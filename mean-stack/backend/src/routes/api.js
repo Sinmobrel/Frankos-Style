@@ -5,7 +5,12 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const productController = require('../controllers/productController');
 const uploadController = require('../controllers/uploadController');
-const upload = require('../config/multer');
+const authController = require('../controllers/authController');
+const upload = require('../config/cloudinary');
+
+// Rutas de autenticación
+router.post('/auth/login', authController.login);
+router.get('/auth/test', authController.verifyToken, authController.testAuth);
 
 // Rutas para usuarios
 router.get('/users', userController.getUsers);
@@ -17,12 +22,13 @@ router.delete('/users/:id', userController.deleteUser);
 // Rutas para productos
 router.get('/products', productController.getProducts);
 router.get('/products/:id', productController.getProductById);
-router.post('/products', productController.createProduct);
-router.put('/products/:id', productController.updateProduct);
-router.delete('/products/:id', productController.deleteProduct);
+// Proteger rutas de administración con middleware de autenticación
+router.post('/products', authController.verifyToken, authController.isAdmin, productController.createProduct);
+router.put('/products/:id', authController.verifyToken, authController.isAdmin, productController.updateProduct);
+router.delete('/products/:id', authController.verifyToken, authController.isAdmin, productController.deleteProduct);
 
 // Ruta para subir imágenes
-router.post('/upload', upload.single('file'), uploadController.uploadImage);
+router.post('/upload', authController.verifyToken, authController.isAdmin, upload.single('file'), uploadController.uploadImage);
 
 // Ruta de prueba
 router.get('/test', (req, res) => {

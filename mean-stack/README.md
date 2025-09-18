@@ -1,6 +1,6 @@
-# MEAN Stack Application
+# Franko's Style - Aplicación MEAN Stack
 
-Este proyecto es una aplicación full-stack desarrollada con el stack MEAN (MongoDB, Express, Angular, Node.js).
+Esta aplicación está desarrollada con el stack MEAN (MongoDB, Express, Angular, Node.js) para una tienda de trajes para hombres.
 
 ## Estructura del Proyecto
 
@@ -10,8 +10,9 @@ Este proyecto es una aplicación full-stack desarrollada con el stack MEAN (Mong
 ## Requisitos
 
 - Node.js (v14 o superior)
-- MongoDB
+- MongoDB o cuenta en MongoDB Atlas
 - Angular CLI
+- Cuenta en Cloudinary (para almacenamiento de imágenes)
 
 ## Configuración e Instalación
 
@@ -25,6 +26,11 @@ Este proyecto es una aplicación full-stack desarrollada con el stack MEAN (Mong
 2. Instala las dependencias:
    ```
    npm install
+   ```
+   
+   **Nota de solución de problemas:** Si encuentras errores de dependencias con cloudinary y multer-storage-cloudinary, asegúrate de que estás usando versiones compatibles:
+   ```
+   npm install cloudinary@^1.41.0 multer-storage-cloudinary@^4.0.0 --save
    ```
 
 3. Configura las variables de entorno:
