@@ -1,0 +1,83 @@
+<div class="app-container">
+  <header>
+    <h1>Franko's Style</h1>
+    <nav>
+      <a routerLink="/">Inicio</a>
+      <!--<a routerLink="/admin">Administración</a>-->
+      <a routerLink="/catalogo">Catálogo</a>
+    </nav>
+  </header>
+  
+  <main>
+    <!-- El router-outlet gestionará qué componente mostrar según la ruta -->
+    <router-outlet></router-outlet>
+  </main>
+  
+  <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__info">
+                    <p>&copy; 2025 Franko's Style. Todos los derechos reservados.</p>
+                </div>
+                <div class="footer__social">
+                    <!-- Twitter/X -->
+                    <a href="#" class="social__link" title="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/frankosstyle" target="_blank" rel="noopener noreferrer" class="social__link" title="Instagram (@frankosstyle)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                        </svg>
+                    </a>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/56950476935" target="_blank" rel="noopener noreferrer" class="social__link" title="WhatsApp (+56 9 5047 6935)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.62-6.003C.122 5.281 5.326 0 12.061 0c3.184 0 6.167 1.24 8.413 3.488a11.82 11.82 0 013.485 8.414c-.003 6.736-5.286 11.939-11.998 11.939a11.9 11.9 0 01-6.002-1.616L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.593 5.448.003 9.907-4.441 9.909-9.885.002-5.462-4.415-9.89-9.881-9.892-5.466-.002-9.9 4.421-9.902 9.887-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.735-.985zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.099 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="#" class="social__link" title="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Burbuja de ChatBot -->
+    <button type="button" class="chatbot-bubble" (click)="toggleChatbot()">
+        <div class="chatbot-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1c-6.627 0-12 4.208-12 9.399 0 3.356 2.246 6.301 5.625 7.963-1.678 5.749-2.664 6.123-2.664 6.123s6.733-2.431 8.357-6.047c.217.019.435.028.657.028 6.627 0 12-4.208 12-9.399 0-5.19-5.373-9.399-12-9.399z"/>
+            </svg>
+        </div>
+        <span class="chatbot-tooltip">¿Necesitas ayuda?</span>
+    </button>
+    
+    <!-- Panel del ChatBot (oculto inicialmente) -->
+    <div class="chatbot-panel" [class.active]="chatbotActive">
+        <div class="chatbot-header">
+            <h3>Asistente Virtual</h3>
+            <button class="close-button" (click)="toggleChatbot()">×</button>
+        </div>
+        <div class="chatbot-body">
+            <div class="message bot">
+                <p>¡Hola! Soy el asistente virtual de Franko's Style. Próximamente estaré disponible para ayudarte con tus consultas.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+

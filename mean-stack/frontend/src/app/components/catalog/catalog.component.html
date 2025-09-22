@@ -1,0 +1,70 @@
+<div class="catalog-container">
+  <h1>Catálogo de Productos</h1>
+
+  <!-- Filtros -->
+  <div class="catalog-filters">
+    <input type="text" [(ngModel)]="filterName" placeholder="Buscar por nombre..." class="filter-input" />
+
+    <select [(ngModel)]="filterCategory" class="filter-select">
+      <option value="">Todas las categorías</option>
+      <option value="traje">Trajes</option>
+      <option value="camisa">Camisas</option>
+      <option value="corbata">Corbatas</option>
+      <option value="calzado">Calzado</option>
+      <option value="accesorio">Accesorios</option>
+    </select>
+
+    <input type="number" [(ngModel)]="filterMinPrice" placeholder="Precio mínimo" class="filter-input" min="0" />
+    <input type="number" [(ngModel)]="filterMaxPrice" placeholder="Precio máximo" class="filter-input" min="0" />
+    
+    <button class="btn-reset-filters" (click)="resetFilters()">Limpiar filtros</button>
+  </div>
+
+  <ng-container *ngIf="loading">Cargando productos...</ng-container>
+  <ng-container *ngIf="error">{{ error }}</ng-container>
+
+  <div class="catalog-grid" *ngIf="!loading && !error && filteredProducts.length">
+    <div class="catalog-card" *ngFor="let product of filteredProducts" (click)="openProductModal(product)">
+      <img [src]="product.imageUrl" [alt]="product.name" class="catalog-img" />
+      <h2>{{ product.name }}</h2>
+      <p class="catalog-category">{{ product.category }}</p>
+      <p class="catalog-price">{{ product.price | currency:'CLP':'symbol-narrow':'1.0-0' }}</p>
+      <div class="catalog-view-more">Ver detalles</div>
+    </div>
+  </div>
+  <div *ngIf="!loading && !error && !filteredProducts.length" class="empty-message">
+    No hay productos que coincidan con los filtros.
+  </div>
+
+  <!-- Modal del producto -->
+  <div class="product-modal-overlay" *ngIf="selectedProduct" (click)="closeProductModal()">
+    <div class="product-modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeProductModal()">×</button>
+      
+      <div class="modal-product-image">
+        <img [src]="selectedProduct.imageUrl" [alt]="selectedProduct.name">
+      </div>
+      
+      <div class="modal-product-details">
+        <h2>{{ selectedProduct.name }}</h2>
+        <p class="modal-category">Categoría: {{ selectedProduct.category }}</p>
+        <p class="modal-price">{{ selectedProduct.price | currency:'CLP':'symbol-narrow':'1.0-0' }}</p>
+        
+        <div class="modal-description">
+          <h3>Descripción</h3>
+          <p>{{ selectedProduct.description || 'Sin descripción disponible' }}</p>
+        </div>
+        
+        <div class="modal-stock">
+          <span [ngClass]="{'in-stock': selectedProduct.stock > 0, 'out-of-stock': selectedProduct.stock <= 0}">
+            {{ selectedProduct.stock > 0 ? 'En stock: ' + selectedProduct.stock + ' unidades' : 'Agotado' }}
+          </span>
+        </div>
+        
+        <div class="modal-actions">
+          <button class="btn-add-to-cart" [disabled]="selectedProduct.stock <= 0" (click)="contactViaWhatsApp(selectedProduct)">Contactar con vendedor</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
