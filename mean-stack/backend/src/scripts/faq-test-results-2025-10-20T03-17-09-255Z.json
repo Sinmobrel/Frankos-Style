@@ -1,0 +1,228 @@
+{
+  "timestamp": "2025-10-20T03:17:09.256Z",
+  "summary": {
+    "totalQuestions": 36,
+    "faqResponses": 35,
+    "aiResponses": 1,
+    "errors": 0,
+    "successRate": "100.0"
+  },
+  "results": [
+    {
+      "question": "¿Qué es Franko's Style?",
+      "source": "FAQ",
+      "response": "¡Bienvenido a Franko's Style! 🎩 Somos una sastrería de alta gama especializada en moda masculina elegante. Ofrecemos trajes, camisas, corbatas y accesorios de calidad superior para el hombre moderno que valora la elegancia y el estilo.",
+      "success": true
+    },
+    {
+      "question": "que hacen ustedes?",
+      "source": "FAQ",
+      "response": "¡Bienvenido a Franko's Style! 🎩 Somos una sastrería de alta gama especializada en moda masculina elegante. Ofrecemos trajes, camisas, corbatas y accesorios de calidad superior para el hombre moderno que valora la elegancia y el estilo.",
+      "success": true
+    },
+    {
+      "question": "cuál es su especialidad",
+      "source": "FAQ",
+      "response": "En Franko's Style nos especializamos en: ✨ Trajes elegantes (clásicos y slim fit), 👔 Camisas de alta calidad, 🎭 Corbatas exclusivas, 💎 Accesorios sofisticados. Todo para ocasiones especiales, trabajo ejecutivo y eventos formales.",
+      "success": true
+    },
+    {
+      "question": "que tipo de negocio son",
+      "source": "FAQ",
+      "response": "¡Bienvenido a Franko's Style! 🎩 Somos una sastrería de alta gama especializada en moda masculina elegante. Ofrecemos trajes, camisas, corbatas y accesorios de calidad superior para el hombre moderno que valora la elegancia y el estilo.",
+      "success": true
+    },
+    {
+      "question": "en que se especializan?",
+      "source": "FAQ",
+      "response": "En Franko's Style nos especializamos en: ✨ Trajes elegantes (clásicos y slim fit), 👔 Camisas de alta calidad, 🎭 Corbatas exclusivas, 💎 Accesorios sofisticados. Todo para ocasiones especiales, trabajo ejecutivo y eventos formales.",
+      "success": true
+    },
+    {
+      "question": "que productos venden",
+      "source": "FAQ",
+      "response": "En Franko's Style nos especializamos en: ✨ Trajes elegantes (clásicos y slim fit), 👔 Camisas de alta calidad, 🎭 Corbatas exclusivas, 💎 Accesorios sofisticados. Todo para ocasiones especiales, trabajo ejecutivo y eventos formales.",
+      "success": true
+    },
+    {
+      "question": "que tipo de ropa tienen",
+      "source": "FAQ",
+      "response": "En Franko's Style nos especializamos en: ✨ Trajes elegantes (clásicos y slim fit), 👔 Camisas de alta calidad, 🎭 Corbatas exclusivas, 💎 Accesorios sofisticados. Todo para ocasiones especiales, trabajo ejecutivo y eventos formales.",
+      "success": true
+    },
+    {
+      "question": "para quienes es su ropa?",
+      "source": "FAQ",
+      "response": "Nos especializamos exclusivamente en moda masculina elegante. Nuestro público son hombres que valoran la calidad y elegancia: ejecutivos, novios, invitados a eventos especiales y caballeros que buscan destacar con estilo y sofisticación.",
+      "success": true
+    },
+    {
+      "question": "venden ropa de mujer?",
+      "source": "FAQ",
+      "response": "Nos especializamos exclusivamente en moda masculina elegante. Nuestro público son hombres que valoran la calidad y elegancia: ejecutivos, novios, invitados a eventos especiales y caballeros que buscan destacar con estilo y sofisticación.",
+      "success": true
+    },
+    {
+      "question": "tienen ropa para señoras?",
+      "source": "FAQ",
+      "response": "Nos especializamos exclusivamente en moda masculina elegante. Nuestro público son hombres que valoran la calidad y elegancia: ejecutivos, novios, invitados a eventos especiales y caballeros que buscan destacar con estilo y sofisticación.",
+      "success": true
+    },
+    {
+      "question": "tienen ropa casual?",
+      "source": "FAQ",
+      "response": "Franko's Style se especializa únicamente en moda formal y elegante. No manejamos ropa casual o deportiva, pero sí tenemos camisas versátiles que puedes usar para diferentes ocasiones semi-formales. ¿Te interesa conocer nuestras opciones formales?",
+      "success": true
+    },
+    {
+      "question": "venden jeans?",
+      "source": "FAQ",
+      "response": "Franko's Style se especializa únicamente en moda formal y elegante. No manejamos ropa casual o deportiva, pero sí tenemos camisas versátiles que puedes usar para diferentes ocasiones semi-formales. ¿Te interesa conocer nuestras opciones formales?",
+      "success": true
+    },
+    {
+      "question": "tienen poleras?",
+      "source": "FAQ",
+      "response": "Franko's Style se especializa únicamente en moda formal y elegante. No manejamos ropa casual o deportiva, pero sí tenemos camisas versátiles que puedes usar para diferentes ocasiones semi-formales. ¿Te interesa conocer nuestras opciones formales?",
+      "success": true
+    },
+    {
+      "question": "venden zapatillas?",
+      "source": "FAQ",
+      "response": "Actualmente no tenemos calzado disponible en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados. ¿Te puedo ayudar con alguna de estas categorías? 👔✨",
+      "success": true
+    },
+    {
+      "question": "tienen zapatos?",
+      "source": "FAQ",
+      "response": "Actualmente no tenemos calzado disponible en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados. ¿Te puedo ayudar con alguna de estas categorías? 👔✨",
+      "success": true
+    },
+    {
+      "question": "que calzado manejan?",
+      "source": "FAQ",
+      "response": "Actualmente no tenemos calzado disponible en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados. ¿Te puedo ayudar con alguna de estas categorías? 👔✨",
+      "success": true
+    },
+    {
+      "question": "donde están ubicados?",
+      "source": "FAQ",
+      "response": "📍 **Nos encuentras en:** Alameda 3410, Persa Estación Central, Local V-21, Santiago. **Horarios:** Lunes a Sábado 12:00-18:30. ¡Ven a conocer nuestra colección en persona!",
+      "success": true
+    },
+    {
+      "question": "cual es su dirección?",
+      "source": "FAQ",
+      "response": "📍 **Nos encuentras en:** Alameda 3410, Persa Estación Central, Local V-21, Santiago. **Horarios:** Lunes a Sábado 12:00-18:30. ¡Ven a conocer nuestra colección en persona!",
+      "success": true
+    },
+    {
+      "question": "que horarios tienen?",
+      "source": "FAQ",
+      "response": "🕐 Nuestros horarios de atención: **Lunes a Sábado de 12:00 a 18:30 hrs**. Los domingos permanecemos cerrados. ¡Te esperamos en Alameda 3410, Local V-21, Persa Estación Central!",
+      "success": true
+    },
+    {
+      "question": "están abiertos los domingos?",
+      "source": "FAQ",
+      "response": "🕐 Nuestros horarios de atención: **Lunes a Sábado de 12:00 a 18:30 hrs**. Los domingos permanecemos cerrados. ¡Te esperamos en Alameda 3410, Local V-21, Persa Estación Central!",
+      "success": true
+    },
+    {
+      "question": "como puedo pagar?",
+      "source": "FAQ",
+      "response": "💳 Aceptamos múltiples formas de pago: **tarjetas de crédito y débito, transferencias bancarias y efectivo**. Para facilidades de pago o financiamiento, te recomiendo consultar directamente en tienda.",
+      "success": true
+    },
+    {
+      "question": "aceptan tarjetas?",
+      "source": "FAQ",
+      "response": "💳 Aceptamos múltiples formas de pago: **tarjetas de crédito y débito, transferencias bancarias y efectivo**. Para facilidades de pago o financiamiento, te recomiendo consultar directamente en tienda.",
+      "success": true
+    },
+    {
+      "question": "tienen delivery?",
+      "source": "FAQ",
+      "response": "🚚 **Realizamos envíos a todo Chile**. Los tiempos y costos varían según la región. Para Santiago metropolitano tenemos opciones más rápidas. Te sugerimos consultar disponibilidad y tarifas al momento de tu compra.",
+      "success": true
+    },
+    {
+      "question": "hacen envios?",
+      "source": "FAQ",
+      "response": "🚚 **Realizamos envíos a todo Chile**. Los tiempos y costos varían según la región. Para Santiago metropolitano tenemos opciones más rápidas. Te sugerimos consultar disponibilidad y tarifas al momento de tu compra.",
+      "success": true
+    },
+    {
+      "question": "cual es su política de cambios?",
+      "source": "FAQ",
+      "response": "🔄 Tenemos **política de cambios** para garantizar tu satisfacción. Las condiciones específicas las conversamos en tienda. Te recomiendo probarte las prendas o consultar medidas antes de comprar para asegurar el ajuste perfecto.",
+      "success": true
+    },
+    {
+      "question": "necesito algo para una boda",
+      "source": "FAQ",
+      "response": "💒 **Para bodas te recomiendo:** Trajes oscuros (negro, azul marino) para ceremonias nocturnas o elegantes. Grises para ceremonias diurnas. Considera el dress code, la estación y si eres novio o invitado. ¿Qué tipo de boda es?",
+      "success": true
+    },
+    {
+      "question": "que me recomiendan para una entrevista de trabajo?",
+      "source": "FAQ",
+      "response": "💼 **Para entrevistas sugiero:** Traje azul marino o gris oscuro (transmiten confianza y seriedad), camisa blanca impecable, corbata conservadora. Evita colores muy llamativos. El objetivo es lucir profesional y confiable.",
+      "success": true
+    },
+    {
+      "question": "tengo una gala, que sugieren?",
+      "source": "FAQ",
+      "response": "🎭 **Para galas y eventos formales:** Trajes negros o azul marino profundo son ideales. Puedes añadir accesorios sofisticados como corbatas con texturas especiales. La clave está en los detalles que marquen la diferencia.",
+      "success": true
+    },
+    {
+      "question": "que colores me recomiendan?",
+      "source": "FAQ",
+      "response": "🎨 **Combinaciones clásicas:** Azul marino + blanco + burdeos/dorado. Gris + azul claro + navy. Negro + blanco + plateado/negro. **¿Tienes algún color específico en mente o alguna ocasión particular?**",
+      "success": true
+    },
+    {
+      "question": "que tipos de trajes tienen?",
+      "source": "FAQ",
+      "response": "👔 **Diferencias de cortes:** **Slim Fit:** Ajustado, moderno, silueta definida. **Classic Fit:** Cómodo, tradicional, corte relajado. **Regular Fit:** Equilibrado entre ambos. La elección depende de tu contextura y preferencia de comodidad.",
+      "success": true
+    },
+    {
+      "question": "como sé mi talla?",
+      "source": "FAQ",
+      "response": "📏 **Para tu talla correcta:** Necesitamos medir pecho, cintura y largo de brazo. En tienda tenemos probadores y te ayudamos con el tallaje perfecto. Cada producto puede variar. **¿Prefieres venir para un tallaje profesional?**",
+      "success": true
+    },
+    {
+      "question": "tengo presupuesto limitado",
+      "source": "FAQ",
+      "response": "💰 Tenemos opciones para **diferentes presupuestos**. Nuestros productos van desde opciones accesibles hasta piezas premium. **¿Podrías contarme tu rango de presupuesto aproximado?** Así te muestro las mejores opciones disponibles.",
+      "success": true
+    },
+    {
+      "question": "ayuda",
+      "source": "FAQ",
+      "response": "✨ **¡Perfecto! Te ayudo a elegir.** Para darte la mejor recomendación, cuéntame: **¿Para qué ocasión lo necesitas?** (trabajo, boda, gala, etc.) **¿Tienes preferencia de color?** **¿Contextura?** Con esa info te daré opciones perfectas.",
+      "success": true
+    },
+    {
+      "question": "no se que quiero",
+      "source": "FAQ",
+      "response": "Nos especializamos exclusivamente en moda masculina elegante. Nuestro público son hombres que valoran la calidad y elegancia: ejecutivos, novios, invitados a eventos especiales y caballeros que buscan destacar con estilo y sofisticación.",
+      "success": true
+    },
+    {
+      "question": "asdasd",
+      "source": "AI",
+      "response": "Lo siento, pero no puedo entender tu mensaje. ¿Puedes explicarme un poco más sobre lo que deseas? ¿Tienes alguna pregunta o necesitas asesoramiento en cuanto a la moda masculina? Me alegra ayudarte. ¿En qué puedo ayudarte hoy?",
+      "success": true
+    },
+    {
+      "question": "???",
+      "source": "FAQ",
+      "response": "¡Bienvenido a Franko's Style! 🎩 Somos una sastrería de alta gama especializada en moda masculina elegante. Ofrecemos trajes, camisas, corbatas y accesorios de calidad superior para el hombre moderno que valora la elegancia y el estilo.",
+      "success": true
+    }
+  ]
+}

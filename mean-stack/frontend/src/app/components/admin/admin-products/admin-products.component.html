@@ -1,0 +1,369 @@
+<div class="admin-container">
+<h1 class="admin-title">Administración de Sastrería y Trajes</h1>
+
+<div class="admin-panel">
+    <div class="admin-form">
+        <h2>{{ editMode ? 'Editar Producto' : 'Agregar Nuevo Producto' }}</h2>
+
+        <!-- Mensajes de estado -->
+        @if (successMessage) {
+        <div class="alert alert-success">
+            <span class="success-icon">✅</span>
+            {{ successMessage }}
+        </div>
+        }
+
+        @if (error) {
+        <div class="alert alert-error">
+            <span class="error-icon">❌</span>
+            {{ error }}
+        </div>
+        }
+
+        @if (isUploading) {
+        <div class="upload-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+            </div>
+            <span class="progress-text">Subiendo imagen: {{ uploadProgress }}%</span>
+        </div>
+        }
+
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <!-- SECCIÓN DE INFORMACIÓN BÁSICA -->
+            <div class="form-section">
+                <h3 class="section-title">📋 Información Básica</h3>
+                
+                <div class="form-group">
+                    <label for="name">Nombre del Producto</label>
+                    <input type="text" id="name" formControlName="name" class="form-control"
+                        [class.is-invalid]="(productForm.get('name')?.invalid && productForm.get('name')?.touched) || fieldErrors['name']">
+                    @if ((productForm.get('name')?.invalid && productForm.get('name')?.touched) || fieldErrors['name']) {
+                    <div class="error-message">
+                        {{ fieldErrors['name'] || 'El nombre es requerido y debe tener al menos 3 caracteres.' }}
+                    </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" formControlName="description" class="form-control"
+                        [class.is-invalid]="(productForm.get('description')?.invalid && productForm.get('description')?.touched) || fieldErrors['description']"
+                        rows="3"></textarea>
+                    @if ((productForm.get('description')?.invalid && productForm.get('description')?.touched) || fieldErrors['description']) {
+                    <div class="error-message">
+                        {{ fieldErrors['description'] || 'La descripción es requerida y debe tener al menos 10 caracteres.' }}
+                    </div>
+                    }
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price">Precio (CLP $)</label>
+                        <input type="number" id="price" formControlName="price" class="form-control"
+                            [class.is-invalid]="(productForm.get('price')?.invalid && productForm.get('price')?.touched) || fieldErrors['price']" min="0"
+                            step="1">
+                        @if ((productForm.get('price')?.invalid && productForm.get('price')?.touched) || fieldErrors['price']) {
+                        <div class="error-message">
+                            {{ fieldErrors['price'] || 'El precio es requerido y debe ser mayor o igual a 0.' }}
+                        </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Stock Disponible</label>
+                        <input type="number" id="stock" formControlName="stock" class="form-control"
+                            [class.is-invalid]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" min="0">
+                        @if (productForm.get('stock')?.invalid && productForm.get('stock')?.touched) {
+                        <div class="error-message">
+                            El stock es requerido y debe ser mayor o igual a 0.
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Imagen del Producto</label>
+                    <div class="image-upload-container">
+                        <input type="file" id="image" (change)="onFileSelected($event)" accept="image/jpeg,image/jpg,image/png,image/webp"
+                            class="form-control file-input"
+                            [class.is-invalid]="fieldErrors['image'] || fieldErrors['imageUrl'] || (!selectedFile && productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched)"
+                            [disabled]="isUploading">
+
+                        @if (selectedFile || (productForm.get('imageUrl')?.value && editMode)) {
+                        <div class="image-preview-container">
+                            <img [src]="imagePreview || productForm.get('imageUrl')?.value" alt="Vista previa"
+                                class="image-preview" />
+                            <button type="button" class="btn btn-sm btn-delete remove-image" (click)="removeImage()"
+                                [disabled]="isUploading">
+                                ×
+                            </button>
+                        </div>
+                        }
+
+                        @if (fieldErrors['image'] || fieldErrors['imageUrl'] || (!selectedFile && productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched)) {
+                        <div class="error-message">
+                            {{ fieldErrors['image'] || fieldErrors['imageUrl'] || 'La imagen del producto es requerida. Formatos permitidos: JPEG, PNG, WebP (máx. 5MB).' }}
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <select id="category" formControlName="category" class="form-control"
+                        [class.is-invalid]="productForm.get('category')?.invalid && productForm.get('category')?.touched">
+                        <option value="">Seleccionar Categoría</option>
+                        <option value="Trajes">Trajes</option>
+                        <option value="Camisas">Camisas</option>
+                        <option value="Corbatas">Corbatas</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
+                    @if (productForm.get('category')?.invalid && productForm.get('category')?.touched) {
+                    <div class="error-message">
+                        La categoría es requerida.
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE DETALLES TÉCNICOS -->
+            <div class="form-section">
+                <h3 class="section-title">📏 Detalles Técnicos</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productType">Tipo de Producto</label>
+                        <input type="text" id="productType" formControlName="productType" class="form-control"
+                            placeholder="ej: Traje de 3 piezas, Camisa formal, Smoking">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cut">Corte</label>
+                        <select id="cut" formControlName="cut" class="form-control">
+                            <option value="">Seleccionar Corte</option>
+                            <option value="Moderno">Moderno</option>
+                            <option value="Clásico">Clásico</option>
+                            <option value="Slim">Slim</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Oversized">Oversized</option>
+                            <option value="Elegancia moderna">Elegancia moderna</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sizesText">Tallas Disponibles</label>
+                        <input type="text" id="sizesText" formControlName="sizesText" class="form-control"
+                            placeholder="ej: S, M, L, XL, XXL o 38, 40, 42, 44, 46">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mainColor">Color Principal</label>
+                        <input type="text" id="mainColor" formControlName="mainColor" class="form-control"
+                            placeholder="ej: Negro, Azul Marino, Gris Claro, Burgundy">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="material">Material</label>
+                    <textarea id="material" formControlName="material" class="form-control" rows="2"
+                        placeholder="ej: 100% lana virgen con forro de seda"></textarea>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE MEDIDAS -->
+            <div class="form-section">
+                <h3 class="section-title">📐 Medidas (cm)</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="measurementLength">Largo</label>
+                        <input type="text" id="measurementLength" formControlName="measurementLength" class="form-control"
+                            placeholder="ej: 72 cm">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="measurementShoulders">Hombros</label>
+                        <input type="text" id="measurementShoulders" formControlName="measurementShoulders" class="form-control"
+                            placeholder="ej: 46 cm">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="measurementWaist">Cintura</label>
+                        <input type="text" id="measurementWaist" formControlName="measurementWaist" class="form-control"
+                            placeholder="ej: 92 cm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE CATEGORIZACIÓN -->
+            <div class="form-section">
+                <h3 class="section-title">🏷️ Categorización y Marketing</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="priceRange">Rango de Precio</label>
+                        <select id="priceRange" formControlName="priceRange" class="form-control">
+                            <option value="">Seleccionar Rango</option>
+                            <option value="Económico">Económico</option>
+                            <option value="Medio">Medio</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Luxury">Luxury</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occasion">Ocasión de Uso</label>
+                        <select id="occasion" formControlName="occasion" class="form-control">
+                            <option value="">Seleccionar Ocasión</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Casual">Casual</option>
+                            <option value="Oficina">Oficina</option>
+                            <option value="Ceremonial">Ceremonial</option>
+                            <option value="Gala">Gala</option>
+                            <option value="Cocktail">Cocktail</option>
+                            <option value="Diario">Diario</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Características Especiales</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" formControlName="featured"> ✨ Producto Destacado
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" formControlName="isPopular"> 🔥 Producto Popular
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" formControlName="isExclusive"> 💎 Producto Exclusivo
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE ARRAYS (COLORES, EVENTOS, INCLUYE) -->
+            <div class="form-section">
+                <h3 class="section-title">🎨 Detalles Adicionales</h3>
+                
+                <div class="form-group">
+                    <label for="colorsArray">Colores Disponibles</label>
+                    <input type="text" id="colorsArray" formControlName="colorsArray" class="form-control"
+                        placeholder="Negro, Azul Marino, Gris Claro, Burgundy, Blanco">
+                    <small class="form-help">Separe cada color con una coma</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventTypesArray">Ideal para Eventos</label>
+                    <input type="text" id="eventTypesArray" formControlName="eventTypesArray" class="form-control"
+                        placeholder="Bodas, Graduaciones, Reuniones de Negocios, Galas, Cenas formales">
+                    <small class="form-help">Separe cada tipo de evento con una coma</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="includesArray">Qué Incluye</label>
+                    <input type="text" id="includesArray" formControlName="includesArray" class="form-control"
+                        placeholder="Chaqueta, Pantalón, Chaleco, Corbata, Pañuelo de bolsillo">
+                    <small class="form-help">Separe cada artículo incluido con una coma</small>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid || isUploading">
+                    @if (isUploading) {
+                        <span class="loading-spinner"></span>
+                        {{ editMode ? 'Actualizando...' : 'Creando...' }}
+                    } @else {
+                        {{ editMode ? 'Actualizar Producto' : 'Crear Producto' }}
+                    }
+                </button>
+                @if (editMode) {
+                <button type="button" class="btn btn-secondary" (click)="resetForm()" [disabled]="isUploading">
+                    Cancelar
+                </button>
+                }
+            </div>
+        </form>
+    </div>
+
+    <div class="admin-list">
+        <h2>Catálogo de Sastrería</h2>
+
+        @if (loading) {
+        <div class="loading">Cargando productos...</div>
+        } @else if (error) {
+        <div class="error-message">{{ error }}</div>
+        } @else if (products.length === 0) {
+        <div class="empty-message">El catálogo de trajes está vacío. Añada sus primeros productos de alta costura.</div>
+        } @else {
+        <div class="table-responsive">
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th class="image-header">Imagen</th>
+                        <th class="name-header">Nombre</th>
+                        <th class="category-header">Categoría</th>
+                        <th class="type-header">Tipo</th>
+                        <th class="price-header">Precio</th>
+                        <th class="range-header">Rango</th>
+                        <th class="stock-header">Stock</th>
+                        <th class="badges-header">Estado</th>
+                        <th class="actions-header">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (product of products; track product._id) {
+                    <tr>
+                        <td data-label="Imagen">
+                            <img [src]="product.imageUrl" alt="{{product.name}}" class="product-thumbnail" />
+                        </td>
+                        <td data-label="Nombre" class="product-name">{{ product.name }}</td>
+                        <td data-label="Categoría" class="product-category">{{ product.category }}</td>
+                        <td data-label="Tipo" class="product-type">{{ product.productType || '-' }}</td>
+                        <td data-label="Precio" class="product-price">{{ product.price |
+                            currency:'CLP':'symbol-narrow':'1.0-0' }}</td>
+                        <td data-label="Rango" class="product-range">
+                            @if (product.priceRange) {
+                            <span class="range-badge" [ngClass]="'badge-' + product.priceRange.toLowerCase()">
+                                {{ product.priceRange }}
+                            </span>
+                            } @else {
+                            <span>-</span>
+                            }
+                        </td>
+                        <td data-label="Stock" class="product-stock">{{ product.stock }}</td>
+                        <td data-label="Estado" class="product-badges">
+                            <div class="mini-badges">
+                                @if (product.featured) {
+                                <span class="mini-badge featured" title="Destacado">✨</span>
+                                }
+                                @if (product.isPopular) {
+                                <span class="mini-badge popular" title="Popular">🔥</span>
+                                }
+                                @if (product.isExclusive) {
+                                <span class="mini-badge exclusive" title="Exclusivo">💎</span>
+                                }
+                            </div>
+                        </td>
+                        <td class="actions-cell">
+                            <div class="button-container">
+                                <button class="btn btn-sm btn-edit" (click)="editProduct(product)">
+                                    Editar
+                                </button>
+                                <button class="btn btn-sm btn-delete" (click)="deleteProduct(product._id || '')">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>
+</div>

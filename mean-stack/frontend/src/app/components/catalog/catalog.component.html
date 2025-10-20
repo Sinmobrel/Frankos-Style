@@ -1,0 +1,43 @@
+<div class="catalog-container">
+  <h1>Catálogo de Productos</h1>
+
+  <!-- Filtros -->
+  <div class="catalog-filters">
+    <input type="text" [(ngModel)]="filterName" placeholder="Buscar por nombre..." class="filter-input" />
+
+    <select [(ngModel)]="filterCategory" class="filter-select">
+      <option value="">Todas las categorías</option>
+      <option value="traje">Trajes</option>
+      <option value="camisa">Camisas</option>
+      <option value="corbata">Corbatas</option>
+      <option value="accesorio">Accesorios</option>
+    </select>
+
+    <input type="number" [(ngModel)]="filterMinPrice" placeholder="Precio mínimo" class="filter-input" min="0" />
+    <input type="number" [(ngModel)]="filterMaxPrice" placeholder="Precio máximo" class="filter-input" min="0" />
+    
+    <button class="btn-reset-filters" (click)="resetFilters()">Limpiar filtros</button>
+  </div>
+
+  <ng-container *ngIf="loading">Cargando productos...</ng-container>
+  <ng-container *ngIf="error">{{ error }}</ng-container>
+
+  <div class="catalog-grid" *ngIf="!loading && !error && filteredProducts.length">
+    <div class="catalog-card" *ngFor="let product of filteredProducts" (click)="openProductModal(product)">
+      <img [src]="getProductImageUrl(product)" 
+           [alt]="product.name" 
+           class="catalog-img"
+           (error)="onImageError($event)"
+           loading="lazy" />
+      <h2>{{ product.name }}</h2>
+      <p class="catalog-category">{{ product.category }}</p>
+      <p class="catalog-price">{{ product.price | currency:'CLP':'symbol-narrow':'1.0-0' }}</p>
+      <div class="catalog-view-more">Ver detalles</div>
+    </div>
+  </div>
+  <div *ngIf="!loading && !error && !filteredProducts.length" class="empty-message">
+    No hay productos que coincidan con los filtros.
+  </div>
+
+  <!-- Modal del producto -->
+</div>

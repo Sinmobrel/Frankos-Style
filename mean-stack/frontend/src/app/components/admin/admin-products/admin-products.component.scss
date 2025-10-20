@@ -1,0 +1,874 @@
+@use '../../../../assets/scss/variables' as vars;
+
+/* ===== RESET Y BOX-SIZING ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+:host {
+  display: block;
+  background: white;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: white;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
+}
+
+.admin-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: vars.$primary-color;
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.admin-panel {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  width: 100%;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+/* ===== FORMULARIO ===== */
+.admin-form {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  height: fit-content;
+  width: 100%;
+  box-sizing: border-box;
+  
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: vars.$primary-color;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    border-radius: 8px;
+    
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+/* ===== LISTA DE PRODUCTOS ===== */
+.admin-list {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  width: 100%;
+  box-sizing: border-box;
+  
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: vars.$primary-color;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    border-radius: 8px;
+    
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+/* ===== SECCIONES DEL FORMULARIO ===== */
+.form-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  width: 100%;
+  box-sizing: border-box;
+  
+  .section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: vars.$primary-color;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid vars.$primary-color;
+  }
+}
+
+/* ===== FORM ROW - CONFIGURACIÓN PARA LISTA VERTICAL ===== */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  
+  /* Si necesitas mantener algunos campos en horizontal en desktop, puedes usar esta media query:
+  @media (min-width: 769px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  } */
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  
+  label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background: white;
+    box-sizing: border-box;
+    
+    &:focus {
+      outline: none;
+      border-color: vars.$primary-color;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    
+    &.is-invalid {
+      border-color: #ef4444;
+      
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      }
+    }
+  }
+  
+  textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .form-help {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+  }
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+    
+    &:hover {
+      background-color: #f3f4f6;
+    }
+    
+    input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+  }
+}
+
+/* ===== SUBIDA DE IMAGEN ===== */
+.image-upload-container {
+  .file-input {
+    margin-bottom: 1rem;
+  }
+  
+  .image-preview-container {
+    position: relative;
+    display: inline-block;
+    
+    .image-preview {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+    }
+    
+    .remove-image {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        background: #dc2626;
+      }
+    }
+  }
+}
+
+/* ===== MENSAJES ===== */
+.error-message {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  background-color: #fef2f2;
+  border-radius: 4px;
+  border-left: 3px solid #ef4444;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* ===== BOTONES ===== */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  font-size: 0.875rem;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background: vars.$primary-color;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background: #7c3aed;
+  }
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background: #4b5563;
+  }
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  min-width: 70px;
+  
+  @media (max-width: 768px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    min-width: 80px;
+    width: 100%;
+  }
+}
+
+.btn-edit {
+  background: #3b82f6;
+  color: white;
+  
+  &:hover {
+    background: #2563eb;
+  }
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  
+  &:hover {
+    background: #dc2626;
+  }
+}
+
+/* ===== TABLA ===== */
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.products-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  
+  th {
+    background: #f8fafc;
+    padding: 0.75rem 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  
+  td {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+    font-size: 0.75rem;
+  }
+  
+  tr:hover {
+    background: #f9fafb;
+  }
+  
+  .product-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  .product-name {
+    font-weight: 500;
+    color: #111827;
+    max-width: 150px;
+    word-wrap: break-word;
+  }
+  
+  .product-price {
+    font-weight: 600;
+    color: vars.$primary-color;
+  }
+  
+  .range-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    
+    &.badge-económico {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    
+    &.badge-medio {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    
+    &.badge-premium {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    
+    &.badge-luxury {
+      background: #fce7f3;
+      color: #be185d;
+    }
+  }
+  
+  .mini-badges {
+    display: flex;
+    gap: 0.25rem;
+    
+    .mini-badge {
+      font-size: 0.875rem;
+    }
+  }
+  
+  .actions-cell {
+    .button-container {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+        
+        .btn {
+          width: 100%;
+          text-align: center;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          min-height: 44px; /* Tamaño mínimo táctil recomendado */
+        }
+      }
+    }
+  }
+}
+
+/* ===== RESPONSIVE PARA TABLA ===== */
+@media (max-width: 768px) {
+  .products-table {
+    display: block;
+    
+    thead, tbody, th, td, tr {
+      display: block;
+    }
+    
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    tr {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: white;
+    }
+    
+    td {
+      border: none;
+      position: relative;
+      padding: 0.5rem 0;
+      
+      &:before {
+        content: attr(data-label) ": ";
+        font-weight: 600;
+        color: #374151;
+      }
+    }
+    
+    .product-thumbnail {
+      width: 80px;
+      height: 80px;
+      margin: 0.5rem 0;
+    }
+    
+    /* Estilos específicos para botones en vista móvil de tabla */
+    .actions-cell {
+      margin-top: 1rem;
+      
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        gap: 0.75rem;
+        justify-content: center;
+        
+        .btn {
+          flex: 1;
+          min-height: 44px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          border-radius: 8px;
+          padding: 0.75rem 1rem;
+          
+          &.btn-edit {
+            background: #3b82f6;
+            
+            &:hover {
+              background: #2563eb;
+            }
+          }
+          
+          &.btn-delete {
+            background: #ef4444;
+            
+            &:hover {
+              background: #dc2626;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ===== CAMPOS ESPECÍFICOS EN LISTA VERTICAL ===== */
+/* Para la sección de Detalles Técnicos */
+.form-section:nth-of-type(1) .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Para la sección de Medidas */
+.form-section:nth-of-type(2) .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Para la sección de Categorización y Marketing */
+.form-section:nth-of-type(3) .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ===== MEJORAS VISUALES PARA LISTA VERTICAL ===== */
+.form-section .form-group {
+  background: white;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e5e7eb;
+  width: 100%;
+  box-sizing: border-box;
+  
+  label {
+    color: vars.$primary-color;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .form-control {
+    border: 1px solid #d1d5db;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    
+    &:focus {
+      border-color: vars.$primary-color;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    margin-bottom: 0.25rem;
+    
+    label {
+      font-size: 0.75rem;
+    }
+    
+    .form-control {
+      padding: 0.4rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+/* ===== ESTILOS ADICIONALES PARA MEJORAR LA PRESENTACIÓN ===== */
+.form-section {
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Checkbox group con mejor espaciado */
+.checkbox-group .checkbox-label {
+  background: white;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  
+  &:hover {
+    background-color: #f8fafc;
+    border-color: vars.$primary-color;
+  }
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* ===== PREVENCIÓN DE DESBORDAMIENTO ===== */
+.admin-container, .admin-panel, .admin-form, .admin-list {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Asegurar que inputs no causen desbordamiento */
+input, textarea, select {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Media query adicional para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .admin-container {
+    padding: 0.25rem;
+  }
+  
+  .admin-form, .admin-list {
+    padding: 0.75rem;
+  }
+  
+  .form-section {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .products-table {
+    min-width: 600px;
+    font-size: 0.7rem;
+  }
+  
+  .products-table th,
+  .products-table td {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  /* Botones más grandes en pantallas muy pequeñas */
+  .btn-sm {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    min-height: 48px;
+    font-weight: 600;
+  }
+  
+  .button-container {
+    gap: 1rem !important;
+    
+    .btn {
+      min-height: 48px !important;
+      font-size: 1rem !important;
+      padding: 1rem 1.25rem !important;
+    }
+  }
+  
+  /* En vista de tabla móvil para pantallas muy pequeñas */
+  .products-table .actions-cell .button-container {
+    flex-direction: column;
+    gap: 0.75rem;
+    
+    .btn {
+      width: 100%;
+      min-height: 48px;
+      font-size: 1rem;
+      padding: 1rem;
+    }
+  }
+}
+
+/* ===== MENSAJES DE ESTADO ===== */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+  
+  &.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    
+    .success-icon {
+      font-size: 1.25rem;
+    }
+  }
+  
+  &.alert-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    
+    .error-icon {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+/* ===== INDICADOR DE PROGRESO ===== */
+.upload-progress {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    
+    .progress-fill {
+      height: 100%;
+      background-color: vars.$accent-color;
+      transition: width 0.3s ease;
+      border-radius: 4px;
+    }
+  }
+  
+  .progress-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+}
+
+/* ===== SPINNER DE CARGA ===== */
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== ESTILOS PARA CAMPOS CON ERRORES DEL SERVIDOR ===== */
+.form-control.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+  animation: slideDown 0.2s ease-out;
+}
+
+/* ===== ESTADOS DESHABILITADOS ===== */
+.btn:disabled,
+.form-control:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  
+  &:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+}
+
+/* ===== RESPONSIVE PARA MENSAJES ===== */
+@media (max-width: 768px) {
+  .alert {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    
+    .success-icon,
+    .error-icon {
+      font-size: 1rem;
+    }
+  }
+  
+  .upload-progress {
+    padding: 0.75rem;
+    
+    .progress-text {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .loading-spinner {
+    width: 14px;
+    height: 14px;
+  }
+}

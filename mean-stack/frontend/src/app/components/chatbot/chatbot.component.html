@@ -1,0 +1,74 @@
+<div class="chatbot-wrapper" [class.active]="chatbotActive">
+  <div class="chatbot-header">
+    <div class="header-content">
+      <div class="avatar-container">
+        <img src="assets/images/carvian-avatar.png" alt="CarVian" class="carvian-avatar" />
+        <div class="status-indicator"></div>
+      </div>
+      <div class="header-text">
+        <h4>CarVian</h4>
+        <span class="subtitle">Tu Asistente de Moda</span>
+      </div>
+    </div>
+    <button class="close-button" (click)="toggleChatbot()">×</button>
+  </div>
+
+  <div class="chatbot-body">
+    @for (m of messages; track m) {
+      <div [ngClass]="{'message': true, 'user': m.from==='user', 'bot': m.from==='bot'}">
+        @if (m.from === 'bot') {
+          <div class="message-avatar">
+            <img src="assets/images/carvian-avatar.png" alt="CarVian" class="bot-avatar" />
+          </div>
+        }
+        <div class="message-content">
+          <p>{{ m.text }}</p>
+        
+          <!-- Mostrar productos si los hay -->
+          @if (m.products && m.products.length > 0) {
+            <div class="products-grid">
+              @for (product of m.products; track product._id) {
+                <div class="product-card" (click)="openProductModal(product)">
+                  <img [src]="getProductImageUrl(product)" 
+                       [alt]="product.name" 
+                       class="product-image"
+                       (error)="onImageError($event)"
+                       loading="lazy"/>
+                  <div class="product-info">
+                    <h5>{{ product.name }}</h5>
+                    <p class="product-price">${{ product.price }}</p>
+                    <p class="product-stock">Stock: {{ product.stock }}</p>
+                    <p class="product-description">{{ product.description.substring(0, 80) }}...</p>
+                  </div>
+                  <div class="product-click-hint">
+                    <span>👆 Click para ver detalles</span>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+    @if (loading) {
+      <div class="message bot">
+        <div class="message-avatar">
+          <img src="assets/images/carvian-avatar.png" alt="CarVian" class="bot-avatar" />
+        </div>
+        <div class="message-content">
+          <p>CarVian está escribiendo...</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <form class="chatbot-input" (submit)="sendMessage(); $event.preventDefault();">
+    <input type="text" [(ngModel)]="messageText" name="msg" placeholder="Pregúntale a CarVian sobre moda..." autocomplete="off" />
+    <button type="submit" [disabled]="loading || !messageText">Enviar</button>
+  </form>
+</div>
+
+<button class="chatbot-bubble" (click)="toggleChatbot()" aria-label="Abrir chatbot">
+  <div class="chatbot-icon">💬</div>
+  <span class="chatbot-tooltip">¡Hola! Soy CarVian</span>
+</button>

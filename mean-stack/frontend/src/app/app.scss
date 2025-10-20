@@ -1,0 +1,1555 @@
+// Import variables
+@use '../assets/scss/variables' as vars;
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: linear-gradient(135deg, 
+    rgba(15, 15, 35, 0.95) 0%,     // Mismo tono del Hero pero transparente
+    rgba(26, 26, 46, 0.92) 50%, 
+    rgba(22, 33, 62, 0.95) 100%
+  );
+  backdrop-filter: blur(15px) saturate(1.2); // Efecto de vidrio mejorado
+  color: vars.$text-light;
+  padding: vars.$spacing-md vars.$spacing-lg; // Más padding horizontal para elegancia
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.1); // Sombra más elegante con borde superior sutil
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Transición más suave
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); // Borde sutil para definir el header
+  position: relative;
+  
+  // Efecto sutil de hover en todo el header
+  &:hover {
+    &::before {
+      opacity: 0.6;
+    }
+    
+    &::after {
+      opacity: 0.8;
+    }
+  }
+  
+  // Efecto de conexión visual con el Hero
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.3) 25%, 
+      rgba(255, 255, 255, 0.5) 50%, 
+      rgba(255, 255, 255, 0.3) 75%, 
+      transparent 100%
+    );
+    opacity: 0.6;
+  }
+  
+  // Efecto cuando está scrolled para mayor opacidad
+  &.scrolled {
+    background: linear-gradient(135deg, 
+      rgba(15, 15, 35, 0.98) 0%, 
+      rgba(26, 26, 46, 0.96) 50%, 
+      rgba(22, 33, 62, 0.98) 100%
+    );
+    backdrop-filter: blur(20px) saturate(1.4);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+                
+    &::after {
+      opacity: 0.8;
+    }
+  }
+  
+  // Efecto de pattern sutil que conecta con el Hero
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23ffffff08"/><circle cx="80" cy="30" r="0.5" fill="%23ffffff05"/><circle cx="40" cy="70" r="0.8" fill="%23ffffff06"/><circle cx="90" cy="80" r="0.3" fill="%23ffffff04"/></svg>');
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem; // Ligeramente más grande para más presencia
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); // Sombra sutil para profundidad
+    letter-spacing: 0.5px; // Espaciado para elegancia
+  }
+
+  nav {
+    margin-top: 0; // Remover el margen superior ya que ahora está alineado horizontalmente
+    display: flex;
+    gap: vars.$spacing-lg; // Usar gap en lugar de margin-right
+    
+    a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500; // Menos peso para mejor jerarquía visual
+      font-size: 0.95rem;
+      padding: vars.$spacing-xs vars.$spacing-sm; // Padding para área de click más grande
+      border-radius: 6px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+      }
+      
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+        
+        &::before {
+          width: 100%;
+        }
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  // Responsive design para el header
+  @media (max-width: vars.$tablet) {
+    padding: vars.$spacing-sm vars.$spacing-md;
+    
+    .header-content {
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .logo-container {
+      gap: 8px;
+    }
+
+    .header-logo {
+      height: 32px;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    nav {
+      gap: vars.$spacing-md;
+      margin-top: 0;
+      
+      a {
+        font-size: 0.9rem;
+        padding: vars.$spacing-xs;
+      }
+    }
+  }
+
+  // Para móviles muy pequeños
+  @media (max-width: vars.$mobile) {
+    padding: 10px 16px;
+
+    .header-logo {
+      height: 28px;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+    }
+
+    nav {
+      gap: 16px;
+
+      a {
+        font-size: 0.85rem;
+        padding: 6px;
+      }
+    }
+  }
+  
+  @media (max-width: vars.$mobile) {
+    padding: vars.$spacing-sm;
+    
+    h1 {
+      font-size: 1.25rem;
+      letter-spacing: 0.25px;
+    }
+    
+    nav {
+      gap: vars.$spacing-sm;
+      flex-wrap: wrap;
+      
+      a {
+        font-size: 0.85rem;
+        padding: 2px vars.$spacing-xs;
+      }
+    }
+  }
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+// Agregar padding solo a componentes específicos que lo necesiten
+main app-catalog,
+main app-admin-login,
+main app-admin-products {
+  padding: vars.$spacing-lg;
+  display: block;
+}
+
+// El componente home no debe tener padding para permitir Hero de altura completa
+main app-home {
+  padding: 0;
+  display: block;
+}
+
+.api-status {
+  margin-bottom: vars.$spacing-lg;
+  padding: vars.$spacing-md;
+  background-color: vars.$background-white;
+  border-radius: vars.$border-radius-sm;
+  border-left: 4px solid vars.$accent-color;
+  box-shadow: vars.$shadow-sm;
+  
+  h2 {
+    margin-top: 0;
+    color: vars.$accent-color;
+    font-weight: 600;
+  }
+}
+
+footer {
+  background: linear-gradient(135deg, 
+    rgba(15, 15, 35, 0.98) 0%,     // Mismo tono del Hero
+    rgba(26, 26, 46, 0.96) 50%, 
+    rgba(22, 33, 62, 0.98) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.2);
+  color: vars.$text-light;
+  padding: vars.$spacing-xl vars.$spacing-lg;
+  margin-top: auto;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: footerFadeIn 0.8s ease-out;
+  
+  // Efecto de pattern sutil igual al header
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23ffffff08"/><circle cx="80" cy="30" r="0.5" fill="%23ffffff05"/><circle cx="40" cy="70" r="0.8" fill="%23ffffff06"/><circle cx="90" cy="80" r="0.3" fill="%23ffffff04"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  
+  // Línea superior decorativa
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.3) 25%, 
+      rgba(255, 255, 255, 0.5) 50%, 
+      rgba(255, 255, 255, 0.3) 75%, 
+      transparent 100%
+    );
+    opacity: 0.6;
+  }
+  
+  .footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    max-width: 1400px; // Consistente con el diseño wide
+    margin: 0 auto;
+    gap: vars.$spacing-lg;
+    
+    @media (max-width: vars.$tablet) {
+      flex-direction: column;
+      text-align: center;
+      gap: vars.$spacing-md;
+    }
+    
+    .footer__info {
+      flex: 1;
+      
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 400;
+        letter-spacing: 0.3px;
+      }
+    }
+  }
+  
+  .footer__social {
+    display: flex;
+    gap: vars.$spacing-md;
+    position: relative;
+    z-index: 1;
+    
+    .social__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      
+      // Efecto de hover más elegante
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.4s ease;
+      }
+      
+      svg {
+        width: 20px;
+        height: 20px;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+      }
+      
+      &:hover {
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.2) 0%, 
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        
+        &::before {
+          width: 40px;
+          height: 40px;
+        }
+        
+        svg {
+          color: rgba(255, 255, 255, 1);
+          transform: scale(1.1);
+        }
+      }
+      
+      &:active {
+        transform: translateY(-1px) scale(1.02);
+      }
+      
+      // Efectos específicos por red social
+      &[title*="Instagram"]:hover {
+        background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        border-color: rgba(240, 148, 51, 0.5);
+      }
+      
+      &[title*="Twitter"]:hover {
+        background: linear-gradient(135deg, #1DA1F2 0%, #0d8bd9 100%);
+        border-color: rgba(29, 161, 242, 0.5);
+      }
+      
+      &[title*="Facebook"]:hover {
+        background: linear-gradient(135deg, #4267B2 0%, #365899 100%);
+        border-color: rgba(66, 103, 178, 0.5);
+      }
+      
+      &[title*="LinkedIn"]:hover {
+        background: linear-gradient(135deg, #0077B5 0%, #005885 100%);
+        border-color: rgba(0, 119, 181, 0.5);
+      }
+      
+      &[title*="WhatsApp"]:hover {
+        background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        border-color: rgba(37, 211, 102, 0.5);
+      }
+    }
+  }
+  
+  // Responsive design para el footer
+  @media (max-width: vars.$tablet) {
+    padding: vars.$spacing-lg vars.$spacing-md;
+    
+    .footer__social {
+      justify-content: center;
+      
+      .social__link {
+        width: 40px;
+        height: 40px;
+        
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: vars.$mobile) {
+    padding: vars.$spacing-md;
+    
+    .footer__content {
+      gap: vars.$spacing-sm;
+      
+      .footer__info p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+    }
+    
+    .footer__social {
+      gap: vars.$spacing-sm;
+      
+      .social__link {
+        width: 36px;
+        height: 36px;
+        
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+  
+  // Efecto de hover en todo el footer
+  &:hover {
+    &::before {
+      opacity: 0.4;
+    }
+    
+    &::after {
+      opacity: 0.8;
+    }
+  }
+}
+
+// ===========================
+// MODAL BASE STYLES - FRANKOS STYLE
+// ===========================
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(20, 20, 30, 0.9) 50%, 
+    rgba(0, 0, 0, 0.8) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  backdrop-filter: blur(8px);
+  animation: modalFadeIn 0.4s ease-out;
+}
+
+.modal__content {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.98) 100%);
+  border-radius: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation: modalSlideUp 0.5s ease-out;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: vars.$spacing-xl;
+  border-bottom: 1px solid rgba(vars.$primary-color, 0.1);
+}
+
+.modal__title {
+  margin: 0;
+  font-size: vars.$font-size-2xl;
+  font-weight: vars.$font-weight-bold;
+  background: linear-gradient(135deg, vars.$primary-color, vars.$secondary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: vars.$text-color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(vars.$primary-color, 0.1);
+    transform: scale(1.1);
+  }
+}
+
+.modal__body {
+  padding: vars.$spacing-xl;
+}
+
+// ===========================
+// MODAL GLOBAL DE PRODUCTO - FRANKOS STYLE
+// ===========================
+
+.product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(20, 20, 30, 0.9) 50%, 
+    rgba(0, 0, 0, 0.8) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  backdrop-filter: blur(8px);
+  animation: modalFadeIn 0.4s ease-out;
+  padding: vars.$spacing-lg;
+  
+  @media (max-width: vars.$mobile) {
+    padding: vars.$spacing-md;
+  }
+}
+
+.product-modal-content {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.98) 50%, 
+    rgba(255, 255, 255, 0.95) 100%);
+  border-radius: 24px;
+  padding: 0;
+  max-width: 900px;
+  width: 100%;
+  max-height: 92vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideIn 0.4s ease-out;
+  border: 1px solid rgba(vars.$primary-color, 0.1);
+  
+  @media (max-width: vars.$tablet) {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 20px;
+  }
+  
+  @media (max-width: vars.$mobile) {
+    max-width: 98vw;
+    max-height: calc(100vh - 2rem);
+    border-radius: 16px;
+    margin: vars.$spacing-sm;
+    // Asegurar que sea un contenedor flex apropiado
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: vars.$spacing-lg;
+  right: vars.$spacing-lg;
+  background: linear-gradient(135deg, 
+    rgba(vars.$primary-color, 0.1) 0%, 
+    rgba(vars.$secondary-color, 0.15) 100%);
+  border: 1px solid rgba(vars.$primary-color, 0.2);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  font-weight: 300;
+  color: vars.$text-color;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    background: linear-gradient(135deg, 
+      rgba(vars.$primary-color, 0.2) 0%, 
+      rgba(vars.$secondary-color, 0.25) 100%);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 8px 16px rgba(vars.$primary-color, 0.3);
+  }
+  
+  @media (max-width: vars.$mobile) {
+    top: vars.$spacing-md;
+    right: vars.$spacing-md;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+}
+
+// Modal Header - Frankos Style
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-xl;
+  padding: vars.$spacing-xl;
+  background: linear-gradient(135deg, 
+    rgba(vars.$primary-color, 0.02) 0%, 
+    rgba(vars.$secondary-color, 0.03) 50%, 
+    rgba(vars.$primary-color, 0.02) 100%);
+  border-bottom: 1px solid rgba(vars.$primary-color, 0.1);
+  
+  @media (min-width: vars.$tablet) {
+    flex-direction: row;
+    gap: vars.$spacing-2xl;
+    padding: vars.$spacing-2xl;
+  }
+  
+  @media (max-width: vars.$mobile) {
+    padding: vars.$spacing-md;
+    gap: vars.$spacing-md;
+    // Hacer el header más compacto
+    flex-direction: column;
+  }
+}
+
+.modal-image-container {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  
+  @media (min-width: vars.$tablet) {
+    width: auto;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(135deg, 
+      rgba(vars.$primary-color, 0.1) 0%, 
+      rgba(vars.$accent-color, 0.08) 50%, 
+      rgba(vars.$secondary-color, 0.1) 100%);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.6;
+  }
+  
+  .modal-product-image {
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    background: linear-gradient(135deg, 
+      vars.$background-light 0%, 
+      rgba(vars.$primary-color, 0.05) 100%);
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.1),
+      0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (min-width: vars.$tablet) {
+      width: 340px;
+      height: 340px;
+      max-width: none;
+    }
+    
+    @media (max-width: vars.$mobile) {
+      max-width: 200px;
+      height: 200px;
+    }
+  }
+}
+
+.modal-main-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-lg;
+  
+  .product-title {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: vars.$primary-color;
+    margin: 0;
+    line-height: 1.2;
+    background: linear-gradient(135deg, 
+      vars.$primary-color 0%, 
+      vars.$secondary-color 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .product-description {
+    color: vars.$text-color;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+  
+  .price-stock-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: vars.$spacing-md;
+    padding: vars.$spacing-md;
+    background: linear-gradient(135deg, 
+      rgba(vars.$accent-color, 0.05) 0%, 
+      rgba(vars.$primary-color, 0.03) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(vars.$accent-color, 0.1);
+    
+    .product-price {
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, 
+        vars.$accent-color 0%, 
+        #ff6b6b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .product-stock {
+      padding: vars.$spacing-sm vars.$spacing-md;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      
+      &.in-stock {
+        background: linear-gradient(135deg, 
+          rgba(34, 197, 94, 0.1) 0%, 
+          rgba(16, 185, 129, 0.15) 100%);
+        color: #059669;
+        border: 1px solid rgba(34, 197, 94, 0.2);
+      }
+      
+      &.out-of-stock {
+        background: linear-gradient(135deg, 
+          rgba(239, 68, 68, 0.1) 0%, 
+          rgba(220, 38, 38, 0.15) 100%);
+        color: #dc2626;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+    }
+  }
+  
+  .product-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$spacing-sm;
+    
+    .badge {
+      padding: vars.$spacing-sm vars.$spacing-md;
+      border-radius: 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      &.featured {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+      }
+      
+      &.popular {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+      
+      &.exclusive {
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        color: white;
+        border: 1px solid rgba(139, 92, 246, 0.3);
+      }
+    }
+  }
+}
+
+.modal-body {
+  padding: 0 vars.$spacing-xl vars.$spacing-lg;
+  overflow-y: auto;
+  flex: 1;
+  // Mejorar el scroll en móvil
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  
+  // Custom scrollbar - Frankos Style
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(vars.$primary-color, 0.05);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, 
+      vars.$primary-color 0%, 
+      vars.$secondary-color 100%);
+    border-radius: 3px;
+    
+    &:hover {
+      background: linear-gradient(135deg, 
+        vars.$secondary-color 0%, 
+        vars.$primary-color 100%);
+    }
+  }
+  
+  @media (max-width: vars.$mobile) {
+    padding: 0 vars.$spacing-md vars.$spacing-lg;
+    // Asegurar que el contenido sea completamente scrolleable
+    max-height: none;
+    flex: 1 1 auto;
+    min-height: 0; // Permitir que se comprima
+  }
+  
+  .info-section {
+    margin-bottom: vars.$spacing-xl;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: vars.$primary-color;
+      margin: 0 0 vars.$spacing-md 0;
+      padding-bottom: vars.$spacing-sm;
+      border-bottom: 2px solid rgba(vars.$primary-color, 0.3);
+      display: flex;
+      align-items: center;
+      gap: vars.$spacing-sm;
+      position: relative;
+      
+      // Desactivar completamente el background-clip para evitar problemas con emojis
+      background: none;
+      -webkit-background-clip: initial;
+      -webkit-text-fill-color: initial;
+      background-clip: initial;
+      
+      // Usar color sólido para máxima compatibilidad
+      color: vars.$primary-color;
+      
+      // Asegurar que los emojis se vean correctamente
+      * {
+        -webkit-text-fill-color: initial;
+        background-clip: initial;
+        filter: none;
+      }
+      
+      // Asegurar visibilidad en modo alto contraste
+      @media (prefers-contrast: high) {
+        color: vars.$primary-color;
+        border-bottom-color: vars.$primary-color;
+      }
+    }
+    
+    // Info List Style - Frankos Enhancement
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: vars.$spacing-md;
+      
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: vars.$spacing-md;
+        background: linear-gradient(135deg, 
+          rgba(248, 250, 252, 0.9) 0%, 
+          rgba(241, 245, 249, 0.95) 50%, 
+          rgba(248, 250, 252, 0.9) 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(vars.$primary-color, 0.15);
+        transition: all 0.3s ease;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: linear-gradient(135deg, 
+            vars.$primary-color 0%, 
+            vars.$secondary-color 100%);
+          border-radius: 0 2px 2px 0;
+          opacity: 0.8;
+          transition: all 0.3s ease;
+        }
+        
+        &:hover {
+          background: linear-gradient(135deg, 
+            rgba(241, 245, 249, 0.95) 0%, 
+            rgba(226, 232, 240, 1) 50%, 
+            rgba(241, 245, 249, 0.95) 100%);
+          transform: translateX(4px);
+          box-shadow: 0 6px 16px rgba(vars.$primary-color, 0.12);
+          border-color: rgba(vars.$primary-color, 0.25);
+          
+          &::before {
+            opacity: 1;
+            width: 6px;
+          }
+        }
+        
+        .label {
+          font-weight: 700;
+          color: vars.$primary-color;
+          font-size: 0.9rem;
+          margin-right: vars.$spacing-lg;
+          flex-shrink: 0;
+          min-width: fit-content;
+        }
+        
+        .value {
+          color: #374151;
+          font-size: 0.9rem;
+          text-align: right;
+          flex: 1;
+          word-break: break-word;
+          font-weight: 500;
+          
+          .price-badge {
+            padding: vars.$spacing-xs vars.$spacing-sm;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+            &.badge-económico {
+              background: linear-gradient(135deg, 
+                rgba(34, 197, 94, 0.15) 0%, 
+                rgba(16, 185, 129, 0.2) 100%);
+              color: #059669;
+              border: 1px solid rgba(34, 197, 94, 0.3);
+            }
+            
+            &.badge-medio {
+              background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.15) 0%, 
+                rgba(37, 99, 235, 0.2) 100%);
+              color: #2563eb;
+              border: 1px solid rgba(59, 130, 246, 0.3);
+            }
+            
+            &.badge-premium {
+              background: linear-gradient(135deg, 
+                rgba(168, 85, 247, 0.15) 0%, 
+                rgba(124, 58, 237, 0.2) 100%);
+              color: #7c3aed;
+              border: 1px solid rgba(168, 85, 247, 0.3);
+            }
+            
+            &.badge-luxury {
+              background: linear-gradient(135deg, 
+                rgba(245, 158, 11, 0.15) 0%, 
+                rgba(217, 119, 6, 0.2) 100%);
+              color: #d97706;
+              border: 1px solid rgba(245, 158, 11, 0.3);
+            }
+          }
+        }
+      }
+    }
+    
+    // Measurements Grid - Frankos Style
+    .measurements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: vars.$spacing-md;
+      
+      @media (max-width: vars.$mobile) {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: vars.$spacing-sm;
+      }
+      
+      .measurement-item {
+        text-align: center;
+        padding: vars.$spacing-md;
+        background: linear-gradient(135deg, 
+          rgba(248, 250, 252, 0.9) 0%, 
+          rgba(241, 245, 249, 0.95) 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(vars.$primary-color, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, 
+            transparent 0%, 
+            vars.$accent-color 50%, 
+            transparent 100%);
+          transition: left 0.3s ease;
+        }
+        
+        &:hover {
+          transform: translateY(-4px);
+          background: linear-gradient(135deg, 
+            rgba(241, 245, 249, 0.95) 0%, 
+            rgba(226, 232, 240, 1) 100%);
+          box-shadow: 0 8px 20px rgba(vars.$primary-color, 0.15);
+          border-color: rgba(vars.$accent-color, 0.4);
+          
+          &::before {
+            left: 0;
+          }
+        }
+        
+        .measure-label {
+          display: block;
+          font-size: 0.8rem;
+          color: #6b7280;
+          font-weight: 600;
+          margin-bottom: vars.$spacing-xs;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .measure-value {
+          display: block;
+          font-size: 1rem;
+          color: #1f2937;
+          font-weight: 700;
+        }
+      }
+    }
+    
+    // Tags Container - Frankos Style
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: vars.$spacing-sm;
+      
+      .color-tag, .event-tag {
+        padding: vars.$spacing-sm vars.$spacing-md;
+        border-radius: 16px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(255, 255, 255, 0.3) 50%, 
+            transparent 100%);
+          transition: left 0.4s ease;
+        }
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          
+          &::before {
+            left: 100%;
+          }
+        }
+      }
+      
+      .color-tag {
+        background: linear-gradient(135deg, 
+          #fef3c7 0%, 
+          #fcd34d 50%, 
+          #fbbf24 100%);
+        color: #92400e;
+        border: 1px solid rgba(251, 191, 36, 0.4);
+        
+        &:hover {
+          background: linear-gradient(135deg, 
+            #fbbf24 0%, 
+            #f59e0b 50%, 
+            #d97706 100%);
+          color: white;
+        }
+      }
+      
+      .event-tag {
+        background: linear-gradient(135deg, 
+          #ede9fe 0%, 
+          #c4b5fd 50%, 
+          #a78bfa 100%);
+        color: #5b21b6;
+        border: 1px solid rgba(139, 92, 246, 0.4);
+        
+        &:hover {
+          background: linear-gradient(135deg, 
+            #8b5cf6 0%, 
+            #7c3aed 50%, 
+            #6d28d9 100%);
+          color: white;
+        }
+      }
+    }
+    
+    // Includes Grid - Frankos Style
+    .includes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: vars.$spacing-sm;
+      
+      .include-item {
+        display: flex;
+        align-items: center;
+        gap: vars.$spacing-md;
+        padding: vars.$spacing-md vars.$spacing-lg;
+        background: linear-gradient(135deg, 
+          #f0fdf4 0%, 
+          #dcfce7 50%, 
+          #bbf7d0 100%);
+        border-radius: 10px;
+        border-left: 4px solid #059669;
+        transition: all 0.3s ease;
+        position: relative;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: linear-gradient(135deg, 
+            #059669 0%, 
+            #10b981 100%);
+          border-radius: 0 2px 2px 0;
+          transition: width 0.3s ease;
+        }
+        
+        &:hover {
+          background: linear-gradient(135deg, 
+            #dcfce7 0%, 
+            #bbf7d0 50%, 
+            #86efac 100%);
+          transform: translateX(4px);
+          box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+          
+          &::before {
+            width: 6px;
+          }
+        }
+        
+        .check-icon {
+          color: #059669;
+          font-weight: bold;
+          font-size: 0.9rem;
+          flex-shrink: 0;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: rgba(5, 150, 105, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .include-text {
+          font-size: 0.9rem;
+          color: vars.$text-color;
+          line-height: 1.4;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.modal-footer {
+  padding: vars.$spacing-lg vars.$spacing-xl vars.$spacing-xl;
+  background: linear-gradient(135deg, 
+    rgba(vars.$primary-color, 0.02) 0%, 
+    rgba(vars.$secondary-color, 0.03) 100%);
+  border-top: 1px solid rgba(vars.$primary-color, 0.1);
+  text-align: center;
+  
+  @media (max-width: vars.$mobile) {
+    padding: vars.$spacing-sm vars.$spacing-md;
+  }
+  
+  .contact-btn {
+    background: linear-gradient(135deg, 
+      #25d366 0%, 
+      #128c7e 50%, 
+      #0d7377 100%);
+    color: white;
+    border: none;
+    padding: vars.$spacing-md vars.$spacing-xl;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: vars.$spacing-sm;
+    box-shadow: 
+      0 8px 16px rgba(37, 211, 102, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        transparent 100%);
+      transition: left 0.6s ease;
+    }
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 
+        0 12px 24px rgba(37, 211, 102, 0.4),
+        0 6px 12px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(135deg, 
+        #22c55e 0%, 
+        #16a34a 50%, 
+        #15803d 100%);
+      
+      &::before {
+        left: 100%;
+      }
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(-1px) scale(1.01);
+    }
+    
+    &:disabled {
+      background: linear-gradient(135deg, 
+        #9ca3af 0%, 
+        #6b7280 100%);
+      cursor: not-allowed;
+      box-shadow: none;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+    
+    .btn-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover:not(:disabled) .btn-icon {
+      transform: scale(1.1) rotate(10deg);
+    }
+  }
+}
+
+// ===========================
+// ANIMACIONES - FRANKOS STYLE
+// ===========================
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// Responsive Design - Modal
+@media (max-width: vars.$mobile) {
+  .product-modal-overlay {
+    align-items: flex-start;
+    padding: vars.$spacing-xs;
+    
+    .product-modal-content {
+      max-height: calc(100vh - 1rem);
+      min-height: 80vh;
+      border-radius: 16px;
+      animation: modalSlideUp 0.4s ease-out;
+      margin-top: vars.$spacing-xs;
+    }
+  }
+  
+  .modal-body {
+    padding: 0 vars.$spacing-sm vars.$spacing-md;
+    // Maximizar el espacio disponible
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1 1 auto;
+    min-height: 0;
+    // Altura más específica para móvil
+    max-height: calc(100vh - 180px);
+  }
+  
+  .modal-header {
+    padding: vars.$spacing-md vars.$spacing-sm;
+    flex-shrink: 0;
+    // Reducir altura del header
+    min-height: auto;
+  }
+  
+  .modal-footer {
+    padding: vars.$spacing-sm;
+    flex-shrink: 0;
+    // Reducir altura del footer
+    min-height: auto;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+// ===========================
+// MODAL UTILITIES
+// ===========================
+
+// Previene el scroll del body cuando el modal está abierto
+body.modal-open {
+  overflow: hidden;
+}
+
+// ===========================
+// MEJORAS ADICIONALES PARA MÓVIL
+// ===========================
+
+@media (max-width: vars.$mobile) {
+  // Asegurar que las secciones de información tengan espaciado adecuado
+  .info-section {
+    margin-bottom: vars.$spacing-md !important;
+    padding-bottom: vars.$spacing-sm;
+    
+    &:last-child {
+      margin-bottom: vars.$spacing-lg !important; // Espacio extra al final
+    }
+  }
+  
+  // Mejorar el espaciado de los elementos en móvil
+  .info-list .info-item {
+    padding: vars.$spacing-sm !important;
+    margin-bottom: vars.$spacing-sm !important;
+  }
+  
+  // Asegurar que el modal tenga altura completa
+  .product-modal-content {
+    min-height: 85vh;
+    max-height: calc(100vh - 0.5rem);
+  }
+  
+  // Maximizar el espacio del modal body
+  .modal-body {
+    // Usar todo el espacio disponible
+    flex: 1 1 0%;
+    min-height: 0;
+    padding-bottom: vars.$spacing-lg !important;
+    // Altura específica más agresiva
+    max-height: calc(100vh - 120px);
+  }
+  
+  // Hacer el botón de contacto más compacto
+  .contact-btn {
+    padding: vars.$spacing-sm vars.$spacing-lg !important;
+    font-size: 0.9rem !important;
+    min-width: 180px !important;
+  }
+  
+  // Reducir espacios en el header principal
+  .modal-main-info {
+    gap: vars.$spacing-sm !important;
+  }
+}
+
+// ===========================
+// ANIMACIONES ADICIONALES - FOOTER
+// ===========================
+
+@keyframes footerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fin del archivo

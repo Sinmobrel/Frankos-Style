@@ -1,0 +1,174 @@
+.catalog-container {
+  width: 100%;
+  padding: 2rem 1rem;
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  
+  .filter-input, .filter-select {
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-width: 180px;
+    font-size: 0.95rem;
+    
+    &:focus {
+      outline: none;
+      border-color: #333;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .filter-select {
+    background-color: white;
+  }
+  
+  .btn-reset-filters {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    border: none;
+    background-color: #f0f0f0;
+    color: #555;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin: 2rem auto 0;
+  max-width: 1400px; // Limita el ancho máximo para centrar mejor
+  justify-content: center; // Centra las columnas cuando hay espacio sobrante
+  
+  // Para pantallas muy grandes, limitamos a 6 columnas máximo
+  @media (min-width: 1800px) {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 1600px;
+  }
+  
+  @media (min-width: 1400px) and (max-width: 1799px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  @media (min-width: 1000px) and (max-width: 1399px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  @media (min-width: 700px) and (max-width: 999px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (min-width: 500px) and (max-width: 699px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 499px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.catalog-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    
+    .catalog-view-more {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.catalog-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.catalog-card h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.2rem 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.catalog-category {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.catalog-price {
+  font-weight: bold;
+  color: #1a6;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.catalog-view-more {
+  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  border: 1px solid #ddd;
+}
+
+.catalog-desc {
+  font-size: 0.95rem;
+  color: #444;
+  text-align: center;
+}
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+}

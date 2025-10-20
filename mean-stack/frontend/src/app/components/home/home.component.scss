@@ -1,0 +1,1570 @@
+// Import global variables using modern @use syntax
+@use '../../../assets/scss/variables' as *;
+
+// Reset para el componente home
+:host {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+// Component-specific styles
+.hero {
+  min-height: 100vh; // Altura completa de la ventana para un estilo más elegante
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  background-attachment: fixed; // Efecto paralaje sutil para elegancia
+  overflow: hidden;
+  padding: $spacing-3xl 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.05) 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff03" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+    pointer-events: none;
+  }
+
+  &__container {
+    width: 100%;
+    padding: 80px $spacing-lg 0; // Padding superior para compensar el header sticky
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-3xl;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+      gap: $spacing-2xl;
+      text-align: center;
+      padding: 100px $spacing-md 0; // Más padding en tablet por el header
+    }
+
+    @media (max-width: $mobile) {
+      padding: 120px $spacing-sm 0; // Más padding en móvil
+    }
+  }
+
+  &__content {
+    max-width: 600px;
+
+    @media (max-width: $tablet) {
+      max-width: 100%;
+      order: 2;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    margin-bottom: $spacing-lg;
+
+    .badge__text {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      color: white;
+      padding: $spacing-xs $spacing-lg;
+      border-radius: 50px;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+  }
+
+  &__title {
+    margin: 0 0 $spacing-xl 0;
+    line-height: 1.1;
+
+    .title__main {
+      display: block;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: $font-weight-bold;
+      background: linear-gradient(135deg, #ffffff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: $spacing-sm;
+    }
+
+    .title__sub {
+      display: block;
+      font-size: clamp(1.25rem, 3vw, 1.875rem);
+      font-weight: $font-weight-normal;
+      color: $text-muted;
+      line-height: 1.3;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-lg;
+    color: $text-muted;
+    line-height: 1.7;
+    margin-bottom: $spacing-2xl;
+    max-width: 500px;
+
+    @media (max-width: $tablet) {
+      max-width: 100%;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+    margin-bottom: $spacing-2xl;
+    padding: $spacing-xl;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media (max-width: $mobile) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+      padding: $spacing-lg;
+    }
+
+    .stat {
+      text-align: center;
+
+      &__number {
+        display: block;
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: white;
+        margin-bottom: $spacing-xs;
+      }
+
+      &__label {
+        font-size: $font-size-sm;
+        color: $text-muted;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    
+    @media (max-width: calc(#{$tablet} - 1px)) {
+      justify-content: center;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-md $spacing-xl;
+      border-radius: 12px;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-base;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: 2px solid transparent;
+
+      &--primary {
+        background: linear-gradient(135deg, $primary-color, $accent-color);
+        color: white;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      &--secondary {
+        background: white;
+        color: $text-dark;
+        border: 2px solid #e2e8f0;
+
+        &:hover {
+          border-color: $primary-color;
+          background: $primary-color;
+          color: white;
+        }
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    height: 600px;
+
+    @media (max-width: $tablet) {
+      height: 400px;
+      order: 1;
+    }
+
+    .image__container {
+      position: relative;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+      .hero__main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .hero__main-image:hover {
+        transform: matrix(1.05, 0, 0, 1.05, 0, 0);
+      }
+
+      .image__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: $spacing-lg;
+
+        .overlay__item {
+          background: rgba(255, 255, 255, 0.95);
+          padding: $spacing-sm $spacing-md;
+          border-radius: 12px;
+          backdrop-filter: blur(10px);
+          width: fit-content;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+          &--1 {
+            align-self: flex-start;
+            animation: float 3s ease-in-out infinite;
+          }
+
+          &--2 {
+            align-self: flex-end;
+            animation: float 3s ease-in-out infinite 1.5s;
+          }
+
+          .item__label {
+            display: block;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-medium;
+            color: $text-dark;
+            margin-bottom: $spacing-xs;
+          }
+
+          .item__price {
+            display: block;
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Featured Collection Section - Now wide
+.featured-collection {
+  padding: $spacing-3xl $spacing-lg; // Padding lateral en lugar de container
+  background: white;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+    max-width: 800px; // Aumentado para mejor legibilidad
+    margin-left: auto;
+    margin-right: auto;
+
+    .section__badge {
+      display: inline-block;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      color: white;
+      padding: $spacing-xs $spacing-lg;
+      border-radius: 50px;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      margin-bottom: $spacing-md;
+    }
+
+    .section__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: $font-weight-bold;
+      color: $text-dark;
+      margin-bottom: $spacing-md;
+      line-height: 1.2;
+    }
+
+    .section__description {
+      font-size: $font-size-lg;
+      color: $text-muted;
+      line-height: 1.6;
+    }
+
+    .section__link {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      color: $primary-color;
+      font-weight: $font-weight-medium;
+      text-decoration: none;
+      margin-top: $spacing-lg;
+      transition: all 0.3s ease;
+
+      &:hover {
+        gap: $spacing-md;
+        color: $accent-color;
+      }
+    }
+  }
+
+  .loading-state, .error-state, .empty-state {
+    text-align: center;
+    padding: $spacing-3xl;
+
+    .loading__spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #f3f4f6;
+      border-top: 4px solid $primary-color;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto $spacing-lg;
+    }
+
+    .error__icon, .empty__icon {
+      font-size: 3rem;
+      margin-bottom: $spacing-lg;
+    }
+
+    .error__title, .empty__title {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $text-dark;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-xl;
+    margin: $spacing-3xl auto 0;
+    max-width: 1000px; // Ancho máximo para máximo 3 productos
+    justify-content: center; // Centra las columnas
+    justify-items: center; // Centra cada item dentro de su celda
+
+    // Limitar a máximo 3 columnas en todas las pantallas grandes
+    @media (min-width: 1000px) {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 960px; // 3 × 300px + 2 × gaps
+    }
+    
+    // Para tablets, máximo 2 columnas
+    @media (min-width: 600px) and (max-width: 999px) {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 640px; // 2 × 300px + 1 × gap
+    }
+
+    // Para móviles, solo 1 columna
+    @media (max-width: 599px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      max-width: 320px; // Ancho de una tarjeta en móvil
+    }
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    &.featured {
+      border: 2px solid $accent-color;
+    }
+
+    &__badges {
+      position: absolute;
+      top: $spacing-md;
+      left: $spacing-md;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      .badge {
+        font-size: $font-size-sm;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: 20px;
+        font-weight: $font-weight-medium;
+
+        &--featured {
+          background: linear-gradient(135deg, #fbbf24, #f59e0b);
+          color: white;
+        }
+
+        &--popular {
+          background: linear-gradient(135deg, #ef4444, #dc2626);
+          color: white;
+        }
+
+        &--exclusive {
+          background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+          color: white;
+        }
+      }
+    }
+
+    &__image {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .image__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        .quick-view-btn {
+          background: white;
+          color: $text-dark;
+          border: none;
+          padding: $spacing-md $spacing-lg;
+          border-radius: 12px;
+          font-weight: $font-weight-medium;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: matrix(1.05, 0, 0, 1.05, 0, 0);
+            background: $primary-color;
+            color: white;
+          }
+        }
+      }
+
+      &:hover {
+        img {
+          transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+        }
+
+        .image__overlay {
+          opacity: 1;
+        }
+      }
+    }
+
+    &__content {
+      padding: $spacing-lg;
+
+      .product__category {
+        font-size: $font-size-sm;
+        color: $text-muted;
+        text-transform: uppercase;
+        font-weight: $font-weight-medium;
+        margin-bottom: $spacing-xs;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: 12px;
+        display: inline-block;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        color: white;
+        border: 1px solid rgba(107, 114, 128, 0.3);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        
+        // Category-specific colors based on content
+        &.category-trajes {
+          background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+          color: white;
+          border: 1px solid rgba(59, 130, 246, 0.3);
+          box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+        
+        &.category-short-fit {
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          color: white;
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        &.category-luxury {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          color: white;
+          border: 1px solid rgba(245, 158, 11, 0.3);
+          box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+        
+        &.category-camisas {
+          background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+          color: white;
+          border: 1px solid rgba(139, 92, 246, 0.3);
+          box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+        }
+        
+        &.category-accesorios {
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          color: white;
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      .product__name {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $text-dark;
+        margin-bottom: $spacing-md;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .product__price-range {
+        margin-bottom: $spacing-sm;
+
+        .price-badge {
+          font-size: $font-size-sm;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: 20px;
+          font-weight: $font-weight-medium;
+
+          &--económico {
+            background: #dcfce7;
+            color: #166534;
+          }
+
+          &--medio {
+            background: #fef3c7;
+            color: #92400e;
+          }
+
+          &--premium {
+            background: #e0e7ff;
+            color: #3730a3;
+          }
+
+          &--luxury {
+            background: #fce7f3;
+            color: #9d174d;
+          }
+        }
+      }
+
+      .product__price {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $primary-color;
+        margin-bottom: $spacing-sm;
+      }
+
+      .product__stock {
+        font-size: $font-size-sm;
+        margin-bottom: $spacing-lg;
+
+        &.in-stock .stock-text {
+          color: #059669;
+        }
+
+        &.low-stock .stock-text {
+          color: #d97706;
+        }
+
+        &.out-of-stock .stock-text {
+          color: #dc2626;
+        }
+      }
+
+      .product__actions {
+        display: flex;
+        gap: $spacing-sm;
+
+        .btn {
+          flex: 1;
+          border-radius: 12px;
+          font-weight: $font-weight-medium;
+          transition: all 0.3s ease;
+          padding: $spacing-sm $spacing-md;
+          border: none;
+          cursor: pointer;
+          font-size: $font-size-base;
+
+          &--primary {
+            background: linear-gradient(135deg, $primary-color, $accent-color);
+            color: white;
+
+            &:hover:not(:disabled) {
+              transform: translateY(-2px);
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            &:disabled {
+              background: #9ca3af;
+              cursor: not-allowed;
+            }
+          }
+
+          &--secondary {
+            background: white;
+            color: $primary-color;
+            border: 2px solid $primary-color;
+            padding: $spacing-sm;
+            width: auto;
+            flex: none;
+
+            &:hover {
+              background: $primary-color;
+              color: white;
+            }
+          }
+
+          &--icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Testimonials Section - Now wide
+.testimonials {
+  padding: $spacing-3xl $spacing-lg; // Padding lateral en lugar de container
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+
+  .section-header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+    max-width: 800px; // Aumentado para mejor legibilidad
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: $spacing-xl;
+    margin: $spacing-3xl auto 0;
+    max-width: 1200px; // Limita el ancho máximo para centrar mejor
+    justify-content: center; // Centra las columnas cuando hay espacio sobrante
+    justify-items: center; // Centra cada testimonio dentro de su celda
+
+    // Para pantallas muy grandes, limitamos a 3 columnas máximo para testimonios
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1100px;
+    }
+    
+    @media (min-width: 768px) and (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 720px;
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      max-width: 400px;
+    }
+  }
+
+  .testimonial-card {
+    background: white;
+    padding: $spacing-xl;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial__rating {
+      display: flex;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-lg;
+
+      .star {
+        color: #fbbf24;
+        font-size: $font-size-lg;
+      }
+    }
+
+    .testimonial__quote {
+      font-size: $font-size-lg;
+      line-height: 1.6;
+      color: $text-dark;
+      font-style: italic;
+      margin: 0 0 $spacing-lg 0;
+      position: relative;
+
+      &::before {
+        content: '"';
+        font-size: 4rem;
+        color: $primary-color;
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+        opacity: 0.3;
+      }
+    }
+
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      .author__avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .author__info {
+        display: flex;
+        flex-direction: column;
+
+        .author__name {
+          font-weight: $font-weight-bold;
+          color: $text-dark;
+        }
+
+        .author__role {
+          font-size: $font-size-sm;
+          color: $text-muted;
+        }
+      }
+    }
+  }
+}
+
+// Benefits Section - Now wide
+.benefits {
+  padding: $spacing-3xl $spacing-lg; // Padding lateral en lugar de container
+  background: #f8fafc;
+
+  .section__title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: $font-weight-bold;
+    color: $text-dark;
+    margin-bottom: $spacing-3xl;
+  }
+
+  .benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-xl;
+    max-width: none; // Sin restricción de ancho máximo
+
+    // Para pantallas grandes, limitamos a 3 columnas para benefits
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+    }
+  }
+
+  .benefit-card {
+    background: white;
+    padding: $spacing-xl;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    &__icon {
+      margin-bottom: $spacing-lg;
+      color: $primary-color;
+    }
+
+    &__title {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $text-dark;
+      margin-bottom: $spacing-md;
+    }
+
+    &__text {
+      color: $text-muted;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Contact Section - Now wide
+.contact {
+  padding: $spacing-3xl $spacing-lg; // Padding lateral en lugar de container
+  background: white;
+
+  .section__title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: $font-weight-bold;
+    color: $text-dark;
+    margin-bottom: $spacing-3xl;
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-3xl;
+    max-width: 1400px; // Aumentado para mejor aprovechamiento
+    margin: 0 auto;
+
+    @media (max-width: 900px) { // Ajustado el breakpoint
+      grid-template-columns: 1fr;
+      gap: $spacing-2xl;
+    }
+  }
+
+  &__info-card {
+    background: #f8fafc;
+    padding: $spacing-xl;
+    border-radius: 16px;
+
+    .info-card__title {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $text-dark;
+      margin-bottom: $spacing-lg;
+    }
+
+    .info-card__address {
+      font-size: $font-size-lg;
+      line-height: 1.6;
+      color: $text-muted;
+      margin-bottom: $spacing-lg;
+    }
+
+    .info-card__schedule {
+      h4 {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $text-dark;
+        margin-bottom: $spacing-md;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          padding: $spacing-xs 0;
+          color: $text-muted;
+
+          span {
+            font-weight: $font-weight-medium;
+            color: $text-dark;
+          }
+        }
+      }
+    }
+  }
+
+  &__form {
+    .form__group {
+      margin-bottom: $spacing-lg;
+    }
+
+    .form__label {
+      display: block;
+      font-weight: $font-weight-medium;
+      color: $text-dark;
+      margin-bottom: $spacing-sm;
+    }
+
+    .form__input, .form__textarea {
+      width: 100%;
+      padding: $spacing-sm $spacing-md;
+      border: 2px solid #e2e8f0;
+      border-radius: $border-radius-md;
+      font-size: $font-size-base;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+
+    .form__textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: $spacing-md;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      color: white;
+      border: none;
+      border-radius: $border-radius-md;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-base;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.7), 0 0 0 10px rgba(37, 211, 102, 0.1);
+  }
+  100% {
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+// ===========================
+// CATEGORY BUTTONS & TAGS - FRANKOS STYLE
+// ===========================
+
+// General category buttons/tags styling
+.category-btn, .category-tag, [class*="category-"] {
+  padding: $spacing-sm $spacing-md;
+  border-radius: 12px;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  // Trajes - Blue
+  &.trajes-completos,
+  &[data-category="trajes"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    
+    &:hover {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    }
+  }
+  
+  // Short Fit Evening - Green
+  &.short-fit-evening,
+  &[data-category="short-fit"] {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    
+    &:hover {
+      background: linear-gradient(135deg, #0d9488 0%, #047857 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+    }
+  }
+  
+  // Luxury - Gold
+  &.luxury,
+  &[data-category="luxury"] {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    
+    &:hover {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+    }
+  }
+}
+
+// Responsive Design - Frankos Style
+@media (max-width: $mobile) {
+  .hero {
+    min-height: 90vh;
+    
+    &__container {
+      padding: 0 $spacing-md;
+    }
+    
+    &__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .featured-collection {
+    padding: $spacing-2xl 0;
+    
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .testimonials {
+    padding: $spacing-2xl 0;
+    
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Estilos específicos para la guía de tallas
+.size-guide {
+  &__section {
+    margin-bottom: $spacing-2xl;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  &__tips {
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 197, 94, 0.1));
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 12px;
+    padding: $spacing-xl;
+    
+    .section-title {
+      margin-bottom: $spacing-lg;
+    }
+  }
+}
+
+.size-table {
+  overflow-x: auto;
+  margin-top: $spacing-md;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 15, 35, 0.3);
+    backdrop-filter: blur(10px);
+    
+    th, td {
+      padding: $spacing-md $spacing-lg;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: $text-light;
+    }
+    
+    th {
+      background: rgba(74, 222, 128, 0.1);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #4ade80; // Verde claro para headers
+    }
+    
+    tr:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+    
+    tr:hover {
+      background: rgba(74, 222, 128, 0.05);
+    }
+    
+    td strong {
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+}
+
+// Botón terciario para la guía de tallas
+.btn--tertiary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: $text-light;
+  backdrop-filter: blur(10px);
+  gap: $spacing-sm;
+  
+  span:first-child {
+    font-size: 1.2em;
+  }
+  
+  &:hover {
+    background: rgba(74, 222, 128, 0.1);
+    border-color: rgba(74, 222, 128, 0.3);
+    transform: translateY(-2px);
+    color: #4ade80; // Verde claro para hover
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ===========================
+// ANIMACIONES PARA EL MODAL
+// ===========================
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===========================
+// ESTILOS ESPECÍFICOS DEL MODAL DE TALLAS - FRANKOS STYLE
+// ===========================
+
+// Modal overlay principal - Frankos Style
+.size-guide-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.85) 0%, 
+    rgba(20, 20, 30, 0.9) 50%, 
+    rgba(0, 0, 0, 0.85) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  backdrop-filter: blur(12px);
+  animation: modalFadeIn 0.4s ease-out;
+}
+
+// Contenido del modal - Frankos Style
+.size-guide-modal__content {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.98) 0%, 
+    rgba(248, 250, 252, 0.95) 50%, 
+    rgba(255, 255, 255, 0.98) 100%);
+  border-radius: 24px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(220, 220, 220, 0.3);
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: modalSlideUp 0.5s ease-out;
+  
+  // Para Firefox (antes de las reglas anidadas)
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.6) rgba(248, 250, 252, 0.3);
+  
+  @media (max-width: $tablet) {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 20px;
+  }
+  
+  @media (max-width: $mobile) {
+    max-width: 96vw;
+    max-height: 92vh;
+    border-radius: 16px;
+  }
+  
+  // Scrollbar personalizado - Estilo elegante
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(248, 250, 252, 0.8);
+    border-radius: 8px;
+    margin: 8px 0;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, 
+      rgba(100, 116, 139, 0.4) 0%, 
+      rgba(71, 85, 105, 0.6) 100%);
+    border-radius: 8px;
+    border: 2px solid rgba(248, 250, 252, 0.5);
+    background-clip: content-box;
+    
+    &:hover {
+      background: linear-gradient(135deg, 
+        rgba(100, 116, 139, 0.6) 0%, 
+        rgba(71, 85, 105, 0.8) 100%);
+      background-clip: content-box;
+    }
+  }
+  
+  &::-webkit-scrollbar-corner {
+    background: rgba(248, 250, 252, 0.8);
+  }
+}
+
+.size-guide-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-2xl;
+  background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 0.9) 0%, 
+    rgba(241, 245, 249, 0.95) 100%);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.size-guide-modal__title {
+  margin: 0;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  
+  // El emoji mantiene su color natural
+  .emoji {
+    font-size: 1.3em;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  }
+  
+  // El texto tiene gradiente con los colores del proyecto
+  .text {
+    background: linear-gradient(135deg, 
+      $primary-color 0%, 
+      $secondary-color 50%, 
+      $accent-color 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.02em;
+  }
+}
+
+.size-guide-modal__close {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(203, 213, 225, 0.4);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+  }
+  
+  &:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.size-guide-modal__body {
+  padding: $spacing-2xl;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.size-section {
+  margin-bottom: $spacing-2xl;
+  padding: $spacing-xl;
+  background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 0.9) 0%, 
+    rgba(241, 245, 249, 0.95) 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(72, 34, 168, 0.2);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    border-color: rgba(72, 34, 168, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(72, 34, 168, 0.15);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.size-section h3 {
+  margin: 0 0 $spacing-lg 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, 
+    $primary-color 0%, 
+    $secondary-color 50%, 
+    $accent-color 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.size-table {
+  width: 100%;
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(72, 34, 168, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+    th {
+      background: linear-gradient(135deg, 
+        rgba(72, 34, 168, 0.1) 0%, 
+        rgba(67, 47, 117, 0.15) 100%) !important;
+      color: $primary-color !important;
+      font-weight: 700;
+      padding: $spacing-md $spacing-lg;
+      text-align: center;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid rgba(72, 34, 168, 0.3) !important;
+    }
+
+    td {
+      padding: $spacing-md $spacing-lg;
+      text-align: center;
+      color: $text-color;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    tr:hover td {
+      background: rgba(72, 34, 168, 0.05);
+      color: $text-color;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.tips-section {
+  margin-top: $spacing-xl;
+  padding: $spacing-lg;
+  background: linear-gradient(135deg, 
+    rgba(72, 34, 168, 0.05) 0%, 
+    rgba(67, 47, 117, 0.08) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(72, 34, 168, 0.2);
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+    padding: $spacing-md;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateX(4px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-item__icon {
+      font-size: 1.2em;
+      color: $primary-color;
+      flex-shrink: 0;
+    }
+
+    .info-item__content {
+      flex: 1;
+
+      h4 {
+        margin: 0 0 $spacing-xs 0;
+        color: $text-color;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      p {
+        margin: 0;
+        color: $text-muted;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+// ===========================
+// ESTILOS ESPECÍFICOS PARA ASEGURAR COLORES DEL PROYECTO
+// ===========================
+
+// Asegurar que los headers de tabla usen los colores correctos
+.size-guide-modal .size-table table th,
+.size-guide-modal th {
+  background: linear-gradient(135deg, 
+    rgba(72, 34, 168, 0.1) 0%, 
+    rgba(67, 47, 117, 0.15) 100%) !important;
+  color: $primary-color !important;
+  border-bottom: 2px solid rgba(72, 34, 168, 0.3) !important;
+}
+
+// Asegurar títulos con gradiente púrpura
+.size-guide-modal .size-section h3 {
+  background: linear-gradient(135deg, 
+    $primary-color 0%, 
+    $secondary-color 50%, 
+    $accent-color 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}

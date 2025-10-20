@@ -1,0 +1,537 @@
+# ================================# ================================# ================================
+
+# FRANKO'S STYLE - MAIN GITIGNORE
+
+# ================================# FRANKO'S STYLE - MAIN GITIGNORE# FRANKO'S STYLE - MAIN GITIGNORE
+
+
+
+# =============================# ================================# ================================
+
+# ARCHIVOS SENSIBLES Y SECRETOS
+
+# =============================
+
+# Variables de entorno (CRÍTICO - NUNCA SUBIR)
+
+**/.env# =============================# =============================
+
+**/.env.local
+
+**/.env.development.local# ARCHIVOS SENSIBLES Y SECRETOS# ARCHIVOS SENSIBLES Y SECRETOS
+
+**/.env.test.local
+
+**/.env.production.local# =============================# =============================
+
+**/config/secrets.json
+
+**/config/production.json# Variables de entorno (CRÍTICO - NUNCA SUBIR)# Variables de entorno (CRÍTICO - NUNCA SUBIR)
+
+
+
+# API Keys y certificados**/.env**/.env
+
+*.pem
+
+*.key**/.env.local**/.env.local
+
+*.crt
+
+*.csr**/.env.development.local**/.env.development.local
+
+api-keys.json
+
+secrets.json**/.env.test.local**/.env.test.local
+
+
+
+# ==================**/.env.production.local**/.env.production.local
+
+# DEPENDENCIAS
+
+# ==================**/config/secrets.json**/config/secrets.json
+
+**/node_modules/
+
+npm-debug.log***/config/production.json**/config/production.json
+
+yarn-debug.log*
+
+yarn-error.log*
+
+lerna-debug.log*
+
+# API Keys y certificados# API Keys y certificados
+
+# ==================
+
+# ARCHIVOS DE BUILD*.pem*.pem
+
+# ==================
+
+**/dist/*.key*.key
+
+**/build/
+
+**/out-tsc/*.crt*.crt
+
+**/.angular/cache/
+
+**/.sass-cache/*.csr*.csr
+
+**/tmp/
+
+**/temp/api-keys.jsonapi-keys.json
+
+
+
+# ==================secrets.jsonsecrets.json
+
+# LOGS Y REPORTES
+
+# ==================
+
+logs
+
+*.log# ==================# ==================
+
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+pids# DEPENDENCIAS# NODE.JS Y NPM
+
+*.pid
+
+*.seed# ==================# ==================
+
+*.pid.lock
+
+**/node_modules/# Dependencias
+
+# Coverage y testing
+
+.nyc_outputnpm-debug.log***/node_modules/
+
+coverage/
+
+*.lcovyarn-debug.log*npm-debug.log*
+
+
+
+# ==================yarn-error.log*yarn-debug.log*
+
+# SISTEMAS OPERATIVOS
+
+# ==================lerna-debug.log*yarn-error.log*
+
+# macOS
+
+.DS_Store.npmlerna-debug.log*
+
+.DS_Store?
+
+._*.yarn-integritypackage-lock.json
+
+.Spotlight-V100
+
+.Trashesyarn.lock
+
+
+
+# Windows# ==================
+
+ehthumbs.db
+
+Thumbs.db# ARCHIVOS DE CACHE# Cache y archivos temporales
+
+Desktop.ini
+
+# ==================**/.npm
+
+# Linux
+
+*~.nyc_output**/.eslintcache
+
+
+
+# ==================coverage/.nyc_output
+
+# EDITORES E IDEs
+
+# ==================*.lcovcoverage/
+
+# Visual Studio Code
+
+.vscode/*.lcov
+
+!.vscode/settings.json
+
+!.vscode/tasks.json# ==================
+
+!.vscode/launch.json
+
+# ARCHIVOS DE BUILD# ==================
+
+# Sublime Text
+
+*.sublime-workspace# ==================# ARCHIVOS DE BUILD
+
+*.sublime-project
+
+**/dist/# ==================
+
+# Vim
+
+*.swp**/build/**/dist/
+
+*.swo
+
+*~**/out-tsc/**/build/
+
+
+
+# Emacs**/.angular/cache/**/out-tsc/
+
+*~
+
+\#*\#**/.sass-cache/**/.angular/cache/
+
+/.emacs.desktop
+
+/.emacs.desktop.lock**/tmp/**/.sass-cache/
+
+*.elc
+
+**/temp/**/tmp/
+
+# ==================
+
+# ARCHIVOS DE MEDIOS**/temp/
+
+# ==================
+
+# Uploads temporales (mantener estructura)# ==================
+
+**/public/uploads/*
+
+!**/public/uploads/.gitkeep# LOGS Y REPORTES# ==================
+
+
+
+# Imágenes grandes temporales# ==================# LOGS Y REPORTES
+
+*.tmp.jpg
+
+*.tmp.jpeglogs# ==================
+
+*.tmp.png
+
+*.tmp.gif*.loglogs
+
+*.temp.*
+
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json*.log
+
+# ==================
+
+# BASES DE DATOSpidsreport.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ==================
+
+*.db*.pidpids
+
+*.sqlite
+
+*.sqlite3*.seed*.pid
+
+/database/backups/
+
+*.pid.lock*.seed
+
+# ==================
+
+# ARCHIVOS DE PRUEBA*.pid.lock
+
+# ==================
+
+test-results/# ==================
+
+coverage/
+
+junit.xml# SISTEMAS OPERATIVOS# ==================
+
+
+
+# ==================# ==================# SISTEMAS OPERATIVOS
+
+# CACHE Y TEMPORALES
+
+# ==================# macOS# ==================
+
+.cache/
+
+.parcel-cache/.DS_Store# macOS
+
+.next/
+
+.nuxt/.DS_Store?.DS_Store
+
+.vuepress/dist/
+
+._*.DS_Store?
+
+# ==================
+
+# DEPLOYMENT.Spotlight-V100._*
+
+# ==================
+
+# Vercel.Trashes.Spotlight-V100
+
+.vercel
+
+.Trashes
+
+# Netlify
+
+.netlify/# Windows
+
+
+
+# AWSehthumbs.db# Windows
+
+.aws/
+
+Thumbs.dbehthumbs.db
+
+# Docker (si se usa)
+
+docker-compose.override.ymlDesktop.iniThumbs.db
+
+
+
+# ==================Desktop.ini
+
+# DOCUMENTACIÓN Y NOTAS
+
+# ==================# Linux
+
+# Notas personales
+
+NOTES.md*~# Linux
+
+TODO.personal.md
+
+IDEAS.md*~
+
+
+
+# Documentos temporales# ==================
+
+*.backup
+
+*.bak# EDITORES E IDEs# ==================
+
+*.orig
+
+# ==================# EDITORES E IDEs
+
+# ==================
+
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO# Visual Studio Code# ==================
+
+# ==================
+
+# Scripts personales de desarrollo.vscode/# Visual Studio Code
+
+scripts/personal/
+
+scripts/dev-only/!.vscode/settings.json.vscode/
+
+
+
+# Configuraciones locales!.vscode/tasks.json!.vscode/settings.json
+
+config.local.json
+
+settings.local.json!.vscode/launch.json!.vscode/tasks.json
+
+
+
+# ================================!.vscode/launch.json
+
+# RECORDATORIO DE SEGURIDAD
+
+# ================================# IntelliJ IDEA!.vscode/extensions.json
+
+# NUNCA subir:
+
+# - Archivos .env con API keys.idea/.history/
+
+# - Credenciales de bases de datos
+
+# - Certificados SSL privados
+
+# - Configuraciones de producción
+
+# - Claves de terceros (Cloudinary, Groq, etc.)# Sublime Text# JetBrains IDEs
+
+# ================================
+*.sublime-workspace.idea/
+
+*.sublime-project*.iws
+
+*.iml
+
+# Vim*.ipr
+
+*.swp
+
+*.swo# Sublime Text
+
+*~*.sublime-workspace
+
+*.sublime-project
+
+# Emacs
+
+*~# Vim
+
+\#*\#*.swp
+
+/.emacs.desktop*.swo
+
+/.emacs.desktop.lock*~
+
+*.elc
+
+# Emacs
+
+# ==================*~
+
+# ARCHIVOS DE MEDIOS\#*\#
+
+# ==================/.emacs.desktop
+
+# Uploads temporales (mantener estructura)/.emacs.desktop.lock
+
+**/public/uploads/**.elc
+
+!**/public/uploads/.gitkeep
+
+# ==================
+
+# Imágenes grandes temporales# ARCHIVOS DE MEDIOS
+
+*.tmp.jpg# ==================
+
+*.tmp.jpeg# Uploads temporales (mantener estructura)
+
+*.tmp.png**/public/uploads/*
+
+*.tmp.gif!**/public/uploads/.gitkeep
+
+*.temp.*
+
+# Imágenes grandes temporales
+
+# ==================*.tmp.jpg
+
+# BASES DE DATOS*.tmp.jpeg
+
+# ==================*.tmp.png
+
+*.db*.tmp.gif
+
+*.sqlite*.temp.*
+
+*.sqlite3
+
+/database/backups/# ==================
+
+# BASES DE DATOS
+
+# ==================# ==================
+
+# ARCHIVOS DE PRUEBA*.db
+
+# ==================*.sqlite
+
+test-results/*.sqlite3
+
+coverage//database/backups/
+
+junit.xml
+
+# ==================
+
+# ==================# ARCHIVOS DE PRUEBA
+
+# ARCHIVOS TEMPORALES# ==================
+
+# ==================test-results/
+
+*.tmpcoverage/
+
+*.tempjunit.xml
+
+*.backup.nyc_output/
+
+*.bak
+
+# ==================
+
+# ==================# DEPLOYMENT Y CI/CD
+
+# DOCUMENTACIÓN SENSIBLE# ==================
+
+# ==================# Vercel
+
+# Archivos de setup con API keys.vercel
+
+**/GROQ_SETUP.md
+
+**/API_KEYS.md# Netlify
+
+**/SECRETS.md.netlify/
+
+# AWS
+.aws/
+
+# Docker (si se usa)
+docker-compose.override.yml
+
+# ==================
+# DOCUMENTACIÓN Y NOTAS
+# ==================
+# Notas personales
+NOTES.md
+TODO.personal.md
+IDEAS.md
+
+# Documentos temporales
+*.backup
+*.bak
+*.orig
+
+# ==================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ==================
+# Scripts personales de desarrollo
+scripts/personal/
+scripts/dev-only/
+
+# Configuraciones locales
+config.local.json
+settings.local.json
+
+# ================================
+# RECORDATORIO DE SEGURIDAD
+# ================================
+# NUNCA subir:
+# - Archivos .env con API keys
+# - Credenciales de bases de datos
+# - Certificados SSL privados
+# - Configuraciones de producción
+# - Claves de terceros (Cloudinary, Groq, etc.)
+# ================================

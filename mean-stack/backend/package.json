@@ -1,0 +1,41 @@
+{
+  "name": "mean-backend",
+  "version": "1.0.0",
+  "description": "Backend para aplicación MEAN stack",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "create-admin": "node src/scripts/create-admin-user.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-faq": "node run-faq-tests.js",
+    "test-faq-full": "node test-faq-script.js",
+    "test-products": "node src/scripts/test-products-vs-faq.js"
+  },
+  "keywords": [
+    "MEAN",
+    "MongoDB",
+    "Express",
+    "Node"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^2.2.0",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "groq-sdk": "^0.33.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.2",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "start": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

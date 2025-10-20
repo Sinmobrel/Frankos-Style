@@ -1,0 +1,555 @@
+<div class="home-container">
+<!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero__container">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <span class="badge__text">✨ Elegancia Redefinida</span>
+                </div>
+                <h1 class="hero__title">
+                    <span class="title__main">Franko's Style</span>
+                    <span class="title__sub">Sastrería de Alta Gama</span>
+                </h1>
+                <p class="hero__description">
+                    Descubre nuestra exclusiva colección de trajes, camisas y accesorios. 
+                    Cada pieza está cuidadosamente seleccionada para el hombre moderno que valora la elegancia y el estilo.
+                </p>
+                <div class="hero__stats">
+                    <div class="stat">
+                        <span class="stat__number">500+</span>
+                        <span class="stat__label">Clientes Satisfechos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">15+</span>
+                        <span class="stat__label">Años de Experiencia</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">100%</span>
+                        <span class="stat__label">Calidad Garantizada</span>
+                    </div>
+                </div>
+                <div class="hero__actions">
+                    <a href="/catalogo" class="btn btn--primary">
+                        <span>Explorar Colección</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14m-7-7 7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <button class="btn btn--tertiary" (click)="openSizeGuide()">
+                        <span>📏</span>
+                        <span>Guía de Tallas</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero__image">
+                <div class="image__container">
+                    <img src="assets/images/Hero_image.png" alt="Franko's Style - Elegancia Masculina" class="hero__main-image">
+                    <div class="image__overlay">
+                        <div class="overlay__item overlay__item--1">
+                            <span class="item__label">Trajes Premium</span>
+                            <span class="item__price">Desde $124.000</span>
+                        </div>
+                        <div class="overlay__item overlay__item--2">
+                            <span class="item__label">Accesorios</span>
+                            <span class="item__price">Desde $14.990</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section id="productos" class="featured-collection">
+        <div class="section-header">
+            <div class="header__content">
+                <span class="section__badge">Colección Destacada</span>
+                <h2 class="section__title">Piezas Seleccionadas</h2>
+                <p class="section__description">
+                    Descubre nuestra selección de productos más populares, elegidos especialmente por su calidad excepcional y estilo atemporal.
+                </p>
+            </div>
+            <a href="/catalogo" class="section__link">
+                Ver toda la colección
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14m-7-7 7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+            <!-- Loading State -->
+            @if (loading) {
+            <div class="loading-state">
+                <div class="loading__spinner"></div>
+                <p class="loading__text">Cargando productos exclusivos...</p>
+            </div>
+            }
+
+            <!-- Error State -->
+            @if (error) {
+            <div class="error-state">
+                <div class="error__icon">⚠️</div>
+                <p class="error__text">{{ error }}</p>
+                <button class="btn btn--secondary" (click)="loadFeaturedProducts()">Reintentar</button>
+            </div>
+            }
+
+            <!-- Products Grid -->
+            @if (!loading && !error && featuredProducts.length) {
+            <div class="products-grid">
+                @for (product of featuredProducts; track product._id) {
+                <div class="product-card" [class.featured]="product.featured" [class.popular]="product.isPopular">
+                    <div class="product-card__badges">
+                        @if (product.featured) {
+                        <span class="badge badge--featured">✨ Destacado</span>
+                        }
+                        @if (product.isPopular) {
+                        <span class="badge badge--popular">🔥 Popular</span>
+                        }
+                        @if (product.isExclusive) {
+                        <span class="badge badge--exclusive">💎 Exclusivo</span>
+                        }
+                    </div>
+                    
+                    <div class="product-card__image">
+                        <img [src]="product.imageUrl" [alt]="product.name" loading="lazy" />
+                        <div class="image__overlay">
+                            <button class="quick-view-btn" (click)="openProductModal(product)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card__content">
+                        <div class="product__category" [ngClass]="getCategoryClass(product.category)">{{ product.category }}</div>
+                        <h3 class="product__name">{{ product.name }}</h3>
+                        
+                        @if (product.priceRange) {
+                        <div class="product__price-range">
+                            <span class="price-badge" [ngClass]="'price-badge--' + product.priceRange.toLowerCase()">
+                                {{ product.priceRange }}
+                            </span>
+                        </div>
+                        }
+                        
+                        <div class="product__price">
+                            {{ product.price | currency:'CLP':'symbol-narrow':'1.0-0' }}
+                        </div>
+                        
+                        <div class="product__stock" [class.in-stock]="product.stock > 0" [class.low-stock]="product.stock > 0 && product.stock <= 5" [class.out-of-stock]="product.stock <= 0">
+                            @if (product.stock > 5) {
+                            <span class="stock-text">✅ En stock</span>
+                            } @else if (product.stock > 0) {
+                            <span class="stock-text">⚠️ Últimas unidades ({{ product.stock }})</span>
+                            } @else {
+                            <span class="stock-text">❌ Agotado</span>
+                            }
+                        </div>
+                        
+                        <div class="product__actions">
+                            <button class="btn btn--primary" (click)="openProductModal(product)" [disabled]="product.stock <= 0">
+                                {{ product.stock > 0 ? 'Ver Detalles' : 'Agotado' }}
+                            </button>
+                            <button class="btn btn--secondary btn--icon" (click)="contactViaWhatsApp(product)" title="Consultar por WhatsApp">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.62-6.003C.122 5.281 5.326 0 12.061 0c3.184 0 6.167 1.24 8.413 3.488a11.82 11.82 0 013.485 8.414c-.003 6.736-5.286 11.939-11.998 11.939a11.9 11.9 0 01-6.002-1.616L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.593 5.448.003 9.907-4.441 9.909-9.885.002-5.462-4.415-9.89-9.881-9.892-5.466-.002-9.9 4.421-9.902 9.887-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.735-.985z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            }
+
+            <!-- Empty State -->
+            @if (!loading && !error && !featuredProducts.length) {
+            <div class="empty-state">
+                <div class="empty__icon">📦</div>
+                <h3 class="empty__title">No hay productos destacados</h3>
+                <p class="empty__text">Vuelve pronto para descubrir nuestras nuevas colecciones.</p>
+                <a href="/catalogo" class="btn btn--primary">Ver todos los productos</a>
+            </div>
+            }
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <span class="section__badge">Testimonios</span>
+            <h2 class="section__title">Lo Que Dicen Nuestros Clientes</h2>
+            <p class="section__description">
+                La satisfacción de nuestros clientes es nuestra mayor recompensa. Descubre por qué confían en Franko's Style.
+            </p>
+        </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial__rating">
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <blockquote class="testimonial__quote">
+                        "La calidad de los trajes es excepcional. El corte es perfecto y la atención al detalle es impresionante. Definitivamente volveré a comprar."
+                    </blockquote>
+                    <div class="testimonial__author">
+                        <div class="author__avatar">
+                            <img src="assets/images/default.png" alt="Carlos Mendoza">
+                        </div>
+                        <div class="author__info">
+                            <span class="author__name">Carlos Mendoza</span>
+                            <span class="author__role">Ejecutivo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial__rating">
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <blockquote class="testimonial__quote">
+                        "Excelente servicio y productos de primera calidad. Me ayudaron a encontrar el traje perfecto para mi boda. ¡Altamente recomendado!"
+                    </blockquote>
+                    <div class="testimonial__author">
+                        <div class="author__avatar">
+                            <img src="assets/images/default.png" alt="Roberto Silva">
+                        </div>
+                        <div class="author__info">
+                            <span class="author__name">Roberto Silva</span>
+                            <span class="author__role">Empresario</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial__rating">
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <blockquote class="testimonial__quote">
+                        "La elegancia y sofisticación que transmiten sus prendas es incomparable. Cada pieza cuenta una historia de calidad y estilo."
+                    </blockquote>
+                    <div class="testimonial__author">
+                        <div class="author__avatar">
+                            <img src="assets/images/default.png" alt="Diego Rodríguez">
+                        </div>
+                        <div class="author__info">
+                            <span class="author__name">Diego Rodríguez</span>
+                            <span class="author__role">Arquitecto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits">
+        <h2 class="section__title">¿Por Qué Elegirnos?</h2>
+        <div class="benefits__grid">
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3 class="benefit-card__title">Envío Gratuito</h3>
+                    <p class="benefit-card__text">Envío gratis en pedidos superiores a $100.000 en todo Chile</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"/>
+                            <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+                            <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
+                            <path d="M3 12c0 5.5 4.5 10 10 10s10-4.5 10-10"/>
+                        </svg>
+                    </div>
+                    <h3 class="benefit-card__title">Garantía de Calidad</h3>
+                    <p class="benefit-card__text">Productos originales con garantía oficial del fabricante</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3 class="benefit-card__title">Soporte 24/7</h3>
+                    <p class="benefit-card__text">Atención al cliente disponible todos los días del año</p>
+                </div>
+            </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="contact">
+        <h2 class="section__title">Contáctanos</h2>
+        <div class="contact__layout">
+                <div class="contact__info-card">
+                    <h3 class="info-card__title">Nuestra Tienda</h3>
+                    <p class="info-card__address">Alameda 3410,<br>Persa Estación Central<br><strong>Local V-21</strong></p>
+                    <div class="info-card__schedule">
+                        <h4>Horario</h4>
+                        <ul>
+                            <li><span>Lunes a Sábado:</span> 12:00 - 18:30</li>
+                            <li><span>Domingo:</span> Cerrado</li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="contact__form">
+                    <div class="form__group">
+                        <label for="name" class="form__label">Nombre</label>
+                        <input type="text" id="name" name="name" class="form__input" required>
+                    </div>
+                    
+                    <div class="form__group">
+                        <label for="email" class="form__label">Email</label>
+                        <input type="email" id="email" name="email" class="form__input" required>
+                    </div>
+                    
+                    <div class="form__group">
+                        <label for="message" class="form__label">Mensaje</label>
+                        <textarea id="message" name="message" class="form__textarea" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary">Enviar Mensaje</button>
+                </form>
+            </div>
+    </section>
+</div>
+
+<!-- Modal de Guía de Tallas -->
+@if (showSizeGuide) {
+    <div class="size-guide-modal" (click)="closeSizeGuide()">
+        <div class="size-guide-modal__content" (click)="$event.stopPropagation()">
+            <div class="size-guide-modal__header">
+                <h2 class="size-guide-modal__title">
+                    <span class="emoji">📏</span>
+                    <span class="text">Guía de Tallas</span>
+                </h2>
+                <button class="size-guide-modal__close" (click)="closeSizeGuide()" aria-label="Cerrar modal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="size-guide-modal__body">
+                <div class="size-guide">
+                    <div class="size-section">
+                        <h3>🧥 Ropa Superior</h3>
+                        <div class="size-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Talla</th>
+                                        <th>Pecho (cm)</th>
+                                        <th>Cintura (cm)</th>
+                                        <th>Hombros (cm)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>XS</strong></td>
+                                        <td>84-88</td>
+                                        <td>68-72</td>
+                                        <td>42-44</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>S</strong></td>
+                                        <td>88-92</td>
+                                        <td>72-76</td>
+                                        <td>44-46</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>M</strong></td>
+                                        <td>92-96</td>
+                                        <td>76-80</td>
+                                        <td>46-48</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>L</strong></td>
+                                        <td>96-100</td>
+                                        <td>80-84</td>
+                                        <td>48-50</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>XL</strong></td>
+                                        <td>100-104</td>
+                                        <td>84-88</td>
+                                        <td>50-52</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>XXL</strong></td>
+                                        <td>104-108</td>
+                                        <td>88-92</td>
+                                        <td>52-54</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="size-section">
+                        <h3>👖 Pantalones</h3>
+                        <div class="size-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Talla</th>
+                                        <th>Cintura (cm)</th>
+                                        <th>Cadera (cm)</th>
+                                        <th>Largo (cm)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>XS</strong></td>
+                                        <td>68-72</td>
+                                        <td>90-94</td>
+                                        <td>100-102</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>S</strong></td>
+                                        <td>72-76</td>
+                                        <td>94-98</td>
+                                        <td>102-104</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>M</strong></td>
+                                        <td>76-80</td>
+                                        <td>98-102</td>
+                                        <td>104-106</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>L</strong></td>
+                                        <td>80-84</td>
+                                        <td>102-106</td>
+                                        <td>106-108</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>XL</strong></td>
+                                        <td>84-88</td>
+                                        <td>106-110</td>
+                                        <td>108-110</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>XXL</strong></td>
+                                        <td>88-92</td>
+                                        <td>110-114</td>
+                                        <td>110-112</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="size-section">
+                        <h3>👟 Calzado</h3>
+                        <div class="size-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>EU</th>
+                                        <th>US</th>
+                                        <th>UK</th>
+                                        <th>CM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>39</strong></td>
+                                        <td>6.5</td>
+                                        <td>6</td>
+                                        <td>24.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>40</strong></td>
+                                        <td>7</td>
+                                        <td>6.5</td>
+                                        <td>25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>41</strong></td>
+                                        <td>8</td>
+                                        <td>7</td>
+                                        <td>25.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>42</strong></td>
+                                        <td>8.5</td>
+                                        <td>7.5</td>
+                                        <td>26</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>43</strong></td>
+                                        <td>9.5</td>
+                                        <td>8.5</td>
+                                        <td>27</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>44</strong></td>
+                                        <td>10</td>
+                                        <td>9</td>
+                                        <td>27.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="size-section">
+                        <h3>💡 Consejos de Medición</h3>
+                        <div class="tips-section">
+                            <div class="info-item">
+                                <span class="info-item__icon">📐</span>
+                                <div class="info-item__content">
+                                    <h4>Mide con precisión</h4>
+                                    <p>Usa una cinta métrica flexible y mide sobre ropa interior ajustada</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-item__icon">⏰</span>
+                                <div class="info-item__content">
+                                    <h4>Momento ideal</h4>
+                                    <p>Mide por la mañana cuando tu cuerpo esté más relajado</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-item__icon">🤝</span>
+                                <div class="info-item__content">
+                                    <h4>Pide ayuda</h4>
+                                    <p>Es más fácil y preciso si alguien te ayuda a medir</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-item__icon">📏</span>
+                                <div class="info-item__content">
+                                    <h4>Entre tallas</h4>
+                                    <p>Si estás entre dos tallas, elige la más grande para mayor comodidad</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
