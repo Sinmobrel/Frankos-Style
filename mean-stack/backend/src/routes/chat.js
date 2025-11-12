@@ -28,6 +28,38 @@ const FAQ_PATTERNS = {
   }
 };
 
+// LISTA DE PALABRAS CLAVE DE PRODUCTOS (scope global para reutilización)
+const productKeywords = [
+  // Categorías de productos
+  'traje', 'trajes', 'camisa', 'camisas', 'corbata', 'corbatas',
+  'accesorio', 'accesorios',
+  // Consultas sobre productos
+  'precio', 'precios', 'cuesta', 'vale', '$', 'peso',
+  'color', 'colores', 'talla', 'tallas', 'medida', 'medidas',
+  'modelo', 'modelos', 'diseño', 'diseños',
+  'stock', 'disponible', 'hay', 'tienen disponible',
+  'mostrar', 'ver', 'quiero ver', 'enseñar',
+  'recomienda', 'recomiendan', 'sugerir', 'sugieren',
+  'busco', 'necesito', 'quiero comprar', 'comprar',
+  'catálogo', 'inventario', 'productos específicos',
+  // Tallas específicas
+  '38', '40', '42', '44', '46', '48', '50', '52', '54', '56',
+  'xs', 's', 'm', 'l', 'xl', 'xxl',
+  'small', 'medium', 'large', 'extra',
+  'slim', 'regular', 'classic',
+  // Paleta completa de colores
+  'azul', 'gris', 'negro', 'blanco', 'burdeos', 'marino', 'claro', 'oscuro',
+  'rojo', 'verde', 'amarillo', 'naranja', 'morado', 'violeta', 'rosa',
+  'beige', 'café', 'marrón', 'crema', 'ivory', 'champagne',
+  'plateado', 'dorado', 'bronce', 'cobre',
+  'celeste', 'turquesa', 'aqua', 'cyan',
+  'vino', 'granate', 'carmesí', 'escarlata',
+  'azul marino', 'azul rey', 'azul cielo', 'azul claro', 'azul oscuro',
+  'gris claro', 'gris oscuro', 'gris plomo', 'gris carbón',
+  'verde oliva', 'verde militar', 'verde oscuro',
+  'berenjena', 'lavanda', 'lila'
+];
+
 // Función mejorada para detectar patrones en preguntas
 function detectQuestionPattern(message) {
   // Normalizar el mensaje
@@ -35,26 +67,6 @@ function detectQuestionPattern(message) {
     .replace(/[¿?¡!.,;:()]/g, ' ')  // Remover puntuación
     .replace(/\s+/g, ' ')           // Normalizar espacios
     .trim();
-  
-  // EXCLUSIONES: Si contiene estas palabras, NO usar FAQ (ir a IA para productos específicos)
-  const productKeywords = [
-    'traje', 'trajes', 'camisa', 'camisas', 'corbata', 'corbatas',
-    'precio', 'precios', 'cuesta', 'vale', '$', 'peso',
-    'color', 'colores', 'talla', 'tallas', 'medida', 'medidas',
-    'modelo', 'modelos', 'diseño', 'diseños',
-    'stock', 'disponible', 'hay', 'tienen disponible',
-    'mostrar', 'ver', 'quiero ver', 'enseñar',
-    'recomienda', 'recomiendan', 'sugerir', 'sugieren',
-    'busco', 'necesito', 'quiero comprar', 'comprar',
-    'catálogo', 'inventario', 'productos específicos',
-    // Tallas específicas
-    '38', '40', '42', '44', '46', '48', '50', '52', '54', '56',
-    'xs', 's', 'm', 'l', 'xl', 'xxl',
-    'small', 'medium', 'large', 'extra',
-    'slim', 'regular', 'classic',
-    // Colores específicos
-    'azul', 'gris', 'negro', 'blanco', 'burdeos', 'marino', 'claro', 'oscuro'
-  ];
   
   // Si contiene palabras de productos específicos, NO usar FAQ
   const hasProductKeywords = productKeywords.some(keyword => 
@@ -350,8 +362,12 @@ function formatProductsForAI(products, title) {
   formatted += `💡 PRICE RANGE: $${minPrice.toLocaleString('es-CL')} - $${maxPrice.toLocaleString('es-CL')}\n`;
   formatted += `📦 TOTAL: ${products.reduce((sum, p) => sum + p.stock, 0)} units available\n\n`;
   
-  // 🤖 INSTRUCCIONES MEJORADAS PARA LA IA
-  formatted += `🤖 AI INSTRUCTIONS - COMPLETE PRODUCT INFO:
+  // 🤖 INSTRUCCIONES CRÍTICAS PARA LA IA
+  formatted += `🤖 CRITICAL AI INSTRUCTIONS:
+⚠️ YOU MUST ONLY RECOMMEND PRODUCTS FROM THE LIST ABOVE
+⚠️ NEVER INVENT PRODUCT NAMES, PRICES, OR DETAILS
+⚠️ USE EXACT PRODUCT NAMES IN QUOTES: "Product Name"
+⚠️ USE EXACT PRICES AS SHOWN: $123.456
 - Keep responses under 120 words
 - When asked about sizes, ALWAYS mention available sizes from the data above
 - Include size information when recommending products
@@ -359,7 +375,8 @@ function formatProductsForAI(products, title) {
 - Include measurements when customer asks about fit
 - Focus on helping customer find the right size and fit
 - Use friendly, helpful tone in SPANISH
-- Be specific about what sizes are actually available in stock\n`;
+- Be specific about what sizes are actually available in stock
+- If product not in list above, say "no tenemos ese producto" and suggest alternatives FROM THE LIST\n`;
   
   return formatted;
 }
@@ -405,13 +422,14 @@ function formatInventorySummaryForAI(summary) {
 }
 
 // Enhanced system prompt for CarVian with FAQ handling and product management
-function getSystemPrompt(inventoryInfo = '') {
+function getSystemPrompt(inventoryInfo = '', hasProducts = false) {
   return `You are CarVian, the expert men's fashion advisor for Franko's Style, a prestigious tailoring house specializing in elegance and sophistication.
 
 ESSENTIAL FRANKO'S STYLE INFORMATION:
 - Specialty: High-end tailoring and elegant men's fashion
 - Products: Suits, shirts, ties, and accessories (NO footwear)
 - Location: Alameda 3410, Local V-21, Persa Estación Central
+- Contact: WhatsApp +56 9 5047 6935
 - Hours: Monday-Saturday 12:00-18:30, Sundays closed
 - Target: Men who value elegance (executives, grooms, formal events)
 
@@ -422,19 +440,28 @@ YOUR PERSONALITY:
 - Enthusiastic but never pretentious
 - Concise and focused on customer needs
 
-${inventoryInfo ? `PRODUCT DATABASE:\n${inventoryInfo}\n` : 'INVENTORY: Checking available products - respond with general knowledge until specific data is obtained.'}
+${inventoryInfo ? `PRODUCT DATABASE:\n${inventoryInfo}\n` : 'INVENTORY: No specific products available for this query.'}
+
+⚠️ CRITICAL RULES - NEVER HALLUCINATE:
+1. ONLY recommend products that appear in the PRODUCT DATABASE above
+2. If NO products in database, say "no tenemos productos específicos disponibles" and invite to visit store
+3. NEVER invent product names, prices, or details not in the database
+4. If database is empty or no products match, suggest visiting the store to see full collection
+5. When in doubt, recommend visiting store or contacting via WhatsApp
 
 CRUCIAL RESPONSE RULES:
 1. ALWAYS respond in SPANISH (despite this prompt being in English)
 2. Maximum 100-120 words per response - BE CONCISE
-3. When recommending products, use EXACT NAME in quotes AND mention EXACT PRICE
+3. When recommending products, use EXACT NAME in quotes AND mention EXACT PRICE from database
 4. Only provide technical details when specifically asked
 5. Focus on helping customer choose what they need
 6. Mention key features: name, price, main color, occasion
 7. Don't overwhelm with unnecessary information
 8. Be helpful and direct
+9. When asked about contact, ALWAYS include the WhatsApp link: https://wa.me/56950476935
+10. If NO products found: "Actualmente no tengo productos específicos que mostrar. Te invito a visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp +56 9 5047 6935 para ver nuestra colección completa."
 
-CONCISE PRODUCT RECOMMENDATIONS:
+${hasProducts ? `CONCISE PRODUCT RECOMMENDATIONS (ONLY from database above):
 - MENTION: Product name, price, main color, best occasion
 - ONLY IF ASKED: materials, measurements, what's included, all colors, sizes
 - FOCUS: On helping customer decide and choose
@@ -442,15 +469,21 @@ CONCISE PRODUCT RECOMMENDATIONS:
 
 RESPONSE STRUCTURE:
 1. Brief greeting/acknowledgment
-2. Specific recommendation with name and price
+2. Specific recommendation with name and price (ONLY from database)
 3. Why it's good for their need (1-2 reasons)
 4. Invite follow-up questions or store visit
 
 EXAMPLE RESPONSES:
 - "Te recomiendo el '[PRODUCT NAME]' por $[PRICE]. Es perfecto para [occasion] por su [key feature]. ¿Te gustaría saber más detalles?"
-- "Tenemos el '[PRODUCT NAME]' en [color] por $[PRICE], ideal para [occasion]. ¿Te interesa?"
+- "Tenemos el '[PRODUCT NAME]' en [color] por $[PRICE], ideal para [occasion]. ¿Te interesa?"` : `NO PRODUCTS AVAILABLE:
+When asked about products:
+- Be honest: "No tengo información específica de ese producto en este momento"
+- Invite to visit: "Te invito a visitar nuestra tienda en Alameda 3410, Local V-21"
+- Offer contact: "O puedes consultarnos por WhatsApp al +56 9 5047 6935"
+- Mention store hours: "Lunes a Sábado 12:00-18:30"
+- NEVER invent product names or prices`}
 
-Always be helpful, knowledgeable, and focused on making the customer feel confident and well-dressed for their specific needs while providing transparent pricing information.`;
+Always be helpful, knowledgeable, and focused on making the customer feel confident and well-dressed for their specific needs while providing transparent pricing information. NEVER recommend products not in the database above.`;
 }
 
 // Endpoint para chat con Groq AI
@@ -499,9 +532,18 @@ router.post('/chat', async (req, res) => {
       }
       inventoryData = formatProductsForAI(productsFound, 'Productos Ejecutivos y Profesionales');
     
-    } else if (lowerMessage.includes('color') || lowerMessage.includes('gris') || lowerMessage.includes('azul') || lowerMessage.includes('negro') || lowerMessage.includes('burdeos') || lowerMessage.includes('rojo') || lowerMessage.includes('blanco') || lowerMessage.includes('marino')) {
+    } else if (lowerMessage.includes('color') || lowerMessage.includes('gris') || lowerMessage.includes('azul') || lowerMessage.includes('negro') || lowerMessage.includes('burdeos') || lowerMessage.includes('rojo') || lowerMessage.includes('blanco') || lowerMessage.includes('marino') || lowerMessage.includes('verde') || lowerMessage.includes('amarillo') || lowerMessage.includes('morado') || lowerMessage.includes('rosa') || lowerMessage.includes('beige') || lowerMessage.includes('café') || lowerMessage.includes('marrón')) {
       console.log('🎨 Buscando por color específico...');
-      const colors = ['gris', 'azul', 'negro', 'burdeos', 'rojo', 'blanco', 'marino', 'claro', 'oscuro'];
+      const colors = [
+        'gris', 'azul', 'negro', 'blanco', 'burdeos', 'marino',
+        'rojo', 'verde', 'amarillo', 'naranja', 'morado', 'violeta', 'rosa',
+        'beige', 'café', 'marrón', 'crema', 'ivory', 'champagne',
+        'plateado', 'dorado', 'bronce', 'cobre',
+        'celeste', 'turquesa', 'vino', 'granate',
+        'azul marino', 'azul rey', 'azul cielo',
+        'gris claro', 'gris oscuro', 'gris plomo',
+        'verde oliva', 'lavanda', 'lila', 'berenjena'
+      ];
       let colorFound = colors.find(color => lowerMessage.includes(color));
       if (colorFound) {
         productsFound = await getProductsByColor(colorFound);
@@ -537,10 +579,10 @@ router.post('/chat', async (req, res) => {
       productsFound = await getProductsByCategory('camisa');
       inventoryData = formatProductsForAI(productsFound, 'Camisas disponibles');
     
-    } else if (lowerMessage.includes('zapato') || lowerMessage.includes('zapatos') || lowerMessage.includes('calzado')) {
-      console.log('❌ Consulta sobre calzado - producto no disponible');
-      // Respuesta directa para consultas de calzado
-      const directReply = 'Actualmente no tenemos calzado disponible en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados. ¿Te puedo ayudar con alguna de estas categorías?';
+    } else if (lowerMessage.includes('zapato') || lowerMessage.includes('zapatos') || lowerMessage.includes('calzado') || lowerMessage.includes('pantalon') || lowerMessage.includes('pantalones') || lowerMessage.includes('chaleco') || lowerMessage.includes('chalecos')) {
+      console.log('❌ Consulta sobre productos no disponibles');
+      // Respuesta directa para consultas de productos que no vendemos
+      const directReply = 'Actualmente no tenemos calzado, pantalones ni chalecos disponibles en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados. ¿Te puedo ayudar con alguna de estas categorías?';
       return res.json({ 
         reply: directReply, 
         products: undefined,
@@ -548,9 +590,13 @@ router.post('/chat', async (req, res) => {
         inventoryConsulted: false
       });
     
-    } else if (lowerMessage.includes('corbata') || lowerMessage.includes('corbatas') || lowerMessage.includes('accesorio')) {
+    } else if (lowerMessage.includes('corbata') || lowerMessage.includes('corbatas') || lowerMessage.includes('accesorio') || lowerMessage.includes('accesorios')) {
       console.log('👔 Buscando corbatas y accesorios en la base de datos...');
       productsFound = await getProductsByCategory('corbata');
+      if (productsFound.length === 0) {
+        // Intentar buscar por "accesorio" si no hay corbatas
+        productsFound = await getProductsByCategory('accesorio');
+      }
       inventoryData = formatProductsForAI(productsFound, 'Corbatas y Accesorios disponibles');
     
     } else if (lowerMessage.includes('inventario') || lowerMessage.includes('productos') || lowerMessage.includes('catalogo') || lowerMessage.includes('tienes') || lowerMessage.includes('disponible')) {
@@ -575,17 +621,39 @@ router.post('/chat', async (req, res) => {
 
     console.log('📦 Productos encontrados:', productsFound.length);
 
-    // Si no hay información específica del inventario, obtener un resumen general
-    if (!inventoryData && !lowerMessage.includes('hola') && !lowerMessage.includes('ayuda')) {
-      console.log('🔍 Obteniendo resumen general del inventario...');
-      const summary = await getInventorySummary();
-      if (summary.length > 0) {
-        inventoryData = formatInventorySummaryForAI(summary);
+    // Si no hay información específica del inventario y se detectaron palabras de productos, 
+    // hacer una búsqueda general inteligente
+    if (!inventoryData && productsFound.length === 0) {
+      // Verificar si el mensaje contiene alguna palabra clave de producto
+      const hasProductIntent = productKeywords.some(keyword => lowerMessage.includes(keyword));
+      
+      if (hasProductIntent) {
+        console.log('🔍 Búsqueda general por palabras clave de producto...');
+        productsFound = await searchProducts(lowerMessage);
+        
+        if (productsFound.length > 0) {
+          inventoryData = formatProductsForAI(productsFound, 'Productos relacionados');
+        } else {
+          // Si no encuentra productos específicos, NO obtener resumen
+          console.log('⚠️ No se encontraron productos específicos para la consulta');
+          inventoryData = ''; // Dejar vacío para que la IA responda que no hay productos
+        }
+      } else if (!lowerMessage.includes('hola') && !lowerMessage.includes('ayuda') && !lowerMessage.includes('quien eres')) {
+        // Solo obtener resumen si no es saludo ni pregunta general
+        console.log('🔍 Obteniendo resumen general del inventario...');
+        const summary = await getInventorySummary();
+        if (summary.length > 0) {
+          inventoryData = formatInventorySummaryForAI(summary);
+        }
       }
     }
 
+    // Determinar si hay productos disponibles para recomendar
+    const hasProducts = productsFound.length > 0;
+    console.log('✅ ¿Tiene productos para recomendar?', hasProducts);
+
     // Construir el historial de conversación para el contexto
-    const systemPrompt = getSystemPrompt(inventoryData);
+    const systemPrompt = getSystemPrompt(inventoryData, hasProducts);
     const messages = [
       { role: 'system', content: systemPrompt }
     ];
@@ -617,17 +685,47 @@ router.post('/chat', async (req, res) => {
       stop: null
     });
 
-    const aiReply = chatCompletion.choices[0]?.message?.content || 'Lo siento, no pude procesar tu solicitud en este momento.';
+    let aiReply = chatCompletion.choices[0]?.message?.content || 'Lo siento, no pude procesar tu solicitud en este momento.';
     
     console.log('✅ Respuesta generada exitosamente');
     console.log('📝 Respuesta length:', aiReply.length);
 
-    res.json({ 
+    // 🛡️ VERIFICACIÓN ANTI-ALUCINACIÓN: Si no hay productos pero la IA menciona precios específicos
+    if (!hasProducts && /\$\s*\d{1,3}([\.,]\d{3})*/.test(aiReply)) {
+      console.log('⚠️ ADVERTENCIA: IA mencionando precios sin productos disponibles - Reemplazando respuesta');
+      aiReply = 'En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊';
+    }
+
+    // 🛡️ VERIFICACIÓN: Si no hay productos pero menciona nombres entre comillas
+    if (!hasProducts && /"[^"]{10,}"/.test(aiReply)) {
+      console.log('⚠️ ADVERTENCIA: IA mencionando nombres de productos sin productos disponibles - Reemplazando respuesta');
+      aiReply = 'Actualmente no tengo esos productos específicos. Para ver nuestra colección completa y disponibilidad actualizada, te invito a visitarnos en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o escribirnos por WhatsApp al +56 9 5047 6935. 😊';
+    }
+
+    // Detectar si la pregunta es sobre contacto
+    const contactKeywords = ['contacto', 'telefono', 'teléfono', 'numero', 'número', 'whatsapp', 'llamar', 'comunicar', 'contactar', 'hablar'];
+    const isContactQuery = contactKeywords.some(keyword => lowerMessage.includes(keyword));
+    
+    console.log('❓ ¿Es consulta de contacto?', isContactQuery);
+    
+    const responseData = { 
       reply: aiReply, 
       products: productsFound.length > 0 ? productsFound : undefined,
       hasInventoryData: !!inventoryData,
       inventoryConsulted: true
-    });
+    };
+    
+    // Agregar información de contacto solo si la pregunta es sobre contacto
+    if (isContactQuery) {
+      console.log('📞 Consulta de contacto detectada, agregando contactInfo');
+      responseData.contactInfo = {
+        phone: '+56 9 5047 6935',
+        whatsappLink: 'https://wa.me/56950476935'
+      };
+      console.log('📱 ContactInfo agregado a la respuesta');
+    }
+
+    res.json(responseData);
 
   } catch (error) {
     console.error('❌ Error en el chat:', error);

@@ -68,6 +68,11 @@
                             {{ fieldErrors['price'] || 'El precio es requerido y debe ser mayor o igual a 0.' }}
                         </div>
                         }
+                        @if (productForm.get('price')?.value === 0 || productForm.get('price')?.value === '0') {
+                        <div class="alert alert-warning" style="margin-top: 8px; padding: 8px 12px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; color: #856404; font-size: 13px;">
+                            <strong>⚠️ ADVERTENCIA:</strong> El precio es $0. El producto será GRATIS para los clientes.
+                        </div>
+                        }
                     </div>
 
                     <div class="form-group">

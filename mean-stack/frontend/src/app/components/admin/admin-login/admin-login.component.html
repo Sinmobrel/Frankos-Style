@@ -17,12 +17,16 @@
                     placeholder="ejemplo@correo.com" 
                     autocomplete="email">
                 
-                <div *ngIf="hasError('email', 'required')" class="error-message">
-                    El email es requerido
-                </div>
-                <div *ngIf="hasError('email', 'email')" class="error-message">
-                    El formato de email es inválido
-                </div>
+                @if (hasError('email', 'required')) {
+                    <div class="error-message">
+                        El email es requerido
+                    </div>
+                }
+                @if (hasError('email', 'email')) {
+                    <div class="error-message">
+                        El formato de email es inválido
+                    </div>
+                }
             </div>
             
             <div class="form-group">
@@ -36,24 +40,34 @@
                     placeholder="Contraseña"
                     autocomplete="current-password">
                 
-                <div *ngIf="hasError('password', 'required')" class="error-message">
-                    La contraseña es requerida
-                </div>
-                <div *ngIf="hasError('password', 'minlength')" class="error-message">
-                    La contraseña debe tener al menos 6 caracteres
-                </div>
+                @if (hasError('password', 'required')) {
+                    <div class="error-message">
+                        La contraseña es requerida
+                    </div>
+                }
+                @if (hasError('password', 'minlength')) {
+                    <div class="error-message">
+                        La contraseña debe tener al menos 6 caracteres
+                    </div>
+                }
             </div>
             
-            <div *ngIf="errorMessage" class="alert-error">
-                {{ errorMessage }}
-            </div>
+            @if (errorMessage) {
+                <div class="alert-error">
+                    {{ errorMessage }}
+                </div>
+            }
             
             <button 
                 type="submit" 
                 class="btn-login"
                 [disabled]="isSubmitting">
-                <span *ngIf="!isSubmitting">Iniciar Sesión</span>
-                <span *ngIf="isSubmitting" class="spinner"></span>
+                @if (!isSubmitting) {
+                    <span>Iniciar Sesión</span>
+                }
+                @if (isSubmitting) {
+                    <span class="spinner"></span>
+                }
             </button>
         </form>
     </div>

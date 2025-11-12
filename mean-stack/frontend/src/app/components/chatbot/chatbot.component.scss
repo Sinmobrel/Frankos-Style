@@ -254,10 +254,7 @@
     position: relative;
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
   }
 
   .carvian-avatar {
@@ -265,6 +262,10 @@
     height: 100%;
     object-fit: cover;
     background: linear-gradient(45deg, #2c2c54, #40407a);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: block;
     
     // Fallback si la imagen no carga
     &::before {
@@ -287,15 +288,16 @@
 
   .status-indicator {
     position: absolute;
-    bottom: 2px;
-    right: 2px;
-    width: 12px;
-    height: 12px;
+    bottom: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
     background: #00d4ff;
     border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    border: 2.5px solid #0f0f23;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
     animation: pulse-status 2s infinite;
+    z-index: 2;
   }
 
   .header-text {
@@ -541,5 +543,101 @@
   50% {
     opacity: 0.7;
     transform: scale(1.1);
+  }
+}
+
+// Estilos para el botón de WhatsApp
+.whatsapp-contact-container {
+  margin-top: 12px;
+  animation: slideInUp 0.4s ease-out;
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    
+    &::before {
+      left: 100%;
+    }
+
+    .whatsapp-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(1.01);
+  }
+}
+
+.whatsapp-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.whatsapp-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.whatsapp-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.whatsapp-number {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+// Animación para el contenedor de WhatsApp
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

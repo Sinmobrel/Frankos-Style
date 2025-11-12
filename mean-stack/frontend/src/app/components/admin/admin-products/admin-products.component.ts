@@ -371,6 +371,14 @@ export class AdminProductsComponent implements OnInit {
       return;
     }
     
+    // Validar si el precio es 0
+    const price = Number(this.productForm.get('price')?.value);
+    if (price === 0) {
+      if (!confirm('⚠️ ADVERTENCIA: El precio del producto es $0 (GRATIS).\n\n¿Está seguro de que desea crear/actualizar este producto con precio $0?\n\nEsto significa que el producto será gratis para los clientes.')) {
+        return;
+      }
+    }
+    
     this.isUploading = true;
     
     // Primero subimos la imagen si hay alguna

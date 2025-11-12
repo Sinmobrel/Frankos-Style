@@ -108,4 +108,12 @@ export class HomeComponent implements OnInit {
     this.showSizeGuide = false;
     document.body.classList.remove('modal-open');
   }
+
+  /**
+   * Abre el chatbot CarVian haciendo click programático en la burbuja
+   */
+  openChatbot(): void {
+    const bubble = document.querySelector<HTMLButtonElement>('.chatbot-bubble');
+    bubble?.click();
+  }
 }

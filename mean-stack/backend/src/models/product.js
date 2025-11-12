@@ -38,7 +38,7 @@ const productSchema = new Schema({
   // Campos de marketing
   featured: { type: Boolean, default: false }, // Producto destacado
   available: { type: Boolean, default: true }, // Disponible para venta
-  isNew: { type: Boolean, default: false }, // Producto nuevo
+  newProduct: { type: Boolean, default: false }, // Producto nuevo
   isPopular: { type: Boolean, default: false }, // Producto popular
   isExclusive: { type: Boolean, default: false }, // Producto exclusivo
   

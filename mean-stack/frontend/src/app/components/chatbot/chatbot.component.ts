@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ChatbotService, ChatMessage, Product } from '../../services/chatbot.service';
 import { ProductModalService } from '../../services/product-modal.service';
 
@@ -14,6 +15,7 @@ import { ProductModalService } from '../../services/product-modal.service';
 export class ChatbotComponent implements OnInit {
   chatbot = inject(ChatbotService);
   productModal = inject(ProductModalService);
+  sanitizer = inject(DomSanitizer);
   
   chatbotActive = false;
   messageText = '';
@@ -79,5 +81,20 @@ export class ChatbotComponent implements OnInit {
    */
   onImageError(event: any): void {
     event.target.src = '/assets/images/placeholder.svg';
+  }
+
+  /**
+   * Sanitiza la URL de WhatsApp para Angular
+   */
+  sanitizeWhatsAppUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  /**
+   * Abre WhatsApp en una nueva ventana
+   */
+  openWhatsApp(url: string): void {
+    console.log('🔗 Abriendo WhatsApp:', url);
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 }
