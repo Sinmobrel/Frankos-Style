@@ -1,11 +1,54 @@
 const Product = require('../models/product');
 
-// Obtener todos los productos
+// Obtener todos los productos con paginación
 exports.getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.status(200).json(products);
+    console.log('📦 GET /products - Query params:', req.query);
+    
+    // Obtener parámetros de paginación (con valores por defecto)
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 12;
+    const skip = (page - 1) * limit;
+    
+    // Parámetro para incluir productos sin stock (para admin)
+    const includeOutOfStock = req.query.includeOutOfStock === 'true';
+    
+    // Filtro base
+    const filter = includeOutOfStock ? {} : { stock: { $gt: 0 } };
+    
+    console.log('🔍 Filtro aplicado:', filter);
+    console.log('📄 Página:', page, '| Límite:', limit, '| Skip:', skip);
+    
+    // Ejecutar consultas en paralelo para mejor rendimiento
+    const [products, total] = await Promise.all([
+      Product.find(filter)
+        .select('-__v')  // Solo excluir __v, mantener createdAt y updatedAt para admin
+        .lean()          // Convertir a objetos JS planos (más rápido)
+        .limit(limit)
+        .skip(skip)
+        .sort({ createdAt: -1 }),  // Más recientes primero
+      Product.countDocuments(filter)
+    ]);
+    
+    console.log(`✅ Encontrados ${products.length} productos de ${total} totales`);
+    
+    // Configurar cache HTTP (5 minutos) solo para catálogo público
+    if (!includeOutOfStock) {
+      res.set('Cache-Control', 'public, max-age=300');
+    }
+    
+    res.status(200).json({
+      products,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(total / limit),
+        totalProducts: total,
+        hasMore: page < Math.ceil(total / limit),
+        productsPerPage: limit
+      }
+    });
   } catch (error) {
+    console.error('❌ Error obteniendo productos:', error);
     res.status(500).json({ message: error.message });
   }
 };

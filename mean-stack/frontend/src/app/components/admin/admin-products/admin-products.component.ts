@@ -82,15 +82,27 @@ export class AdminProductsComponent implements OnInit {
   
   loadProducts(): void {
     this.loading = true;
+    this.error = null;
+    console.log('🔄 Cargando productos...');
+    
     this.apiService.getProducts().subscribe({
       next: (products) => {
-        this.products = products;
+        console.log('✅ Productos cargados:', products);
+        if (Array.isArray(products)) {
+          this.products = products;
+          console.log(`📦 Total productos: ${products.length}`);
+        } else {
+          console.error('❌ La respuesta no es un array:', products);
+          this.products = [];
+          this.error = 'Error: La respuesta del servidor no es válida';
+        }
         this.loading = false;
       },
       error: (err) => {
-        console.error('Error cargando productos:', err);
+        console.error('❌ Error cargando productos:', err);
         this.error = 'No se pudieron cargar los productos. Por favor, intente de nuevo más tarde.';
         this.loading = false;
+        this.products = [];
       }
     });
   }
@@ -429,11 +441,16 @@ export class AdminProductsComponent implements OnInit {
       };
 
       if (this.editMode && this.currentProductId) {
+        console.log('📝 Actualizando producto:', this.currentProductId, productData);
         this.apiService.updateProduct(this.currentProductId, productData).subscribe({
           next: (response) => {
+            console.log('✅ Producto actualizado exitosamente:', response);
             this.isUploading = false;
             this.successMessage = 'Producto actualizado exitosamente';
             this.resetForm();
+            
+            // Recargar productos después de actualizar
+            console.log('🔄 Recargando lista de productos...');
             this.loadProducts();
             
             // Limpiar mensaje de éxito después de 3 segundos
@@ -443,16 +460,21 @@ export class AdminProductsComponent implements OnInit {
           },
           error: (err) => {
             this.isUploading = false;
-            console.error('Error actualizando producto:', err);
+            console.error('❌ Error actualizando producto:', err);
             this.handleServerError(err);
           }
         });
       } else {
+        console.log('➕ Creando nuevo producto:', productData);
         this.apiService.createProduct(productData).subscribe({
           next: (response) => {
+            console.log('✅ Producto creado exitosamente:', response);
             this.isUploading = false;
             this.successMessage = 'Producto creado exitosamente';
             this.resetForm();
+            
+            // Recargar productos después de crear
+            console.log('🔄 Recargando lista de productos...');
             this.loadProducts();
             
             // Limpiar mensaje de éxito después de 3 segundos

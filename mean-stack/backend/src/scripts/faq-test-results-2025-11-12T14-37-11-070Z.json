@@ -1,0 +1,534 @@
+{
+  "timestamp": "2025-11-12T14:37:11.071Z",
+  "summary": {
+    "totalQuestions": 87,
+    "faqResponses": 0,
+    "aiResponses": 86,
+    "errors": 1,
+    "successRate": "98.9"
+  },
+  "results": [
+    {
+      "question": "tengo un bautizo y soy el padrino, ademas tengo un presupuesto de 200000",
+      "source": "AI",
+      "response": "¡Perfecto para un bautizo como padrino! Con tu presupuesto de $200.000 te recomiendo:\n\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico elegante que transmite sobriedad y respeto. Aunque está un poco por encima de tu presupuesto, es un traje de alta calidad que vale la pena considerar si estás dispuesto a invertir un poco más.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje moderno y sofisticado que es perfecto para un evento como un bautizo. Su color azul eléctrico es vibrante y llamativo, y su corte slim fit contemporáneo es muy elegante.\n* El \"Traje Verde\" por $89.990. Aunque está un poco por debajo de tu presupuesto, es un traje verde elegante que es perfecto para un evento semiformal como un bautizo. Su corte slim de 3 piezas es muy cómodo y elegante.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "me caso en 2 meses y solo puedo gastar 150 mil pesos que me recomiendas",
+      "source": "AI",
+      "response": "¡Felicidades por tu compromiso! Con tu presupuesto de $150.000 y la ocasión de tu boda en 2 meses, te recomiendo dos opciones que son ideales para un novio elegante.\n\n\"Te recomiendo el 'Traje de Caballero Azul Marino Clásico' por $124.000. Es perfecto porque es clásico, elegante y transmite sobriedad. También está disponible en gris y burdeos si prefieres un tono diferente. ¿Te gustaría saber más sobre este traje?\"\n\nOtra opción es el \"Traje de Caballero Rojo Statement\" por $175.000, aunque está un poco por encima de tu presupuesto, pero si estás dispuesto a ajustar un poco, es una excelente opción para una boda. Es llamativo y seguro que te hará destacar en la ceremonia.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "necesito algo elegante para una boda pero económico, digamos unos $100.000",
+      "source": "AI",
+      "response": "Perfecto para una boda! Con tu presupuesto de $100.000, te recomiendo:\n\n* El \"Traje Verde\" por $89.990. Es un traje elegante y versátil que combina la sobriedad del corte clásico con un toque de modernidad. Es perfecto para una boda y está dentro de tu presupuesto.\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000 es un poco más caro, pero si estás dispuesto a invertir un poco más, es un traje de alta calidad que te hará destacar en la boda. Sin embargo, si buscas algo más económico, el \"Traje Verde\" es una excelente opción.\n* También podrías considerar el \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000, que es un traje sofisticado y audaz que te hará destacar en la boda. Sin embargo, también está un poco por encima de tu presupuesto.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "mi graduación es la próxima semana, tengo como 250000 para gastar",
+      "source": "AI",
+      "response": "¡Felicidades por tu graduación! Con tu presupuesto de $250.000, te recomiendo tres opciones perfectas para ti:\n\n1. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico elegante que transmite sofisticación y modernidad. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje contemporáneo que destaca con su color vibrante y su corte slim fit. Está disponible en tallas 48, 50, 52 y 54.\n3. \"Traje de Caballero Gris Claro Premium\" también es una excelente opción, ya que es un clásico que siempre está de moda. Está disponible en tallas 48, 50, 52 y 54.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "voy a una gala de la empresa y mi presupuesto es de $300.000 más o menos",
+      "source": "AI",
+      "response": "¡Excelente elección! Para una gala de la empresa, necesitas algo de alta calidad y elegancia. Con tu presupuesto de $300.000, te recomiendo:\n\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Es perfecto para una gala de la empresa porque transmite sofisticación y elegancia. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es ideal para eventos sociales y fiestas, pero también es perfecto para una gala de la empresa. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje de Caballero Gris Claro Premium\" también es una excelente opción, pero si quieres algo un poco más llamativo, el \"Traje de Caballero Azul Eléctrico Fashion\" es una buena opción.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "soy testigo de matrimonio y tengo 180 mil, que opciones hay?",
+      "source": "AI",
+      "response": "¡Excelente elección! Con tu presupuesto de $180.000, te recomiendo dos opciones perfectas para un testigo de matrimonio:\n\n1. \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un clásico que transmite elegancia y sobriedad, ideal para un evento tan importante. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje de Caballero Rojo Statement\" por $175.000. Si buscas algo un poco más llamativo, este traje es perfecto. Su color rojo es ideal para destacarte en la ceremonia. Está disponible en tallas 48, 50, 52 y 54.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "comunión de mi sobrino, soy padrino, presupuesto 200.000 pesos chilenos",
+      "source": "AI",
+      "response": "¡Excelente elección! Como padrino, quieres lucir elegante y sofisticado en la comunión de tu sobrino. Con tu presupuesto de $200.000, te recomiendo tres opciones ideales para ti:\n\n1. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es perfecto porque transmite sofisticación y elegancia. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es una excelente opción si buscas un traje clásico y moderno. Está disponible en tallas 48, 50, 52 y 54.\n3. \"Traje Verde\" por $89.990. Si buscas algo más fresco y original, este traje verde es una excelente opción. Está disponible en tallas S, M, L, XL y XXL.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "tengo una entrevista importante y solo 120000 disponible",
+      "source": "AI",
+      "response": "¡Buena suerte en tu entrevista! Con un presupuesto de $120.000, te recomiendo dos opciones que podrían ser ideales para ti:\n\n1. \"Traje de Caballero Gris Executive\" por $300.000 (no es exactamente dentro de tu presupuesto, pero es una excelente opción que vale la pena considerar si estás dispuesto a invertir un poco más). Es un traje de alta calidad que transmite sobriedad y elegancia perfectas para una entrevista importante.\n2. \"Corbata Azul Marino a Rayas Diagonales\" por $19.990. Es una corbata clásica que puede complementar perfectamente cualquier traje y es muy asequible dentro de tu presupuesto.\n\nSi estás dispuesto a invertir un poco más, podrías considerar el \"Traje de Caballero Gris Executive\". Si prefieres algo más asequible, la corbata es una excelente opción.\n\n¿Te gustaría más información sobre alguno de estos productos?",
+      "success": true
+    },
+    {
+      "question": "necesito algo que sirva tanto para bodas como para el trabajo",
+      "source": "AI",
+      "response": "¡Perfecto! Con tu necesidad, te recomiendo dos opciones que son ideales para ambas ocasiones.\n\nPrimero, te presento el \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico que combina elegancia y sofisticación, perfecto para bodas y eventos formales en el trabajo. Está disponible en tallas 48, 50, 52 y 54, y sus medidas son: 72 cm de largo, 46 cm de hombros y 92 cm de cintura.\n\nOtra opción es el \"Traje Verde\" por $89.990. Es un traje versátil que puede ser perfecto para celebraciones semiformales o cócteles en el trabajo, y también es ideal para bodas más informales. Está disponible en tallas S, M, L, XL y XXL.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "busco un traje versátil para graduación y también para galas",
+      "source": "AI",
+      "response": "¡Excelente elección! Para graduación y galas, te recomiendo el \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un traje versátil que combina elegancia y sofisticación, perfecto para cualquier ocasión formal. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje o tal vez probarlo en nuestra tienda?",
+      "success": true
+    },
+    {
+      "question": "quiero algo que use en la oficina pero también en cenas elegantes",
+      "source": "AI",
+      "response": "¡Excelente elección! Con tu presupuesto, te recomiendo:\n\n* El \"Traje de Caballero Gris Executive\" por $300.000. Es perfecto para la oficina porque es sobrio y elegante, y también es ideal para cenas elegantes debido a su tono gris neutro. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es una excelente opción para cenas elegantes debido a su tono burdeos sofisticado, y también es adecuado para la oficina porque es moderno y ejecutivo. Está disponible en tallas 48, 50, 52 y 54.\n* La \"Corbata Azul Marino a Rayas Diagonales\" por $19.990. Es una excelente opción para complementar cualquier traje y es ideal para la oficina y cenas elegantes. Está disponible en una sola talla.\n\n¿Te gustaría más información sobre alguno de estos productos?",
+      "success": true
+    },
+    {
+      "question": "necesito ropa para varias ocasiones: trabajo, bodas y eventos formales",
+      "source": "AI",
+      "response": "¡Excelente! Para cubrir tus necesidades, te recomiendo tres opciones que se ajustan a tus requerimientos.\n\nCon tu presupuesto y las ocasiones que mencionas, te recomiendo:\n\n1. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es perfecto para bodas y eventos formales, y también es adecuado para un ambiente de trabajo formal. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje Verde\" por $89.990. Es una excelente opción para eventos semiformales o cócteles, y también puede ser adecuado para un trabajo informal. Está disponible en tallas S, M, L, XL y XXL.\n3. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es ideal para eventos sociales y fiestas, y también puede ser adecuado para un trabajo formal. Está disponible en tallas 48, 50, 52 y 54.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "tengo 200 mil que me puedes mostrar",
+      "source": "AI",
+      "response": "¡Claro que sí! Con un presupuesto de $200.000, te recomiendo tres opciones excelentes:\n\n1. \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es perfecto para eventos formales y oficinas, y transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es ideal para eventos sociales y fiestas, y destaca con su color vibrante y moderno. Está disponible en tallas 48, 50, 52 y 54.\n3. \"Traje de Caballero Rojo Statement\" por $175.000. Es perfecto para fiestas y recepciones, y proyecta seguridad y estilo llamativo. Está disponible en tallas 48, 50, 52 y 54.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "mi presupuesto es limitado, solo $150.000",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "cuento con $300000 para comprar",
+      "source": "AI",
+      "response": "¡Excelente elección de presupuesto! Con $300.000, tienes acceso a algunas de nuestras mejores opciones. ¿Cuál es el motivo de tu compra? ¿Es para un evento específico, como una boda o una reunión de negocios, o simplemente para actualizar tu guardarropa?",
+      "success": true
+    },
+    {
+      "question": "tengo como 100 mil pesos nada mas",
+      "source": "AI",
+      "response": "Con un presupuesto de $100.000, te recomiendo el \"Traje Verde\" por $89.990. Es un traje elegante y sobrio que combina perfectamente con cualquier ocasión semiformal o cócteles. Está disponible en tallas S, M, L, XL y XXL. ¿Te gustaría saber más sobre este traje o tal vez verlo en persona? Puedes contactarme por WhatsApp en +56 9 5047 6935 para más información.",
+      "success": true
+    },
+    {
+      "question": "voy a un bautizo como padrino que me recomiendas",
+      "source": "AI",
+      "response": "¡Perfecto para un bautizo como padrino! Con tu elegancia y responsabilidad, necesitas un traje que refleje tu papel. Te recomiendo dos opciones:\n\n1. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico que transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje?\n2. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje moderno y audaz que destacará en cualquier ocasión. Está disponible en tallas 48, 50, 52 y 54. ¿Te interesa conocer más detalles sobre este traje?\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "me invitaron a una boda elegante",
+      "source": "AI",
+      "response": "¡Excelente! Para una boda elegante, te recomiendo:\n\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Es perfecto porque transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es ideal porque combina la sobriedad del corte clásico con un toque de modernidad. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje Verde\" por $89.990. Es una excelente opción si buscas algo más versátil y no quieres gastar tanto. Está disponible en tallas S, M, L, XL y XXL.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "tengo una cena romántica importante",
+      "source": "AI",
+      "response": "¡Excelente elección! Para una cena romántica, te recomiendo dos opciones que son ideales para transmitir elegancia y sofisticación.\n\nCon tu presupuesto, te recomiendo:\n\n1. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es perfecto porque transmite modernidad y elegancia, y es ideal para una cena romántica. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es una excelente opción porque es audaz y sofisticado, y es ideal para destacar en una cena romántica. Está disponible en tallas 48, 50, 52 y 54.\n\nAmbos trajes están hechos con materiales de alta calidad y tienen un diseño contemporáneo que te hará sentir seguro y confiado. ¿Te gustaría más información sobre alguno de ellos?",
+      "success": true
+    },
+    {
+      "question": "asisto a una graduación universitaria",
+      "source": "AI",
+      "response": "¡Felicidades por tu graduación! Un traje elegante es perfecto para esta ocasión. Con tu presupuesto, te recomiendo:\n\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico que transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje Verde\" por $89.990. Es una excelente opción para un evento semiformal como una graduación. Está disponible en tallas S, M, L, XL y XXL.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje moderno y sofisticado que destacará en la graduación. Está disponible en tallas 48, 50, 52 y 54.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "mi cumpleaños número 30 quiero algo especial",
+      "source": "AI",
+      "response": "¡Felicidades por tu cumpleaños número 30! Me alegra ayudarte a encontrar algo especial para esta ocasión.\n\nCon tu presupuesto, te recomiendo tres opciones:\n\n1. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico elegante que transmite sofisticación y modernidad. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje Verde\" por $89.990. Es una opción más versátil y perfecta para un cumpleaños informal. Está disponible en tallas S, M, L, XL y XXL.\n3. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es una opción audaz y sofisticada que te hará destacar en cualquier ocasión. Está disponible en tallas 48, 50, 52 y 54.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "que tienen bonito?",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "muestrame lo mejor",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "quiero algo que se vea bien",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa. También puedes consultarnos por WhatsApp al +56 9 5047 6935. Lunes a Sábado 12:00-18:30. Estoy aquí para ayudarte a encontrar lo que necesitas.",
+      "success": true
+    },
+    {
+      "question": "necesito ropa elegante",
+      "source": "AI",
+      "response": "¡Claro! En Franko's Style, nos especializamos en ropa elegante para hombres. ¿Qué tipo de ocasión tienes en mente? ¿Un evento formal, un trabajo importante o una boda? Esto me ayudará a recomendarte los mejores productos para ti.\n\nActualmente no tengo productos específicos que mostrar. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, o contactarnos por WhatsApp al +56 9 5047 6935 para ver nuestra colección completa. Estamos abiertos de lunes a sábado de 12:00 a 18:30.",
+      "success": true
+    },
+    {
+      "question": "algo formal pero no tanto",
+      "source": "AI",
+      "response": "¡Hola! Me alegra ayudarte a encontrar el estilo perfecto para ti. ¿Qué tipo de evento o ocasión tienes en mente? ¿Un cumpleaños, una boda o algo más formal?",
+      "success": true
+    },
+    {
+      "question": "busco algo discreto pero impactante",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "quiero un traje azul para boda con presupuesto de 200000",
+      "source": "AI",
+      "response": "Perfecto para una boda! Con tu presupuesto de $200.000 te recomiendo:\n\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje azul eléctrico que combina la sofisticación con un toque vibrante, perfecto para destacar en la boda. También está disponible en gris y negro.\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Aunque está un poco por encima de tu presupuesto, es un traje de alta calidad que combina elegancia y modernidad. Puedes considerarlo si estás dispuesto a ajustar un poco tu presupuesto.\n* El \"Traje Verde\" no es azul, pero si estás dispuesto a considerar un color diferente, es un traje elegante que combina la sobriedad con un toque de elegancia.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "algo gris para trabajo que no cueste mas de 150 mil",
+      "source": "AI",
+      "response": "¡Claro! Para un traje gris para trabajo que no cueste más de $150.000, te recomiendo el \"Traje de Caballero Azul Marino Clásico\" por $124.000. Aunque su nombre no sea gris, es un color que combina bien con muchos tonos grises. Además, es un traje clásico y elegante que es perfecto para un entorno laboral. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje?",
+      "success": true
+    },
+    {
+      "question": "traje negro elegante para gala, tengo 250000",
+      "source": "AI",
+      "response": "¡Perfecto! Con tu presupuesto de $250.000 y necesidad de un traje negro elegante para gala, te recomiendo:\n\n* \"Traje de Caballero Gris Claro Premium\" por $255.000. Aunque está ligeramente por encima de tu presupuesto, es un traje de alta calidad y elegancia que te haría destacar en cualquier gala. Puedes elegir entre Gris Claro, Burdeos y Negro.\n* \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje slim fit contemporáneo que combina sofisticación y audacia. Puedes elegir entre Azul Eléctrico, Gris y Negro.\n\nAmbos trajes son ideales para gala y están disponibles en tallas 48, 50, 52 y 54. ¿Te gustaría conocer más detalles sobre alguno de ellos?",
+      "success": true
+    },
+    {
+      "question": "busco algo en color marino para bautizo, máximo $180.000",
+      "source": "AI",
+      "response": "¡Perfecto para un bautizo! Con tu presupuesto de $180.000, te recomiendo:\n\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Aunque está un poco por encima de tu presupuesto, es un traje muy elegante y sofisticado que seguro te hará destacar en el bautizo. Sin embargo, si buscas algo más asequible, te sugiero:\n* El \"Traje Verde\" por $89.990. Aunque no es azul marino, es un traje muy elegante y versátil que puedes usar en diferentes ocasiones, incluyendo un bautizo. Es un poco más barato y tiene un diseño clásico que seguro te gustará.\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Aunque está fuera de tu presupuesto, es un traje muy elegante y sofisticado que seguro te hará destacar en el bautizo. Sin embargo, si buscas algo más asequible, te sugiero:\n* El \"Traje Verde\" por $89.990. Como mencioné anteriormente, es un traje muy elegante y versátil que puedes usar en diferentes ocasiones, incluyendo un bautizo.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "necesito talla 42 para boda, presupuesto 200 mil",
+      "source": "AI",
+      "response": "¡Perfecto para una boda! Con tu presupuesto de $200.000 y talla 42, te recomiendo:\n\n* El \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un clásico que transmite elegancia y sobriedad, perfecto para una boda. Disponible en tallas 48, 50, 52, 54, pero no en 42.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje moderno y sofisticado que destaca en cualquier ocasión. Disponible en tallas 48, 50, 52, 54, pero no en 42.\n* El \"Traje de Caballero Rojo Statement\" por $175.000. Es un traje llamativo y elegante que es perfecto para una boda. Disponible en tallas 48, 50, 52, 54, pero no en 42.\n\nSi estás interesado en alguno de estos trajes, te recomiendo que visites nuestra tienda en Alameda 3410 o contactarnos por WhatsApp +56 9 5047 6935 para ver nuestra colección completa.",
+      "success": true
+    },
+    {
+      "question": "talla L o XL algo para oficina económico",
+      "source": "AI",
+      "response": "¡Hola! Para una oficina económica, te recomiendo el \"Corbata Azul Marino a Rayas Diagonales\" por $19.990. Es una excelente opción porque es clásica y elegante, y se ajusta perfectamente a un presupuesto económico. También tenemos el \"Traje de Caballero Gris Executive\" por $300.000, que es una excelente opción para una oficina formal, pero si buscas algo más económico, te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Ambos están disponibles en tallas L y XL.\n\n¿Te gustaría más información sobre alguno de estos productos?",
+      "success": true
+    },
+    {
+      "question": "uso 46 que tienen para graduación bajo 300000",
+      "source": "AI",
+      "response": "¡Excelente elección! Para una graduación, te recomiendo el \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico que transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje o tal vez probarlo en nuestra tienda?",
+      "success": true
+    },
+    {
+      "question": "quiero algo muy elegante pero barato",
+      "source": "AI",
+      "response": "Lo siento, pero no tenemos productos específicos disponibles que se ajusten a tu descripción. Sin embargo, te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa y encontrar algo que se adapte a tus necesidades y presupuesto.\n\nSi prefieres, también puedes consultarnos por WhatsApp al +56 9 5047 6935. Estamos disponibles para ayudarte a encontrar lo que buscas. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "necesito un traje económico de lujo",
+      "source": "AI",
+      "response": "Entiendo que buscas un traje de lujo a un precio económico. En Franko's Style tenemos algunas opciones que podrían interesarte.\n\nTe recomiendo el \"Traje Verde\" por $89.990. Es un traje de lujo que combina la sobriedad del corte clásico con un toque de elegancia moderna. Es perfecto para celebraciones semiformales o cócteles.\n\nTambién tenemos el \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000, que es un poco más caro pero ofrece una sofisticación audaz con un contraste vibrante que te hará destacar en cualquier evento social.\n\n¿Te gustaría conocer más detalles sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "algo exclusivo que no sea caro",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "busco calidad premium con presupuesto ajustado",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "no se si azul o gris para una boda",
+      "source": "AI",
+      "response": "¡Excelente elección! Ambos colores son ideales para una boda. El azul es un clásico que transmite elegancia y sofisticación, mientras que el gris es un poco más moderno y versátil.\n\nTe recomiendo considerar el \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje de alta calidad que combina la sofisticación del azul eléctrico con la elegancia de un corte slim fit contemporáneo. También está disponible en gris y negro.\n\nSi prefieres el gris, el \"Traje de Caballero Gris Claro Premium\" por $255.000 es una excelente opción. Es un traje de lujo que combina la elegancia del gris claro con detalles únicos y acabados de alta calidad.\n\n¿Te gustaría saber más sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "cual es mejor para entrevista, negro o marino?",
+      "source": "AI",
+      "response": "Excelente elección! Para una entrevista, te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es un clásico que transmite profesionalismo y elegancia. El color burdeos es ideal para una entrevista porque es un tono oscuro y sofisticado que no distrae la atención del candidato. Además, es un color que se combina bien con cualquier color de camisa y corbata.\n\nSi prefieres un color más oscuro, también puedes considerar el \"Traje de Caballero Negro Ejecutivo\" (no disponible en la base de datos, pero te sugiero el \"Traje de Caballero Gris Executive\" por $300.000, que es un buen alternativa). Ambos son ideales para una entrevista formal.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "entre slim y regular cual me conviene?",
+      "source": "AI",
+      "response": "Excelente pregunta! La elección entre un corte slim y regular depende de tu figura y estilo personal. Si tienes un cuerpo más delgado, el corte slim te sentará bien, ya que resalta tus líneas y te da un aspecto más elegante. Si tienes un cuerpo más robusto, el corte regular te sentará mejor, ya que equilibra tus proporciones y te da un aspecto más clásico.\n\nEn Franko's Style, tenemos una variedad de cortes para elegir. ¿Podrías decirme un poco más sobre tu figura y estilo para que pueda recomendarte lo mejor? ¿Tienes algún evento especial en mente para el que necesitas un traje?",
+      "success": true
+    },
+    {
+      "question": "es mejor un traje de 200 mil o dos de 100 mil?",
+      "source": "AI",
+      "response": "Excelente pregunta! Si tienes un presupuesto de $200.000, te recomiendo considerar opciones que te ofrezcan un mejor valor por dinero. En nuestro catálogo, tenemos varios trajes que se ajustan a tu presupuesto.\n\nTe sugiero considerar el \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un clásico que transmite elegancia y sofisticación, y es una excelente opción para eventos formales. También tenemos el \"Traje de Caballero Rojo Statement\" por $175.000, que es perfecto para fiestas y eventos donde quieres destacar.\n\nSi prefieres dos trajes de $100.000 cada uno, podrías considerar el \"Traje de Caballero Azul Marino Clásico\" y el \"Traje de Caballero Azul Eléctrico Fashion\" por $124.000 y $230.000, respectivamente. Sin embargo, en este caso, el segundo traje supera tu presupuesto.\n\nEn resumen, con un presupuesto de $200.000, te recomiendo considerar el \"Traje de Caballero Azul Marino Clásico\" o el \"Traje de Caballero Rojo Statement\". ¿Te gustaría saber más sobre alguno de ellos?",
+      "success": true
+    },
+    {
+      "question": "tengo un evento y...",
+      "source": "AI",
+      "response": "¡Excelente! ¿Cuál es el evento y cuál es tu presupuesto aproximado? Quiero ayudarte a encontrar el traje perfecto para ti.",
+      "success": true
+    },
+    {
+      "question": "estaba pensando en comprar algo",
+      "source": "AI",
+      "response": "¡Excelente decisión! En Franko's Style, estamos aquí para ayudarte a encontrar la ropa perfecta para ti. ¿Qué tipo de ocasión tienes en mente? ¿Un evento formal, un trabajo importante o simplemente una noche especial? Cuéntame un poco más sobre lo que buscas y te puedo recomendar algunas opciones.",
+      "success": true
+    },
+    {
+      "question": "me gustan los trajes pero",
+      "source": "AI",
+      "response": "¡Excelente elección! Los trajes son una excelente opción para cualquier ocasión formal. ¿Cuál es tu presupuesto para el traje? ¿Estás buscando algo para un evento específico, como una boda o una gala?",
+      "success": true
+    },
+    {
+      "question": "quizás necesite",
+      "source": "AI",
+      "response": "¡Claro que sí! ¿En qué puedo ayudarte hoy? ¿Necesitas un traje para un evento especial o quizás un conjunto para un día de trabajo formal? ¿Cuál es tu presupuesto aproximado y qué tipo de ocasión tienes en mente?",
+      "success": true
+    },
+    {
+      "question": "necesito un terno bacán para mi matrimonio",
+      "source": "AI",
+      "response": "¡Genial elección! Para un matrimonio, te recomiendo el \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico que transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54. El traje incluye saco y pantalón, y está hecho con una mezcla premium de algodón y poliéster. ¿Te gustaría saber más sobre este traje o tal vez ver otras opciones?",
+      "success": true
+    },
+    {
+      "question": "quiero verme piola para la pega",
+      "source": "AI",
+      "response": "¡Genial elección! Para una pega, necesitas verte impecable. Te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es un clásico que transmite distinción y personalidad. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría probarlo?",
+      "success": true
+    },
+    {
+      "question": "algo pulento para una talla importante",
+      "source": "AI",
+      "response": "¡Claro! Si buscas algo pulento para una talla importante, te recomiendo el \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje de corte slim fit contemporáneo, perfecto para eventos sociales y fiestas. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje?",
+      "success": true
+    },
+    {
+      "question": "cachái algo filete para una junta?",
+      "source": "AI",
+      "response": "¡Claro que sí! Para una junta, te recomiendo el \"Traje de Caballero Gris Executive\" por $300.000. Es un traje clásico y elegante que transmite profesionalismo y sofisticación. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje o tal vez verlo en persona?",
+      "success": true
+    },
+    {
+      "question": "me siento perdido, no se que comprar",
+      "source": "AI",
+      "response": "No te preocupes, estoy aquí para ayudarte. ¿Cuál es la ocasión para la que buscas un traje o accesorio? ¿Es para un evento formal, un trabajo o simplemente para sentirte bien vestido? Cuéntame un poco más sobre lo que buscas y te puedo recomendar algunas opciones.",
+      "success": true
+    },
+    {
+      "question": "estoy nervioso por mi boda y necesito ayuda",
+      "source": "AI",
+      "response": "¡No te preocupes! Estoy aquí para ayudarte a encontrar el traje perfecto para tu gran día. ¿Cuál es tu presupuesto para el traje de boda? ¿Tienes alguna idea de qué tipo de traje te gustaría? ¿Es un traje clásico, moderno o algo más elegante?",
+      "success": true
+    },
+    {
+      "question": "es muy importante verme bien ese día",
+      "source": "AI",
+      "response": "¡Claro que sí! Entiendo que quieres verte bien para ese día especial. En Franko's Style, tenemos una amplia variedad de opciones para elegir. ¿Podrías decirme un poco más sobre el tipo de evento o ocasión para la que necesitas un traje? ¿Es un cumpleaños, una boda, un trabajo importante o algo más? Esto me ayudará a recomendarte los mejores productos para ti.\n\nAdemás, si tienes un presupuesto en mente, no dudes en compartirlo conmigo. De esta manera, puedo sugerirte opciones que se adapten a tus necesidades y a tu bolsillo.\n\n¿Quieres visitar nuestra tienda en Alameda 3410, Local V-21, para ver nuestra colección completa? Estamos aquí para ayudarte a encontrar el traje perfecto para ti. Puedes contactarnos por WhatsApp al +56 9 5047 6935 para hacer una cita o preguntar cualquier cosa. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "quiero impresionar en mi entrevista",
+      "source": "AI",
+      "response": "¡Excelente elección! Para impresionar en tu entrevista, te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es un traje de alta calidad que transmite distinción y personalidad. Con solapas satinadas, es perfecto para recepciones y galas. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría conocer más detalles sobre este traje?\n\n¿Te gustaría visitar nuestra tienda para probarlo? Puedes contactarnos por WhatsApp +56 9 5047 6935 para agendar una cita.",
+      "success": true
+    },
+    {
+      "question": "busco traje azul marino, talla 44, para boda, máximo 200 mil, que sea moderno",
+      "source": "AI",
+      "response": "¡Excelente elección! Para una boda, te recomiendo dos opciones que se ajustan a tu presupuesto y estilo moderno:\n\n1. \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un clásico que transmite elegancia y sofisticación. Está disponible en tallas 48, 50, 52, 54, pero no en 44. Sin embargo, si te ajustas a la talla 48, es una excelente opción.\n2. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un diseño moderno y audaz que destacará en la boda. Está disponible en tallas 48, 50, 52, 54, pero no en 44. Sin embargo, si te ajustas a la talla 48, es una excelente opción.\n\nSi prefieres algo más económico, te recomiendo considerar el \"Traje de Caballero Azul Marino Clásico\" por $124.000. Si estás dispuesto a invertir un poco más, el \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000 es una excelente opción moderna.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "necesito camisa blanca, corbata elegante y traje gris, todo por 250000",
+      "source": "AI",
+      "response": "¡Perfecto! Con tu presupuesto de $250.000, te recomiendo:\n\n* La \"Camisa Blanca Clásica\" no está disponible en nuestra base de datos, pero te sugiero la \"Camisa Blanca Elegante\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\" no está disponible, sin embargo, te recomiendo la \"Camisa Blanca\" no está disponible, pero te sugiero la \"Camisa Blanca\"",
+      "success": true
+    },
+    {
+      "question": "quiero un conjunto completo para graduación, soy talla L, presupuesto 300 mil",
+      "source": "AI",
+      "response": "¡Excelente elección! Con tu presupuesto de $300.000 y talla L, te recomiendo tres opciones ideales para graduación:\n\n1. \"Traje de Caballero Gris Executive\" por $300.000. Es perfecto para graduación porque transmite sobriedad y elegancia. Está disponible en tallas 48, 50, 52 y 54, y su largo es de 72 cm. Incluye saco con solapas satinadas y pantalón.\n2. \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es una excelente opción dentro de tu presupuesto y es ideal para graduación. Está disponible en tallas 48, 50, 52 y 54, y su largo es de 71 cm. Incluye saco y pantalón.\n3. \"Traje de Caballero Gris Claro Premium\" por $255.000. Es una opción elegante y moderna que se adapta perfectamente a la ocasión. Está disponible en tallas 48, 50, 52 y 54, y su largo es de 72 cm. Incluye saco y pantalón.\n\n¿Te gustaría más información sobre alguno de estos conjuntos?",
+      "success": true
+    },
+    {
+      "question": "que diferencia hay entre sus trajes?",
+      "source": "AI",
+      "response": "Excelente pregunta! En Franko's Style, tenemos una variedad de trajes para diferentes ocasiones y gustos. Aquí te presento las principales diferencias entre nuestros trajes:\n\n* El \"Traje de Caballero Gris Claro Premium\" es nuestro modelo más elegante y sofisticado. Es perfecto para bodas y galas, y cuenta con detalles únicos y acabados de lujo. Puedes elegir entre Gris Claro, Burdeos y Negro. (Disponible en tallas 48, 50, 52, 54)\n* El \"Traje Verde\" es un modelo más versátil y cómodo. Es ideal para celebraciones semiformales o cócteles, y combina la sobriedad del corte clásico con un toque de modernidad. (Disponible en tallas S, M, L, XL, XXL)\n* El \"Traje de Caballero Azul Eléctrico Fashion\" es un modelo más audaz y sofisticado. Es perfecto para eventos sociales y fiestas, y cuenta con un contraste vibrante que te hará destacar. Puedes elegir entre Azul Eléctrico, Gris y Negro. (Disponible en tallas 48, 50, 52, 54)\n\n¿Te gustaría saber más sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "como se cual es mi talla exacta?",
+      "source": "AI",
+      "response": "Para determinar tu talla exacta, necesito saber tus medidas. Por favor, proporciona tus medidas de cintura, hombros y largo de pantalón. Con eso, puedo ayudarte a encontrar la talla adecuada para ti.\n\nRecuerda que nuestras prendas están disponibles en las siguientes tallas:\n\n- \"Traje de Caballero Gris Claro Premium\": 48, 50, 52, 54\n- \"Traje Verde\": S, M, L, XL, XXL\n- \"Traje de Caballero Azul Eléctrico Fashion\": 48, 50, 52, 54\n\n¿Puedes proporcionarme tus medidas para que pueda ayudarte a encontrar la talla perfecta?",
+      "success": true
+    },
+    {
+      "question": "que significa corte slim?",
+      "source": "AI",
+      "response": "El corte \"Slim\" se refiere a un estilo de corte de chaqueta y pantalón que se caracteriza por ser más ajustado y estrecho que otros cortes tradicionales. En un corte Slim, la chaqueta y los pantalones están diseñados para ajustarse a la figura del cuerpo, creando un aspecto más elegante y moderno.\n\nEn Franko's Style, ofrecemos chaquetas y pantalones con corte Slim que están diseñados para hacer que cualquier hombre se vea más sofisticado y confiado. Si estás buscando un estilo de corte que te haga destacar en cualquier ocasión formal, te recomiendo visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp al +56 9 5047 6935 para ver nuestra colección completa.",
+      "success": true
+    },
+    {
+      "question": "cual es la diferencia de precio entre sus productos?",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "mi evento es mañana que tienen disponible?",
+      "source": "AI",
+      "response": "¡Hola! Entiendo que necesitas algo para mañana. Tenemos varios trajes disponibles en nuestra tienda. Me gustaría saber un poco más sobre tu evento y tu presupuesto para recomendarte opciones adecuadas.\n\n¿Cuál es el tipo de evento y cuánto estás dispuesto a gastar?",
+      "success": true
+    },
+    {
+      "question": "necesito algo urgente para pasado mañana",
+      "source": "AI",
+      "response": "Lo siento, pero no tengo productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, o a consultarnos por WhatsApp al +56 9 5047 6935 para ver nuestra colección completa. Estamos abiertos de lunes a sábado de 12:00 a 18:30.",
+      "success": true
+    },
+    {
+      "question": "mi boda es en 3 meses, cuando debería comprar?",
+      "source": "AI",
+      "response": "¡Excelente decisión planificar con anticipación! Para un traje de boda, te recomiendo comprar con al menos 2 meses de antelación. Esto te permitirá asegurar el tamaño y el color que deseas, y también te dará tiempo para cualquier ajuste o modificación que necesites.\n\nEn nuestro caso, te sugiero visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp +56 9 5047 6935 para discutir tus opciones y asegurar tu traje. Tenemos varios modelos disponibles, como el \"Traje de Caballero Gris Claro Premium\" por $255.000, que es perfecto para una boda formal. ¿Te gustaría más información sobre este o otros modelos?",
+      "success": true
+    },
+    {
+      "question": "cuanto demoran en tener stock?",
+      "source": "AI",
+      "response": "En Franko's Style, nos esforzamos por mantener un stock actualizado y disponible para nuestros clientes. Sin embargo, debido a la naturaleza de nuestra línea de productos, algunos artículos pueden tener un tiempo de entrega más largo que otros.\n\nTe recomiendo visitar nuestra tienda en Alameda 3410, Local V-21, para obtener información más precisa sobre el estado de nuestro stock y el tiempo de entrega de los productos que estás interesado en. También puedes contactarnos por WhatsApp al +56 9 5047 6935 para obtener más información.\n\nRecuerda que nuestros horarios de atención son de lunes a sábado de 12:00 a 18:30. Estoy aquí para ayudarte a encontrar lo que necesitas.",
+      "success": true
+    },
+    {
+      "question": "tienen stock?",
+      "error": "Request failed with status code 500",
+      "status": 500,
+      "success": false
+    },
+    {
+      "question": "hay disponibilidad?",
+      "source": "AI",
+      "response": "¡Claro que sí! Tenemos una amplia variedad de productos para elegir. ¿Qué tipo de producto estás buscando? ¿Un traje, camisa, corbata o algún accesorio? ¿Tienes algún evento o ocasión específica en mente?",
+      "success": true
+    },
+    {
+      "question": "esta todo agotado?",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa. También puedes consultarnos por WhatsApp al +56 9 5047 6935. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "cuando llega mercadería nueva?",
+      "source": "AI",
+      "response": "Nuestra tienda recibe mercadería nueva regularmente. Sin embargo, no tengo información específica sobre la próxima llegada de productos nuevos en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa y conocer nuestros últimos productos. Lunes a Sábado 12:00-18:30. O puedes consultarnos por WhatsApp al +56 9 5047 6935 para obtener más información.",
+      "success": true
+    },
+    {
+      "question": "ayuda",
+      "source": "AI",
+      "response": "¡Claro que sí! Soy CarVian, tu asesor de moda masculina en Franko's Style. ¿En qué puedo ayudarte hoy? ¿Estás buscando un traje para un evento especial o necesitas consejos para elegir la ropa adecuada para tu estilo? ¿Cuál es tu presupuesto y ocasión?",
+      "success": true
+    },
+    {
+      "question": "no se que quiero",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa. También puedes consultarnos por WhatsApp al +56 9 5047 6935. Lunes a Sábado 12:00-18:30. Estoy aquí para ayudarte a encontrar lo que necesitas.",
+      "success": true
+    },
+    {
+      "question": "asdasd",
+      "source": "AI",
+      "response": "Lo siento, pero no tengo información específica sobre ese producto en este momento. ¿Te gustaría visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central? Estamos abiertos de lunes a sábado de 12:00 a 18:30. También puedes consultarnos por WhatsApp al +56 9 5047 6935 para obtener más información.",
+      "success": true
+    },
+    {
+      "question": "???",
+      "source": "AI",
+      "response": "¡Hola! Me alegra poder ayudarte. ¿En qué puedo asistirte hoy? ¿Estás buscando un traje para un evento especial o necesitas consejos para elegir el mejor estilo para ti?",
+      "success": true
+    },
+    {
+      "question": "hola como estas que me recomiendas tengo un evento",
+      "source": "AI",
+      "response": "Hola! Estoy bien, gracias. ¿Qué tipo de evento tienes? ¿Es una boda, una gala, una celebración semiformal o algo más? ¿Cuál es tu presupuesto para el evento?",
+      "success": true
+    },
+    {
+      "question": "emmm... pues... necesito algo...",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa. También puedes consultarnos por WhatsApp al +56 9 5047 6935. Lunes a Sábado estamos abiertos de 12:00 a 18:30. Estoy aquí para ayudarte a encontrar lo que necesitas. ¿En qué puedo ayudarte hoy?",
+      "success": true
+    },
+    {
+      "question": "traje? camisa? no se...",
+      "source": "AI",
+      "response": "No te preocupes, te ayudaré a encontrar lo perfecto. ¿Cuál es el motivo de la ocasión? ¿Es para un evento formal, una boda, una fiesta o algo más informal? Y ¿cuál es tu presupuesto aproximado?",
+      "success": true
+    },
+    {
+      "question": "tnego un vautiso y soy el padrno",
+      "source": "AI",
+      "response": "¡Felicidades! Un bautizo es un momento muy especial. Como padrino, quieres lucir elegante y sofisticado. Te recomiendo el \"Traje de Caballero Gris Claro Premium\" por $255.000. Es perfecto porque transmite modernidad y elegancia. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría conocer más detalles sobre este traje?",
+      "success": true
+    },
+    {
+      "question": "nesesito algo elejante para voda",
+      "source": "AI",
+      "response": "¡Perfecto! Para una boda, te recomiendo:\n\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un clásico elegante que transmite sofisticación y modernidad. Está disponible en tallas 48, 50, 52 y 54.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje contemporáneo que destaca con su color vibrante y es perfecto para eventos sociales y fiestas. Está disponible en tallas 48, 50, 52 y 54.\n\nAmbos trajes son ideales para una boda y están disponibles en nuestras tiendas. ¿Te gustaría conocer más detalles sobre alguno de ellos?",
+      "success": true
+    },
+    {
+      "question": "presupusto de 200mil pesos",
+      "source": "AI",
+      "response": "¡Excelente elección de presupuesto! Con $200.000, tienes acceso a una variedad de opciones elegantes y sofisticadas. Te recomiendo considerar los siguientes productos:\n\n* \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un clásico que transmite elegancia y sobriedad, perfecto para ocasiones formales como oficinas o cenas.\n* \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Si buscas algo más moderno y audaz, este traje es ideal para eventos sociales y fiestas. Aunque está un poco por encima de tu presupuesto, podrías considerarlo si estás dispuesto a invertir un poco más.\n* \"Traje de Caballero Rojo Statement\" por $175.000. Este traje es perfecto para ocasiones especiales como fiestas y recepciones. Su color rojo llamativo te hará destacar en cualquier ambiente.\n\n¿Te gustaría más información sobre alguno de estos productos?",
+      "success": true
+    },
+    {
+      "question": "talla cuarenta y dos mas o meno",
+      "source": "AI",
+      "response": "¡Hola! En nuestra tienda, tenemos varios trajes que podrían ser adecuados para ti. El \"Traje de Caballero Gris Claro Premium\" está disponible en tallas de 48 a 54, incluyendo la tuya. Este traje es perfecto para bodas y galas, y su precio es de $255.000. También tenemos el \"Traje Verde\" en tallas S, M, L, XL y XXL, pero no está disponible en 42. Sin embargo, el \"Traje de Caballero Azul Eléctrico Fashion\" está disponible en tallas de 48 a 54, incluyendo la tuya. ¿Te gustaría conocer más detalles sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "como los contacto?",
+      "source": "AI",
+      "response": "¡Claro! Puedes contactarme a través de WhatsApp al +56 9 5047 6935. También puedes visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central. Estamos abiertos de lunes a sábado de 12:00 a 18:30. Estoy aquí para ayudarte a encontrar la ropa perfecta para ti. ¿En qué puedo ayudarte hoy?",
+      "success": true
+    },
+    {
+      "question": "donde quedan?",
+      "source": "AI",
+      "response": "📍 **Nos encuentras en:** Alameda 3410, Persa Estación Central, Local V-21, Santiago. **Horarios:** Lunes a Sábado 12:00-18:30. ¡Ven a conocer nuestra colección en persona!",
+      "success": true
+    },
+    {
+      "question": "estan cerca del metro?",
+      "source": "AI",
+      "response": "Sí, estamos muy cerca del metro. Nuestra tienda se encuentra en Alameda 3410, Local V-21, Persa Estación Central, lo que significa que estamos a pocos minutos a pie de la estación de metro. Puedes llegar fácilmente a nuestra tienda después de bajar del metro. ¿Necesitas ayuda con la ubicación o tienes alguna otra pregunta? Puedes contactarnos por WhatsApp al +56 9 5047 6935 para más información.",
+      "success": true
+    },
+    {
+      "question": "puedo ir hoy?",
+      "source": "AI",
+      "response": "¡Claro que sí! Nuestra tienda está abierta de lunes a sábado de 12:00 a 18:30. Hoy es un buen día para visitarnos y explorar nuestra colección de trajes y accesorios. ¿Te gustaría venir a ver nuestros productos y que te asesoremos en tu elección? Puedes contactarnos por WhatsApp al +56 9 5047 6935 si tienes alguna pregunta o necesitas más información. ¡Estamos aquí para ayudarte!",
+      "success": true
+    },
+    {
+      "question": "son mejores que otras tiendas?",
+      "source": "AI",
+      "response": "¡Absolutamente! En Franko's Style, nos enfocamos en ofrecer la mejor calidad y elegancia en cada uno de nuestros productos. Nuestros trajes, camisas, corbatas y accesorios están diseñados para que nuestros clientes se sientan confiados y sofisticados en cualquier ocasión. Nuestra experiencia y dedicación a la alta costura nos permiten ofrecer una atención personalizada y una selección de productos que no se puede encontrar en cualquier otra tienda.\n\n¿Quieres saber más sobre cómo podemos ayudarte a encontrar el look perfecto para ti? Puedes visitarnos en Alameda 3410, Local V-21, o contactarnos por WhatsApp al +56 9 5047 6935. Estamos aquí para ayudarte.",
+      "success": true
+    },
+    {
+      "question": "por que debería comprar con ustedes?",
+      "source": "AI",
+      "response": "Excelente pregunta! En Franko's Style, nos enorgullecemos de ofrecer la mejor calidad y elegancia en nuestros productos. Nuestros trajes y accesorios están diseñados para hacer que cada hombre se sienta confiado y sofisticado. Nuestra experiencia y conocimiento en la moda masculina nos permiten ofrecer recomendaciones personalizadas para cada ocasión y estilo.\n\nAdemás, nuestros productos están hechos con materiales de alta calidad y están diseñados para durar. Nuestros clientes valoran nuestra atención al detalle y nuestra pasión por la moda. ¡Te invitamos a experimentar la diferencia de Franko's Style!\n\nSi deseas saber más o programar una cita, no dudes en contactarnos por WhatsApp al +56 9 5047 6935 o visitarnos en nuestra tienda en Alameda 3410, Local V-21. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "que los hace diferentes?",
+      "source": "AI",
+      "response": "Excelente pregunta! En Franko's Style, nos destacamos por nuestra atención al detalle y nuestra pasión por la elegancia masculina. Nuestros trajes y accesorios están diseñados para hacer que cada hombre se sienta confiado y sofisticado.\n\nNuestros trajes son hechos a medida, lo que significa que se ajustan perfectamente a cada cuerpo. Nuestras telas son de alta calidad y elegidas cuidadosamente para que se adapten a cada ocasión. Además, nuestros accesorios, como camisas y corbatas, están diseñados para complementar perfectamente nuestros trajes.\n\nEn resumen, lo que nos hace diferentes es nuestra atención al detalle, nuestra pasión por la elegancia y nuestra dedicación a hacer que cada hombre se sienta como un verdadero caballero. ¿Te gustaría visitar nuestra tienda y ver nuestra colección completa? Estamos ubicados en Alameda 3410, Local V-21, y estamos abiertos de lunes a sábado de 12:00 a 18:30. Puedes contactarnos por WhatsApp al +56 9 5047 6935 para más información.",
+      "success": true
+    }
+  ]
+}

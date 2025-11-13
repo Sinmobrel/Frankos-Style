@@ -3,6 +3,438 @@ const Groq = require('groq-sdk');
 const Product = require('../models/product');
 const router = express.Router();
 
+// ============================================
+// SISTEMA DE CORRECCIÓN DE ERRORES ORTOGRÁFICOS
+// ============================================
+
+// Diccionario de correcciones ortográficas comunes (EXPANDIDO)
+const SPELLING_CORRECTIONS = {
+  // Productos
+  'terno': 'traje',
+  'ternos': 'trajes',
+  'trage': 'traje',
+  'trge': 'traje',
+  'trjes': 'trajes',
+  'teaje': 'traje',
+  'trake': 'traje',
+  
+  // Ocasiones
+  'vautizo': 'bautizo',
+  'vautiso': 'bautizo',
+  'bautiso': 'bautizo',
+  'vautiso': 'bautizo',
+  'bavtizo': 'bautizo',
+  'voda': 'boda',
+  'vboda': 'boda',
+  'voba': 'boda',
+  'vodas': 'bodas',
+  'bodas': 'boda',
+  'matriomonio': 'matrimonio',
+  'matrimnio': 'matrimonio',
+  'matrimnonio': 'matrimonio',
+  'graducion': 'graduacion',
+  'graduaion': 'graduacion',
+  'graducion': 'graduacion',
+  'gala': 'gala',
+  'galas': 'gala',
+  
+  // Colores (EXPANDIDO - normalizados sin tildes)
+  'azul': 'azul',
+  'ázul': 'azul',
+  'asul': 'azul',
+  'azúl': 'azul',
+  'azil': 'azul',
+  'acul': 'azul',
+  'azull': 'azul',
+  'gris': 'gris',
+  'griz': 'gris',
+  'grizz': 'gris',
+  'griis': 'gris',
+  'griss': 'gris',
+  'negro': 'negro',
+  'negró': 'negro',
+  'negr': 'negro',
+  'negri': 'negro',
+  'nwgro': 'negro',
+  'blanco': 'blanco',
+  'blanko': 'blanco',
+  'vranco': 'blanco',
+  'balnco': 'blanco',
+  'blanxo': 'blanco',
+  'burdeos': 'burdeos',
+  'burdeoz': 'burdeos',
+  'vurdeos': 'burdeos',
+  'burdos': 'burdeos',
+  'marino': 'marino',
+  'marinho': 'marino',
+  'marinó': 'marino',
+  'marin': 'marino',
+  'cafe': 'cafe',
+  'café': 'cafe',
+  'kafe': 'cafe',
+  'caffe': 'cafe',
+  'caf': 'cafe',
+  'marron': 'marron',
+  'marrón': 'marron',
+  'maron': 'marron',
+  'marrown': 'marron',
+  'rojo': 'rojo',
+  'roxo': 'rojo',
+  'rogo': 'rojo',
+  'rojjo': 'rojo',
+  'verde': 'verde',
+  'berde': 'verde',
+  'veerde': 'verde',
+  'berge': 'verde',
+  'amarillo': 'amarillo',
+  'amarilo': 'amarillo',
+  'amarrillo': 'amarillo',
+  'morado': 'morado',
+  'morao': 'morado',
+  'moraddo': 'morado',
+  'violeta': 'violeta',
+  'violetta': 'violeta',
+  'bioleta': 'violeta',
+  'rosa': 'rosa',
+  'rossa': 'rosa',
+  'beige': 'beige',
+  'beije': 'beige',
+  'beis': 'beige',
+  'dorado': 'dorado',
+  'dorao': 'dorado',
+  'gold': 'dorado',
+  'plateado': 'plateado',
+  'plata': 'plateado',
+  'silver': 'plateado',
+  'turquesa': 'turquesa',
+  'turkesa': 'turquesa',
+  'turqesa': 'turquesa',
+  'naranja': 'naranja',
+  'naranja': 'naranja',
+  'anaranjado': 'naranja',
+  'celeste': 'celeste',
+  'seleste': 'celeste',
+  'cyan': 'celeste',
+  
+  // Atributos
+  'elegnte': 'elegante',
+  'elejante': 'elegante',
+  'eleganté': 'elegante',
+  'elegante': 'elegante',
+  'elegantr': 'elegante',
+  'prezio': 'precio',
+  'presio': 'precio',
+  'preçio': 'precio',
+  'precio': 'precio',
+  'precip': 'precio',
+  'taya': 'talla',
+  'taia': 'talla',
+  'taja': 'talla',
+  'tallá': 'talla',
+  'talla': 'talla',
+  'taia': 'talla',
+  
+  // Acciones
+  'nesesito': 'necesito',
+  'nesecito': 'necesito',
+  'neçesito': 'necesito',
+  'necesito': 'necesito',
+  'necewito': 'necesito',
+  'kiero': 'quiero',
+  'kero': 'quiero',
+  'kieró': 'quiero',
+  'quiero': 'quiero',
+  'qiero': 'quiero',
+  'quierp': 'quiero',
+  'komprar': 'comprar',
+  'conprar': 'comprar',
+  'comprar': 'comprar',
+  'comprat': 'comprar',
+  'busco': 'busco',
+  'vusco': 'busco',
+  'bisco': 'busco',
+  'presupusto': 'presupuesto',
+  'presupuesto': 'presupuesto',
+  'presupesto': 'presupuesto',
+  'presuouesto': 'presupuesto',
+  
+  // Otros términos comunes
+  'kamisa': 'camisa',
+  'camiza': 'camisa',
+  'camisá': 'camisa',
+  'camisa': 'camisa',
+  'csmisa': 'camisa',
+  'corvata': 'corbata',
+  'korvata': 'corbata',
+  'corbata': 'corbata',
+  'corvatta': 'corbata',
+  'corbatta': 'corbata',
+  'aksesorio': 'accesorio',
+  'acsesorio': 'accesorio',
+  'accezorio': 'accesorio',
+  'accesorio': 'accesorio',
+  'acsesorio': 'accesorio'
+};
+
+// Mapa de teclas adyacentes en teclado QWERTY español
+const KEYBOARD_ADJACENT = {
+  'q': ['w', 'a'],
+  'w': ['q', 'e', 's', 'a'],
+  'e': ['w', 'r', 'd', 's'],
+  'r': ['e', 't', 'f', 'd'],
+  't': ['r', 'y', 'g', 'f'],
+  'y': ['t', 'u', 'h', 'g'],
+  'u': ['y', 'i', 'j', 'h'],
+  'i': ['u', 'o', 'k', 'j'],
+  'o': ['i', 'p', 'l', 'k'],
+  'p': ['o', 'ñ', 'l'],
+  'a': ['q', 'w', 's', 'z'],
+  's': ['a', 'w', 'e', 'd', 'x', 'z'],
+  'd': ['s', 'e', 'r', 'f', 'c', 'x'],
+  'f': ['d', 'r', 't', 'g', 'v', 'c'],
+  'g': ['f', 't', 'y', 'h', 'b', 'v'],
+  'h': ['g', 'y', 'u', 'j', 'n', 'b'],
+  'j': ['h', 'u', 'i', 'k', 'm', 'n'],
+  'k': ['j', 'i', 'o', 'l', 'm'],
+  'l': ['k', 'o', 'p', 'ñ'],
+  'z': ['a', 's', 'x'],
+  'x': ['z', 's', 'd', 'c'],
+  'c': ['x', 'd', 'f', 'v'],
+  'v': ['c', 'f', 'g', 'b'],
+  'b': ['v', 'g', 'h', 'n'],
+  'n': ['b', 'h', 'j', 'm'],
+  'm': ['n', 'j', 'k']
+};
+
+// Función avanzada para corregir errores de tipeo por teclas adyacentes
+function fixTypos(word, candidates) {
+  const wordLower = word.toLowerCase();
+  
+  for (const candidate of candidates) {
+    const candidateLower = candidate.toLowerCase();
+    
+    // Si la longitud es muy diferente, skip
+    if (Math.abs(wordLower.length - candidateLower.length) > 2) continue;
+    
+    // Contar diferencias
+    let differences = 0;
+    let adjacentErrors = 0;
+    
+    for (let i = 0; i < Math.min(wordLower.length, candidateLower.length); i++) {
+      if (wordLower[i] !== candidateLower[i]) {
+        differences++;
+        
+        // Verificar si es un error de tecla adyacente
+        const adjacent = KEYBOARD_ADJACENT[candidateLower[i]] || [];
+        if (adjacent.includes(wordLower[i])) {
+          adjacentErrors++;
+        }
+      }
+    }
+    
+    // Si tiene máximo 2 diferencias y al menos 1 es de tecla adyacente
+    if (differences <= 2 && adjacentErrors >= 1) {
+      return candidate;
+    }
+  }
+  
+  return null;
+}
+
+// Función para normalizar y corregir texto (MEJORADA CON MULTI-CAPA)
+function normalizeText(text) {
+  if (!text || typeof text !== 'string') return '';
+  
+  console.log('🔧 AUTO-CORRECTOR INICIADO:', text);
+  
+  // CAPA 1: Normalización básica
+  let normalized = text.toLowerCase()
+    .normalize('NFD')  // Normalizar caracteres Unicode
+    .replace(/[\u0300-\u036f]/g, '')  // Remover acentos
+    .trim();
+  
+  // CAPA 2: Aplicar correcciones del diccionario (primera pasada)
+  Object.keys(SPELLING_CORRECTIONS).forEach(misspelled => {
+    const correct = SPELLING_CORRECTIONS[misspelled];
+    const regex = new RegExp(`\\b${misspelled}\\b`, 'gi');
+    if (regex.test(normalized)) {
+      console.log(`  ✓ Diccionario: "${misspelled}" → "${correct}"`);
+      normalized = normalized.replace(regex, correct);
+    }
+  });
+  
+  // CAPA 3: Corrección inteligente palabra por palabra
+  const words = normalized.split(/\s+/);
+  const correctedWords = words.map(word => {
+    // Si la palabra ya está en el diccionario, mantenerla
+    if (SPELLING_CORRECTIONS[word]) {
+      return SPELLING_CORRECTIONS[word];
+    }
+    
+    // Lista de palabras objetivo (productos, colores, ocasiones) - SIN TILDES
+    const targetWords = [
+      'traje', 'trajes', 'camisa', 'camisas', 'corbata', 'corbatas', 'accesorio', 'accesorios',
+      'azul', 'gris', 'negro', 'blanco', 'burdeos', 'marino', 'rojo', 'verde', 'amarillo', 
+      'morado', 'violeta', 'rosa', 'beige', 'cafe', 'marron', 'dorado', 'plateado', 'turquesa',
+      'naranja', 'celeste', 'electrico',
+      'bautizo', 'boda', 'matrimonio', 'graduacion', 'gala',
+      'precio', 'talla', 'elegante', 'necesito', 'quiero', 'busco', 'comprar'
+    ];
+    
+    // Intentar corrección por teclas adyacentes
+    const fixed = fixTypos(word, targetWords);
+    if (fixed) {
+      console.log(`  ✓ Tecla adyacente: "${word}" → "${fixed}"`);
+      return fixed;
+    }
+    
+    // Si tiene más de 3 caracteres, intentar fuzzy matching agresivo
+    if (word.length > 3) {
+      for (const target of targetWords) {
+        const distance = levenshteinDistance(word, target);
+        // Umbral más agresivo para palabras cortas
+        const threshold = word.length <= 5 ? 2 : 3;
+        if (distance <= threshold) {
+          console.log(`  ✓ Fuzzy match: "${word}" → "${target}" (distancia: ${distance})`);
+          return target;
+        }
+      }
+    }
+    
+    return word;
+  });
+  
+  normalized = correctedWords.join(' ');
+  
+  // CAPA 4: Segunda pasada del diccionario (por si la corrección anterior creó nuevas palabras)
+  Object.keys(SPELLING_CORRECTIONS).forEach(misspelled => {
+    const correct = SPELLING_CORRECTIONS[misspelled];
+    const regex = new RegExp(`\\b${misspelled}\\b`, 'gi');
+    normalized = normalized.replace(regex, correct);
+  });
+  
+  console.log('✨ RESULTADO FINAL:', normalized);
+  
+  return normalized;
+}
+
+// Función para calcular distancia de Levenshtein (similitud entre strings)
+function levenshteinDistance(str1, str2) {
+  const len1 = str1.length;
+  const len2 = str2.length;
+  const matrix = [];
+
+  if (len1 === 0) return len2;
+  if (len2 === 0) return len1;
+
+  for (let i = 0; i <= len2; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= len1; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= len2; i++) {
+    for (let j = 1; j <= len1; j++) {
+      if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,  // Sustitución
+          matrix[i][j - 1] + 1,      // Inserción
+          matrix[i - 1][j] + 1       // Eliminación
+        );
+      }
+    }
+  }
+
+  return matrix[len2][len1];
+}
+
+// Función para encontrar la palabra más similar de una lista
+function findClosestMatch(word, candidatesList, threshold = 3) {
+  let closestMatch = null;
+  let minDistance = Infinity;
+  
+  const normalizedWord = normalizeText(word);
+  
+  candidatesList.forEach(candidate => {
+    const normalizedCandidate = normalizeText(candidate);
+    const distance = levenshteinDistance(normalizedWord, normalizedCandidate);
+    
+    // Si la distancia es menor al umbral y es la mejor hasta ahora
+    if (distance < threshold && distance < minDistance) {
+      minDistance = distance;
+      closestMatch = candidate;
+    }
+  });
+  
+  return closestMatch;
+}
+
+// Función mejorada para búsqueda inteligente con corrección ortográfica
+async function smartProductSearch(query) {
+  try {
+    // 1. Normalizar la consulta
+    const normalizedQuery = normalizeText(query);
+    console.log('🔍 Query normalizada:', normalizedQuery);
+    
+    // 2. Buscar con la query normalizada
+    let products = await Product.find({
+      $or: [
+        { name: new RegExp(normalizedQuery, 'i') },
+        { description: new RegExp(normalizedQuery, 'i') },
+        { category: new RegExp(normalizedQuery, 'i') },
+        { mainColor: new RegExp(normalizedQuery, 'i') },
+        { productType: new RegExp(normalizedQuery, 'i') },
+        { tags: new RegExp(normalizedQuery, 'i') }
+      ],
+      stock: { $gt: 0 }
+    }).limit(3);
+    
+    // 3. Si no hay resultados, intentar fuzzy matching con categorías conocidas
+    if (products.length === 0) {
+      console.log('⚠️ Sin resultados directos, probando fuzzy matching...');
+      
+      const categories = ['traje', 'camisa', 'corbata', 'accesorio'];
+      const colors = [
+        'azul', 'gris', 'negro', 'blanco', 'burdeos', 'marino', 'rojo', 'verde',
+        'cafe', 'marron', 'beige', 'amarillo', 'morado', 'rosa', 'violeta'
+      ];
+      
+      const words = normalizedQuery.split(' ');
+      
+      for (const word of words) {
+        // Buscar categoría similar
+        const matchedCategory = findClosestMatch(word, categories);
+        if (matchedCategory) {
+          console.log(`✅ Categoría corregida: "${word}" → "${matchedCategory}"`);
+          products = await Product.find({
+            category: new RegExp(matchedCategory, 'i'),
+            stock: { $gt: 0 }
+          }).limit(3);
+          if (products.length > 0) break;
+        }
+        
+        // Buscar color similar
+        const matchedColor = findClosestMatch(word, colors);
+        if (matchedColor && products.length === 0) {
+          console.log(`✅ Color corregido: "${word}" → "${matchedColor}"`);
+          // Usar la función mejorada que busca sinónimos
+          products = await getProductsByColor(matchedColor);
+          if (products.length > 0) break;
+        }
+      }
+    }
+    
+    return products;
+  } catch (error) {
+    console.error('❌ Error en búsqueda inteligente:', error);
+    return [];
+  }
+}
+
 // Sistema de patrones FAQ REDUCIDO - Solo lo esencial
 const FAQ_PATTERNS = {
   // INFORMACIÓN BÁSICA DE CONTACTO Y UBICACIÓN
@@ -36,34 +468,35 @@ const productKeywords = [
   // Consultas sobre productos
   'precio', 'precios', 'cuesta', 'vale', '$', 'peso',
   'color', 'colores', 'talla', 'tallas', 'medida', 'medidas',
-  'modelo', 'modelos', 'diseño', 'diseños',
+  'modelo', 'modelos', 'diseño', 'diseños', 'diseno', 'disenos',
   'stock', 'disponible', 'hay', 'tienen disponible',
-  'mostrar', 'ver', 'quiero ver', 'enseñar',
+  'mostrar', 'ver', 'quiero ver', 'enseñar', 'ensenar',
   'recomienda', 'recomiendan', 'sugerir', 'sugieren',
   'busco', 'necesito', 'quiero comprar', 'comprar',
-  'catálogo', 'inventario', 'productos específicos',
+  'catalogo', 'catálogo', 'inventario', 'productos', 'productos especificos',
   // Tallas específicas
   '38', '40', '42', '44', '46', '48', '50', '52', '54', '56',
   'xs', 's', 'm', 'l', 'xl', 'xxl',
   'small', 'medium', 'large', 'extra',
   'slim', 'regular', 'classic',
-  // Paleta completa de colores
+  // Paleta completa de colores (SIN TILDES - normalizados)
   'azul', 'gris', 'negro', 'blanco', 'burdeos', 'marino', 'claro', 'oscuro',
   'rojo', 'verde', 'amarillo', 'naranja', 'morado', 'violeta', 'rosa',
-  'beige', 'café', 'marrón', 'crema', 'ivory', 'champagne',
+  'beige', 'cafe', 'marron', 'crema', 'ivory', 'champagne',
   'plateado', 'dorado', 'bronce', 'cobre',
   'celeste', 'turquesa', 'aqua', 'cyan',
-  'vino', 'granate', 'carmesí', 'escarlata',
-  'azul marino', 'azul rey', 'azul cielo', 'azul claro', 'azul oscuro',
-  'gris claro', 'gris oscuro', 'gris plomo', 'gris carbón',
+  'vino', 'granate', 'carmesi', 'escarlata',
+  'azul marino', 'azul rey', 'azul cielo', 'azul claro', 'azul oscuro', 'azul electrico',
+  'gris claro', 'gris oscuro', 'gris plomo', 'gris carbon',
   'verde oliva', 'verde militar', 'verde oscuro',
   'berenjena', 'lavanda', 'lila'
 ];
 
 // Función mejorada para detectar patrones en preguntas
 function detectQuestionPattern(message) {
-  // Normalizar el mensaje
-  const lowerMessage = message.toLowerCase()
+  // Normalizar y corregir el mensaje
+  const normalizedMessage = normalizeText(message);
+  const lowerMessage = normalizedMessage
     .replace(/[¿?¡!.,;:()]/g, ' ')  // Remover puntuación
     .replace(/\s+/g, ' ')           // Normalizar espacios
     .trim();
@@ -127,13 +560,13 @@ const groq = new Groq({
   apiKey: GROQ_API_KEY
 });
 
-// Funciones para consultar la base de datos
+// Funciones para consultar la base de datos (OPTIMIZADAS - límite reducido a 3)
 async function getProductsByCategory(category) {
   try {
     const products = await Product.find({ 
       category: new RegExp(category, 'i'),
       stock: { $gt: 0 } 
-    }).limit(5);
+    }).limit(3); // Reducido de 5 a 3
     return products;
   } catch (error) {
     console.error('Error consultando productos por categoría:', error);
@@ -142,23 +575,8 @@ async function getProductsByCategory(category) {
 }
 
 async function searchProducts(query) {
-  try {
-    const products = await Product.find({
-      $or: [
-        { name: new RegExp(query, 'i') },
-        { description: new RegExp(query, 'i') },
-        { category: new RegExp(query, 'i') },
-        { mainColor: new RegExp(query, 'i') },
-        { productType: new RegExp(query, 'i') },
-        { tags: new RegExp(query, 'i') }
-      ],
-      stock: { $gt: 0 }
-    }).limit(8);
-    return products;
-  } catch (error) {
-    console.error('Error buscando productos:', error);
-    return [];
-  }
+  // Usar la nueva función de búsqueda inteligente
+  return await smartProductSearch(query);
 }
 
 async function getProductsByPriceRange(minPrice, maxPrice) {
@@ -166,7 +584,7 @@ async function getProductsByPriceRange(minPrice, maxPrice) {
     const products = await Product.find({
       price: { $gte: minPrice, $lte: maxPrice },
       stock: { $gt: 0 }
-    }).sort({ price: 1 }).limit(5);
+    }).sort({ price: 1 }).limit(3); // Reducido de 5 a 3
     return products;
   } catch (error) {
     console.error('Error consultando productos por rango de precio:', error);
@@ -183,7 +601,7 @@ async function getFeaturedProducts() {
         { isExclusive: true }
       ],
       stock: { $gt: 0 }
-    }).sort({ price: -1 }).limit(4);
+    }).sort({ price: -1 }).limit(3); // Reducido de 4 a 3
     return products;
   } catch (error) {
     console.error('Error consultando productos destacados:', error);
@@ -196,7 +614,7 @@ async function getBestSellersByCategory() {
     const products = await Product.find({
       isPopular: true,
       stock: { $gt: 0 }
-    }).sort({ price: -1 }).limit(6);
+    }).sort({ price: -1 }).limit(3); // Reducido de 6 a 3
     return products;
   } catch (error) {
     console.error('Error consultando bestsellers:', error);
@@ -213,7 +631,7 @@ async function getProductsBySize(size) {
         { sizesText: { $regex: new RegExp(size, 'i') } }
       ],
       stock: { $gt: 0 }
-    }).limit(8);
+    }).limit(3); // Reducido de 8 a 3
     return products;
   } catch (error) {
     console.error('Error consultando productos por talla:', error);
@@ -223,13 +641,57 @@ async function getProductsBySize(size) {
 
 async function getProductsByColor(color) {
   try {
+    // Mapa de sinónimos de colores para búsqueda más amplia (INCLUYE VERSIONES CON Y SIN TILDES)
+    const colorSynonyms = {
+      'cafe': ['cafe', 'café', 'brown', 'marron', 'marrón', 'coffee', 'camel'],
+      'marron': ['marron', 'marrón', 'cafe', 'café', 'brown', 'camel'],
+      'azul': ['azul', 'blue', 'azul marino', 'azul eléctrico', 'azul electrico', 'navy'],
+      'gris': ['gris', 'gray', 'grey', 'plomo', 'gris claro'],
+      'negro': ['negro', 'black'],
+      'blanco': ['blanco', 'white', 'ivory', 'crema'],
+      'rojo': ['rojo', 'red', 'vino', 'granate', 'burdeos', 'burdeos'],
+      'verde': ['verde', 'green', 'oliva'],
+      'amarillo': ['amarillo', 'yellow', 'dorado', 'gold'],
+      'morado': ['morado', 'purple', 'violeta', 'lila', 'púrpura', 'purpura'],
+      'rosa': ['rosa', 'pink', 'rosado'],
+      'beige': ['beige', 'beige', 'arena', 'crema'],
+      'dorado': ['dorado', 'oro', 'gold', 'golden', 'amarillo'],
+      'plateado': ['plateado', 'plata', 'silver', 'gris'],
+      'turquesa': ['turquesa', 'turquoise', 'aqua', 'cyan'],
+      'naranja': ['naranja', 'orange', 'anaranjado'],
+      'celeste': ['celeste', 'sky blue', 'azul cielo', 'cyan'],
+      'violeta': ['violeta', 'violet', 'morado', 'púrpura', 'purpura', 'lila']
+    };
+    
+    // Obtener sinónimos del color (normalizado sin acentos)
+    const normalizedColor = color.toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+    
+    let searchTerms = [color, normalizedColor];
+    for (const [key, synonyms] of Object.entries(colorSynonyms)) {
+      if (synonyms.some(s => s.toLowerCase() === normalizedColor)) {
+        searchTerms = synonyms;
+        console.log(`🎨 Buscando color "${color}" con sinónimos:`, searchTerms);
+        break;
+      }
+    }
+    
+    // Construir regex pattern con todos los sinónimos (escapar caracteres especiales)
+    const escapedTerms = searchTerms.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const colorPattern = escapedTerms.join('|');
+    
     const products = await Product.find({
       $or: [
-        { mainColor: new RegExp(color, 'i') },
-        { colors: { $regex: new RegExp(color, 'i') } }
+        { mainColor: new RegExp(colorPattern, 'i') },
+        { colors: { $regex: new RegExp(colorPattern, 'i') } },
+        { name: new RegExp(colorPattern, 'i') },
+        { description: new RegExp(colorPattern, 'i') }
       ],
       stock: { $gt: 0 }
-    }).limit(8);
+    }).limit(3);
+    
+    console.log(`✅ Encontrados ${products.length} productos para color "${color}"`);
     return products;
   } catch (error) {
     console.error('Error consultando productos por color:', error);
@@ -251,7 +713,8 @@ async function getInventorySummary() {
           colors: { $addToSet: '$mainColor' },
           products: { $push: { name: '$name', price: '$price', id: '$_id' } }
         }},
-      { $sort: { count: -1 } }
+      { $sort: { count: -1 } },
+      { $limit: 10 } // OPTIMIZACIÓN: Limitar categorías para evitar sobrecarga
     ]);
     return summary;
   } catch (error) {
@@ -260,7 +723,7 @@ async function getInventorySummary() {
   }
 }
 
-// Función MEJORADA para formatear productos para la IA
+// Función SIMPLIFICADA para formatear productos para la IA (OPTIMIZADA PARA VERCEL)
 function formatProductsForAI(products, title) {
   if (!products || products.length === 0) {
     return `${title}: NO PRODUCTS AVAILABLE.`;
@@ -270,154 +733,39 @@ function formatProductsForAI(products, title) {
   
   products.forEach((product, index) => {
     formatted += `${index + 1}. "${product.name}"\n`;
+    formatted += `   💰 $${product.price.toLocaleString('es-CL')}`;
     
-    // 💰 PRECIO Y STOCK BÁSICO
-    formatted += `   💰 $${product.price.toLocaleString('es-CL')} | 📦 ${product.stock} units\n`;
+    if (product.stock) formatted += ` | 📦 ${product.stock} units`;
+    if (product.mainColor) formatted += ` | 🎨 ${product.mainColor}`;
+    if (product.sizes && product.sizes.length > 0) formatted += ` | 👔 ${product.sizes.join(', ')}`;
     
-    // 🎨 COLOR PRINCIPAL Y COLORES DISPONIBLES
-    if (product.mainColor) {
-      formatted += `   🎨 Main: ${product.mainColor}`;
-      if (product.colors && product.colors.length > 1) {
-        const otherColors = product.colors.filter(c => c !== product.mainColor);
-        if (otherColors.length > 0) {
-          formatted += ` | Also: ${otherColors.slice(0, 2).join(', ')}`;
-        }
-      }
-      formatted += `\n`;
-    }
-    
-    // 👔 TALLAS DISPONIBLES (INFORMACIÓN CRUCIAL)
-    if (product.sizes && product.sizes.length > 0) {
-      formatted += `   👔 Sizes: ${product.sizes.join(', ')}`;
-      if (product.sizesText) {
-        formatted += ` (${product.sizesText})`;
-      }
-      formatted += `\n`;
-    } else if (product.sizesText) {
-      formatted += `   👔 Sizes: ${product.sizesText}\n`;
-    }
-    
-    // ✂️ TIPO Y CORTE BÁSICO
-    const basics = [];
-    if (product.cut) basics.push(product.cut);
-    if (product.productType && product.productType !== product.name) basics.push(product.productType);
-    if (basics.length > 0) {
-      formatted += `   ✂️ ${basics.join(' - ')}\n`;
-    }
-    
-    // 📏 MEDIDAS (cuando están disponibles)
-    if (product.measurements) {
-      const measures = [];
-      if (product.measurements.length) measures.push(`Length: ${product.measurements.length}`);
-      if (product.measurements.shoulders) measures.push(`Shoulders: ${product.measurements.shoulders}`);
-      if (product.measurements.waist) measures.push(`Waist: ${product.measurements.waist}`);
-      if (measures.length > 0) {
-        formatted += `   📏 ${measures.join(' | ')}\n`;
-      }
-    }
-    
-    // 🎪 OCASIONES PRINCIPALES
-    if (product.eventTypes && product.eventTypes.length > 0) {
-      formatted += `   🎪 ${product.eventTypes.slice(0, 2).join(', ')}\n`;
-    }
-    
-    // 🧵 MATERIAL (cuando está disponible)
-    if (product.material) {
-      const shortMaterial = product.material.length > 40 
-        ? product.material.substring(0, 40) + '...' 
-        : product.material;
-      formatted += `   🧵 ${shortMaterial}\n`;
-    }
-    
-    // 📦 QUÉ INCLUYE
-    if (product.includes && product.includes.length > 0) {
-      formatted += `   📦 Includes: ${product.includes.slice(0, 2).join(', ')}\n`;
-    }
-    
-    // ⭐ BADGES IMPORTANTES
-    const badges = [];
-    if (product.featured) badges.push('⭐FEATURED');
-    if (product.isPopular) badges.push('🔥POPULAR');
-    if (product.isExclusive) badges.push('💎EXCLUSIVE');
-    if (badges.length > 0) {
-      formatted += `   ${badges.join(' ')}\n`;
-    }
-    
-    // 📝 DESCRIPCIÓN RESUMIDA (máximo 60 caracteres)
-    if (product.description) {
-      const shortDesc = product.description.length > 60 
-        ? product.description.substring(0, 60) + '...' 
-        : product.description;
-      formatted += `   📝 ${shortDesc}\n`;
-    }
-    
-    formatted += `\n`;
+    formatted += `\n\n`;
   });
   
-  // 💡 RESUMEN SIMPLE
   const prices = products.map(p => p.price);
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
+  formatted += `💡 PRICE RANGE: $${Math.min(...prices).toLocaleString('es-CL')} - $${Math.max(...prices).toLocaleString('es-CL')}\n\n`;
   
-  formatted += `💡 PRICE RANGE: $${minPrice.toLocaleString('es-CL')} - $${maxPrice.toLocaleString('es-CL')}\n`;
-  formatted += `📦 TOTAL: ${products.reduce((sum, p) => sum + p.stock, 0)} units available\n\n`;
-  
-  // 🤖 INSTRUCCIONES CRÍTICAS PARA LA IA
-  formatted += `🤖 CRITICAL AI INSTRUCTIONS:
-⚠️ YOU MUST ONLY RECOMMEND PRODUCTS FROM THE LIST ABOVE
-⚠️ NEVER INVENT PRODUCT NAMES, PRICES, OR DETAILS
-⚠️ USE EXACT PRODUCT NAMES IN QUOTES: "Product Name"
-⚠️ USE EXACT PRICES AS SHOWN: $123.456
-- Keep responses under 120 words
-- When asked about sizes, ALWAYS mention available sizes from the data above
-- Include size information when recommending products
-- Mention specific colors available, not just main color
-- Include measurements when customer asks about fit
-- Focus on helping customer find the right size and fit
-- Use friendly, helpful tone in SPANISH
-- Be specific about what sizes are actually available in stock
-- If product not in list above, say "no tenemos ese producto" and suggest alternatives FROM THE LIST\n`;
+  formatted += `🤖 INSTRUCTIONS:\n⚠️ ONLY recommend products from list above\n⚠️ Use EXACT names in quotes and EXACT prices\n- Keep under 100 words\n- Respond in SPANISH\n- If not in list, say "no tenemos" and suggest from list\n`;
   
   return formatted;
 }
 
+// Función SIMPLIFICADA para formatear resumen de inventario (OPTIMIZADA PARA VERCEL)
 function formatInventorySummaryForAI(summary) {
   if (!summary || summary.length === 0) {
-    return 'INVENTORY: EMPTY STORE - No products available.';
+    return 'INVENTORY: No products available.';
   }
   
-  let formatted = '=== FRANKO\'S STYLE INVENTORY SUMMARY ===\n\n';
-  let totalProducts = 0;
-  let totalStock = 0;
+  let formatted = '=== INVENTORY ===\n\n';
   
   summary.forEach(cat => {
-    totalProducts += cat.count;
-    totalStock += cat.totalStock;
-    
-    formatted += `📂 ${cat._id.toUpperCase()}: ${cat.count} products | ${cat.totalStock} units\n`;
-    formatted += `   💰 $${cat.minPrice?.toLocaleString('es-CL')} - $${cat.maxPrice?.toLocaleString('es-CL')} (avg: $${Math.round(cat.avgPrice).toLocaleString('es-CL')})\n`;
-    
-    if (cat.colors && cat.colors.length > 0) {
-      const validColors = cat.colors.filter(c => c && c.trim());
-      if (validColors.length > 0) {
-        formatted += `   🎨 Colors: ${validColors.slice(0, 4).join(', ')}\n`;
-      }
-    }
-    
+    formatted += `📂 ${cat._id}: ${cat.count} products\n`;
     if (cat.products && cat.products.length > 0) {
-      const topProducts = cat.products
-        .sort((a, b) => b.price - a.price)
-        .slice(0, 2)
-        .map(p => `"${p.name}" ($${p.price.toLocaleString('es-CL')})`)
-        .join(', ');
-      formatted += `   ⭐ Top: ${topProducts}\n`;
+      formatted += `   Top: ${cat.products.slice(0, 2).map(p => `"${p.name}" $${p.price.toLocaleString('es-CL')}`).join(', ')}\n`;
     }
-    formatted += `\n`;
   });
   
-  formatted += `🏪 STORE TOTALS: ${totalProducts} products | ${totalStock} units | ${summary.length} categories\n`;
-  formatted += `💡 AI INSTRUCTION: Focus on our premium suit collection with personalized styling advice. Always respond in SPANISH to customers.`;
-  
+  formatted += `\n💡 Respond in SPANISH with personalized advice.`;
   return formatted;
 }
 
@@ -451,31 +799,32 @@ ${inventoryInfo ? `PRODUCT DATABASE:\n${inventoryInfo}\n` : 'INVENTORY: No speci
 
 CRUCIAL RESPONSE RULES:
 1. ALWAYS respond in SPANISH (despite this prompt being in English)
-2. Maximum 100-120 words per response - BE CONCISE
+2. Maximum 120-150 words per response - BE CONCISE but HELPFUL
 3. When recommending products, use EXACT NAME in quotes AND mention EXACT PRICE from database
-4. Only provide technical details when specifically asked
+4. When customer mentions BUDGET and OCCASION, recommend 2-3 best options within budget
 5. Focus on helping customer choose what they need
-6. Mention key features: name, price, main color, occasion
+6. Mention key features: name, price, main color, why it's good for their occasion
 7. Don't overwhelm with unnecessary information
-8. Be helpful and direct
+8. Be helpful, enthusiastic and direct
 9. When asked about contact, ALWAYS include the WhatsApp link: https://wa.me/56950476935
 10. If NO products found: "Actualmente no tengo productos específicos que mostrar. Te invito a visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp +56 9 5047 6935 para ver nuestra colección completa."
 
 ${hasProducts ? `CONCISE PRODUCT RECOMMENDATIONS (ONLY from database above):
-- MENTION: Product name, price, main color, best occasion
+- MENTION: Product name in quotes, exact price, main color, why it fits their need
 - ONLY IF ASKED: materials, measurements, what's included, all colors, sizes
 - FOCUS: On helping customer decide and choose
-- AVOID: Long lists of technical specifications unless requested
+- WHEN BUDGET MENTIONED: Show how the price fits their budget, offer 2-3 options if available
+- WHEN OCCASION MENTIONED: Explain why product is perfect for that specific event
 
-RESPONSE STRUCTURE:
-1. Brief greeting/acknowledgment
-2. Specific recommendation with name and price (ONLY from database)
-3. Why it's good for their need (1-2 reasons)
-4. Invite follow-up questions or store visit
+RESPONSE STRUCTURE FOR BUDGET + OCCASION:
+1. "Perfecto para un [occasion]! Con tu presupuesto de $[budget] te recomiendo:"
+2. List 2-3 products with name, price, color, key feature
+3. Brief explanation why each is good for their occasion
+4. "¿Te gustaría más información sobre alguno?"
 
 EXAMPLE RESPONSES:
-- "Te recomiendo el '[PRODUCT NAME]' por $[PRICE]. Es perfecto para [occasion] por su [key feature]. ¿Te gustaría saber más detalles?"
-- "Tenemos el '[PRODUCT NAME]' en [color] por $[PRICE], ideal para [occasion]. ¿Te interesa?"` : `NO PRODUCTS AVAILABLE:
+- "Para un bautizo como padrino, te recomiendo el 'Traje Azul Marino Elegante' por $189.000. Es perfecto porque transmite sobriedad y elegancia. ¿Te interesa conocer más detalles?"
+- "Con tu presupuesto de $200.000 para el bautizo, tengo 2 excelentes opciones: el '[PRODUCT 1]' por $[PRICE1] en [color] y el '[PRODUCT 2]' por $[PRICE2]. Ambos son ideales para padrinos. ¿Cuál te llama más la atención?"` : `NO PRODUCTS AVAILABLE:
 When asked about products:
 - Be honest: "No tengo información específica de ese producto en este momento"
 - Invite to visit: "Te invito a visitar nuestra tienda en Alameda 3410, Local V-21"
@@ -513,10 +862,161 @@ router.post('/chat', async (req, res) => {
     console.log('🤖 Procesando con IA + Base de datos...');
     let inventoryData = '';
     let productsFound = [];
-    const lowerMessage = message.toLowerCase();
+    
+    // Normalizar y corregir el mensaje
+    const normalizedMessage = normalizeText(message);
+    const lowerMessage = normalizedMessage.toLowerCase();
+    console.log('📝 Mensaje original:', message);
+    console.log('✨ Mensaje normalizado:', normalizedMessage);
+
+    // === DETECCIÓN DE PRESUPUESTO ===
+    const budgetPatterns = [
+      /(\d{1,3}[.,]?\d{3}[.,]?\d{3})/g,  // Ej: 200.000 o 200,000 o 200000
+      /(\d{1,3})\s*mil/gi,                 // Ej: 200 mil
+      /\$\s*(\d+)/g                        // Ej: $200000
+    ];
+    
+    let detectedBudget = null;
+    for (const pattern of budgetPatterns) {
+      const match = lowerMessage.match(pattern);
+      if (match) {
+        let amount = match[0].replace(/[.,\s$mil]/gi, '');
+        if (lowerMessage.includes('mil')) {
+          amount = parseInt(amount) * 1000;
+        } else {
+          amount = parseInt(amount);
+        }
+        if (amount > 1000) {
+          detectedBudget = amount;
+          console.log('💰 Presupuesto detectado:', detectedBudget);
+          break;
+        }
+      }
+    }
+    
+    // === DETECCIÓN DE OCASIÓN/EVENTO ===
+    const occasions = {
+      // Eventos religiosos
+      bautizo: ['bautizo', 'bautismo', 'padrino', 'madrina', 'bautizar'],
+      confirmacion: ['confirmación', 'confirmacion', 'confirmando'],
+      comunion: ['comunión', 'comunion', 'primera comunión'],
+      
+      // Bodas y eventos nupciales
+      boda: ['boda', 'matrimonio', 'casamiento', 'nupcial', 'novio', 'novia', 'testigo', 'casarse', 'enlace'],
+      civil: ['civil', 'registro civil', 'matrimonio civil'],
+      
+      // Graduaciones y eventos académicos
+      graduacion: ['graduación', 'graduacion', 'licenciatura', 'titulación', 'grado', 'titulo'],
+      
+      // Galas y eventos formales
+      gala: ['gala', 'evento formal', 'fiesta elegante', 'cóctel', 'cocktail', 'black tie', 'etiqueta'],
+      
+      // Eventos laborales
+      trabajo: ['trabajo', 'oficina', 'ejecutivo', 'profesional', 'reunión', 'entrevista', 'junta', 'presentación', 'pega'],
+      
+      // Cumpleaños y aniversarios
+      cumpleanos: ['cumpleaños', 'cumpleanos', 'aniversario', 'celebración', 'celebracion', 'fiesta'],
+      
+      // Eventos de fin de año
+      navidad: ['navidad', 'año nuevo', 'nochebuena', 'fin de año', 'fiestas patrias', 'pascua'],
+      
+      // Quinceaños y eventos juveniles
+      quince: ['quinceaños', 'quinceanera', 'quinceañera', 'quinces', '15 años'],
+      
+      // Cenas y eventos sociales
+      cena: ['cena', 'restaurante', 'salir a cenar', 'cita', 'date'],
+      
+      // Viajes y vacaciones
+      viaje: ['viaje', 'vacaciones', 'crucero', 'luna de miel'],
+      
+      // Estilo casual
+      casual: ['casual', 'informal', 'diario', 'cotidiano', 'relajado']
+    };
+    
+    let detectedOccasion = null;
+    for (const [occasion, keywords] of Object.entries(occasions)) {
+      if (keywords.some(keyword => normalizedMessage.includes(keyword))) {
+        detectedOccasion = occasion;
+        console.log('🎭 Ocasión detectada:', detectedOccasion);
+        break;
+      }
+    }
+    
+    // === BÚSQUEDA POR PRESUPUESTO Y/O OCASIÓN ===
+    if (detectedBudget || detectedOccasion) {
+      console.log('🎯 Búsqueda específica por presupuesto/ocasión...');
+      
+      let minPrice = 0;
+      let maxPrice = detectedBudget || 999999999;
+      
+      if (detectedBudget) {
+        minPrice = Math.floor(detectedBudget * 0.6);
+        maxPrice = Math.ceil(detectedBudget * 1.2);
+        console.log(`💰 Buscando entre $${minPrice.toLocaleString()} y $${maxPrice.toLocaleString()}`);
+        productsFound = await getProductsByPriceRange(minPrice, maxPrice);
+        // OPTIMIZACIÓN: Limitar a 3 productos
+        if (productsFound.length > 3) {
+          productsFound = productsFound.slice(0, 3);
+        }
+      }
+      
+      if (detectedOccasion && productsFound.length === 0) {
+        console.log(`🎭 Buscando para ${detectedOccasion}...`);
+        
+        if (['bautizo', 'boda', 'gala', 'confirmacion', 'comunion', 'civil', 'graduacion'].includes(detectedOccasion)) {
+          productsFound = await Product.find({ 
+            category: new RegExp('traje', 'i'),
+            stock: { $gt: 0 } 
+          }).limit(3);
+        } else if (detectedOccasion === 'trabajo') {
+          productsFound = await Product.find({
+            $or: [
+              { name: new RegExp('ejecutivo', 'i') },
+              { category: new RegExp('traje', 'i') }
+            ],
+            stock: { $gt: 0 }
+          }).limit(3);
+        } else {
+          productsFound = await Product.find({
+            name: new RegExp(detectedOccasion, 'i'),
+            stock: { $gt: 0 }
+          }).limit(3);
+        }
+        
+        if (detectedBudget && productsFound.length > 0) {
+          productsFound = productsFound.filter(p => p.price >= minPrice && p.price <= maxPrice);
+        }
+      }
+      
+      let contextInfo = '';
+      if (detectedBudget && detectedOccasion) {
+        contextInfo = `Productos para ${detectedOccasion} con presupuesto de $${detectedBudget.toLocaleString('es-CL')}`;
+      } else if (detectedBudget) {
+        contextInfo = `Productos dentro del presupuesto de $${detectedBudget.toLocaleString('es-CL')}`;
+      } else if (detectedOccasion) {
+        contextInfo = `Productos para ${detectedOccasion}`;
+      }
+      
+      if (productsFound.length > 0) {
+        inventoryData = formatProductsForAI(productsFound, contextInfo);
+      } else {
+        console.log('⚠️ No hay productos exactos, buscando alternativas...');
+        productsFound = await Product.find({ 
+          category: new RegExp('traje', 'i'),
+          stock: { $gt: 0 } 
+        }).limit(3);
+        if (detectedBudget && productsFound.length > 0) {
+          productsFound.sort((a, b) => Math.abs(a.price - detectedBudget) - Math.abs(b.price - detectedBudget));
+          productsFound = productsFound.slice(0, 3);
+        }
+        if (productsFound.length > 0) {
+          inventoryData = formatProductsForAI(productsFound, `Alternativas ${contextInfo ? 'para ' + contextInfo : 'disponibles'}`);
+        }
+      }
+    }
 
     // Búsqueda inteligente según el tipo de consulta
-    if (lowerMessage.includes('boda') || lowerMessage.includes('matrimonio') || lowerMessage.includes('gala') || lowerMessage.includes('evento')) {
+    else if (lowerMessage.includes('boda') || lowerMessage.includes('matrimonio') || lowerMessage.includes('gala') || lowerMessage.includes('evento')) {
       console.log('💒 Buscando productos para eventos especiales...');
       productsFound = await searchProducts('boda gala evento');
       if (productsFound.length === 0) {
@@ -532,21 +1032,39 @@ router.post('/chat', async (req, res) => {
       }
       inventoryData = formatProductsForAI(productsFound, 'Productos Ejecutivos y Profesionales');
     
-    } else if (lowerMessage.includes('color') || lowerMessage.includes('gris') || lowerMessage.includes('azul') || lowerMessage.includes('negro') || lowerMessage.includes('burdeos') || lowerMessage.includes('rojo') || lowerMessage.includes('blanco') || lowerMessage.includes('marino') || lowerMessage.includes('verde') || lowerMessage.includes('amarillo') || lowerMessage.includes('morado') || lowerMessage.includes('rosa') || lowerMessage.includes('beige') || lowerMessage.includes('café') || lowerMessage.includes('marrón')) {
+    } else if (lowerMessage.includes('color') || lowerMessage.includes('gris') || lowerMessage.includes('azul') || lowerMessage.includes('negro') || lowerMessage.includes('burdeos') || lowerMessage.includes('rojo') || lowerMessage.includes('blanco') || lowerMessage.includes('marino') || lowerMessage.includes('verde') || lowerMessage.includes('amarillo') || lowerMessage.includes('morado') || lowerMessage.includes('rosa') || lowerMessage.includes('beige') || lowerMessage.includes('cafe') || lowerMessage.includes('marron')) {
       console.log('🎨 Buscando por color específico...');
       const colors = [
         'gris', 'azul', 'negro', 'blanco', 'burdeos', 'marino',
         'rojo', 'verde', 'amarillo', 'naranja', 'morado', 'violeta', 'rosa',
-        'beige', 'café', 'marrón', 'crema', 'ivory', 'champagne',
+        'beige', 'cafe', 'marron', 'crema', 'ivory', 'champagne',
         'plateado', 'dorado', 'bronce', 'cobre',
         'celeste', 'turquesa', 'vino', 'granate',
-        'azul marino', 'azul rey', 'azul cielo',
+        'azul marino', 'azul rey', 'azul cielo', 'azul electrico',
         'gris claro', 'gris oscuro', 'gris plomo',
         'verde oliva', 'lavanda', 'lila', 'berenjena'
       ];
+      
+      // Primero buscar coincidencia exacta
       let colorFound = colors.find(color => lowerMessage.includes(color));
+      
+      // Si no hay coincidencia exacta, intentar fuzzy matching
+      if (!colorFound) {
+        const words = lowerMessage.split(' ');
+        for (const word of words) {
+          const matchedColor = findClosestMatch(word, colors);
+          if (matchedColor) {
+            console.log(`✅ Color corregido: "${word}" → "${matchedColor}"`);
+            colorFound = matchedColor;
+            break;
+          }
+        }
+      }
+      
       if (colorFound) {
+        console.log(`🔍 Buscando productos con color: "${colorFound}"`);
         productsFound = await getProductsByColor(colorFound);
+        console.log(`📦 Productos encontrados: ${productsFound.length}`);
         inventoryData = formatProductsForAI(productsFound, `Productos en color ${colorFound}`);
       }
     
@@ -599,7 +1117,8 @@ router.post('/chat', async (req, res) => {
       }
       inventoryData = formatProductsForAI(productsFound, 'Corbatas y Accesorios disponibles');
     
-    } else if (lowerMessage.includes('inventario') || lowerMessage.includes('productos') || lowerMessage.includes('catalogo') || lowerMessage.includes('tienes') || lowerMessage.includes('disponible')) {
+    } else if ((lowerMessage.includes('inventario') || lowerMessage.includes('catalogo')) && !lowerMessage.includes('stock')) {
+      // OPTIMIZACIÓN: Solo activar resumen completo para "inventario" o "catálogo", no para "stock"
       console.log('🏪 Obteniendo resumen del inventario...');
       const summary = await getInventorySummary();
       inventoryData = formatInventorySummaryForAI(summary);
@@ -611,10 +1130,10 @@ router.post('/chat', async (req, res) => {
     
     } else if (lowerMessage.includes('buscar') || lowerMessage.includes('quiero') || lowerMessage.includes('necesito')) {
       console.log('🔍 Buscando productos por término general...');
-      // Extraer términos de búsqueda del mensaje
-      const searchTerms = message.replace(/buscar|quiero|necesito|un|una|el|la|de|para|en/gi, '').trim();
+      // Extraer términos de búsqueda del mensaje normalizado
+      const searchTerms = normalizedMessage.replace(/buscar|quiero|necesito|un|una|el|la|de|para|en/gi, '').trim();
       if (searchTerms && searchTerms.length > 2) {
-        productsFound = await searchProducts(searchTerms);
+        productsFound = await smartProductSearch(searchTerms);
         inventoryData = formatProductsForAI(productsFound, `Resultados para "${searchTerms}"`);
       }
     }
@@ -629,7 +1148,7 @@ router.post('/chat', async (req, res) => {
       
       if (hasProductIntent) {
         console.log('🔍 Búsqueda general por palabras clave de producto...');
-        productsFound = await searchProducts(lowerMessage);
+        productsFound = await smartProductSearch(normalizedMessage);
         
         if (productsFound.length > 0) {
           inventoryData = formatProductsForAI(productsFound, 'Productos relacionados');
@@ -675,6 +1194,7 @@ router.post('/chat', async (req, res) => {
 
     // Llamar a Groq AI
     console.log('🤖 Enviando a Groq con', messages.length, 'mensajes');
+    
     const chatCompletion = await groq.chat.completions.create({
       messages: messages,
       model: 'llama-3.1-8b-instant',

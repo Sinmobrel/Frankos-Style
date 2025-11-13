@@ -51,6 +51,10 @@ const productSchema = new Schema({
 });
 
 // Índices para búsquedas eficientes
+productSchema.index({ stock: 1, createdAt: -1 });      // Para listado principal paginado
+productSchema.index({ category: 1, stock: 1 });        // Para filtro por categoría
+productSchema.index({ price: 1 });                     // Para filtro por precio
+productSchema.index({ mainColor: 1 });                 // Para filtro por color
 productSchema.index({ category: 1, mainColor: 1 });
 productSchema.index({ priceRange: 1, featured: 1 });
 productSchema.index({ tags: 1 });

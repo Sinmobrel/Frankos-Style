@@ -24,10 +24,12 @@ export class HomeComponent implements OnInit {
     this.loadFeaturedProducts();
   }  loadFeaturedProducts(): void {
     this.loading = true;
-    this.apiService.getProducts().subscribe({
+    // Solo productos con stock para el home público
+    this.apiService.getProducts(false).subscribe({
       next: (products) => {
         // Ordenar por stock descendente y tomar los 3 primeros
         this.featuredProducts = products
+          .filter(p => p.stock > 0)  // Doble verificación
           .sort((a, b) => b.stock - a.stock)
           .slice(0, 3);
         this.loading = false;

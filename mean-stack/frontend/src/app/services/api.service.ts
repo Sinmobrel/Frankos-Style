@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject, PLATFORM_ID, Inject, isDevMode } from '@angular/core';
-import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { User } from '../models/user.model';
 import { Product } from '../models/product.model';
@@ -19,6 +20,18 @@ export interface LoginCredentials {
 export interface AuthResponse {
   token: string;
   user: User;
+}
+
+// Interface para respuesta de productos con paginación
+export interface ProductsResponse {
+  products: Product[];
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalProducts: number;
+    hasMore: boolean;
+    productsPerPage: number;
+  };
 }
 
 @Injectable({
@@ -107,8 +120,40 @@ export class ApiService {
   }
 
   // Product API calls
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+  
+  // Método con paginación (recomendado para catálogo)
+  getProductsPaginated(page: number = 1, limit: number = 12): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
+      `${this.apiUrl}/products?page=${page}&limit=${limit}`
+    );
+  }
+
+  // Método original sin paginación (para compatibilidad con admin y home)
+  // Admin: incluye productos sin stock
+  // Home: solo productos con stock
+  getProducts(includeOutOfStock: boolean = true): Observable<Product[]> {
+    const params = includeOutOfStock 
+      ? 'limit=1000&includeOutOfStock=true'  // Admin: todos los productos
+      : 'limit=1000';                         // Home: solo con stock
+    
+    return this.http.get<any>(`${this.apiUrl}/products?${params}`)
+      .pipe(
+        map(response => {
+          console.log('📦 getProducts response:', response);
+          // Si la respuesta tiene estructura de paginación, extraer solo los productos
+          if (response && typeof response === 'object' && 'products' in response && Array.isArray(response.products)) {
+            console.log('✅ Extrayendo array de productos:', response.products.length);
+            return response.products;
+          }
+          // Si es un array directo, retornarlo tal cual
+          if (Array.isArray(response)) {
+            console.log('✅ Respuesta es array directo:', response.length);
+            return response;
+          }
+          console.warn('⚠️ Respuesta inesperada, retornando array vacío');
+          return [];
+        })
+      );
   }
 
   getProductById(id: string): Observable<Product> {

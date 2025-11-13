@@ -19,10 +19,17 @@
     <button class="btn-reset-filters" (click)="resetFilters()">Limpiar filtros</button>
   </div>
 
-  <ng-container *ngIf="loading">Cargando productos...</ng-container>
+  <!-- Spinner de carga inicial (primera carga) -->
+  <ng-container *ngIf="loading && products.length === 0">
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Cargando catálogo...</p>
+    </div>
+  </ng-container>
+
   <ng-container *ngIf="error">{{ error }}</ng-container>
 
-  <div class="catalog-grid" *ngIf="!loading && !error && filteredProducts.length">
+  <div class="catalog-grid" *ngIf="!error && filteredProducts.length">
     <div class="catalog-card" *ngFor="let product of filteredProducts" (click)="openProductModal(product)">
       <img [src]="getProductImageUrl(product)" 
            [alt]="product.name" 
@@ -35,8 +42,59 @@
       <div class="catalog-view-more">Ver detalles</div>
     </div>
   </div>
-  <div *ngIf="!loading && !error && !filteredProducts.length" class="empty-message">
-    No hay productos que coincidan con los filtros.
+
+  <!-- Controles de paginación -->
+  <ng-container *ngIf="!loading && !error && products.length > 0">
+    <div class="pagination-container">
+      <div class="pagination-info">
+        Mostrando {{ (currentPage - 1) * pageSize + 1 }} - {{ Math.min(currentPage * pageSize, totalProducts) }} de {{ totalProducts }} productos
+      </div>
+      
+      <div class="pagination-controls">
+        <!-- Botón anterior -->
+        <button 
+          class="pagination-btn pagination-btn--prev" 
+          [disabled]="currentPage === 1"
+          (click)="previousPage()"
+          aria-label="Página anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+          Anterior
+        </button>
+
+        <!-- Números de página -->
+        <div class="pagination-numbers">
+          <button 
+            *ngFor="let page of pageNumbers"
+            [class.pagination-number]="page !== -1"
+            [class.pagination-ellipsis]="page === -1"
+            [class.active]="page === currentPage"
+            [disabled]="page === -1 || page === currentPage"
+            (click)="goToPage(page)"
+            [attr.aria-label]="page === -1 ? null : 'Ir a página ' + page"
+            [attr.aria-current]="page === currentPage ? 'page' : null">
+            {{ page === -1 ? '...' : page }}
+          </button>
+        </div>
+
+        <!-- Botón siguiente -->
+        <button 
+          class="pagination-btn pagination-btn--next" 
+          [disabled]="currentPage === totalPages"
+          (click)="nextPage()"
+          aria-label="Página siguiente">
+          Siguiente
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!loading && !error && !filteredProducts.length && products.length === 0" class="empty-message">
+    No hay productos disponibles.
   </div>
 
   <!-- Modal del producto -->

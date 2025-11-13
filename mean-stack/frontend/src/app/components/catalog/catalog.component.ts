@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
+import { ApiService, ProductsResponse } from '../../services/api.service';
 import { ProductModalService } from '../../services/product-modal.service';
 import { Product } from '../../models/product.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-catalog',
@@ -18,6 +19,15 @@ export class CatalogComponent implements OnInit {
   products: Product[] = [];
   loading = true;
   error: string | null = null;
+  
+  // Exponer Math para usar en template
+  Math = Math;
+  
+  // Propiedades para paginación
+  currentPage = 1;
+  pageSize = 12;
+  totalProducts = 0;
+  hasMore = true;
   
   // Propiedades para filtros
   filterName: string = '';
@@ -106,20 +116,112 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getProducts().subscribe({
-      next: (products) => {
-        this.products = products;
-        this.loading = false;
-        
-        // Mostrar las categorías únicas para depuración
-        const uniqueCategories = [...new Set(products.map(p => p.category))];
-        console.log('Categorías disponibles:', uniqueCategories);
-      },
-      error: (err) => {
-        this.error = 'Error al cargar productos';
-        this.loading = false;
+    this.loadProducts();
+  }
+
+  /**
+   * Carga productos con paginación
+   */
+  loadProducts(): void {
+    this.loading = true;
+    this.apiService.getProductsPaginated(this.currentPage, this.pageSize)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe({
+        next: (response: ProductsResponse) => {
+          // Reemplazar productos (no agregar)
+          this.products = response.products;
+          this.totalProducts = response.pagination.totalProducts;
+          this.hasMore = response.pagination.hasMore;
+          
+          console.log(`📦 Página ${this.currentPage}: ${response.products.length} productos (${this.totalProducts} totales)`);
+          
+          // Scroll al inicio de la página
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+        error: (err) => {
+          console.error('Error loading products:', err);
+          this.error = 'Error al cargar productos';
+        }
+      });
+  }
+
+  /**
+   * Ir a una página específica
+   */
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages || page === this.currentPage || this.loading) {
+      return;
+    }
+    this.currentPage = page;
+    this.loadProducts();
+  }
+
+  /**
+   * Página anterior
+   */
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.goToPage(this.currentPage - 1);
+    }
+  }
+
+  /**
+   * Página siguiente
+   */
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.goToPage(this.currentPage + 1);
+    }
+  }
+
+  /**
+   * Calcular el número total de páginas
+   */
+  get totalPages(): number {
+    return Math.ceil(this.totalProducts / this.pageSize);
+  }
+
+  /**
+   * Generar array de números de página para mostrar
+   */
+  get pageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxPagesToShow = 5;
+    
+    if (this.totalPages <= maxPagesToShow) {
+      // Mostrar todas las páginas
+      for (let i = 1; i <= this.totalPages; i++) {
+        pages.push(i);
       }
-    });
+    } else {
+      // Mostrar páginas con elipsis
+      if (this.currentPage <= 3) {
+        // Cerca del inicio
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push(-1); // Elipsis
+        pages.push(this.totalPages);
+      } else if (this.currentPage >= this.totalPages - 2) {
+        // Cerca del final
+        pages.push(1);
+        pages.push(-1); // Elipsis
+        for (let i = this.totalPages - 3; i <= this.totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        // En el medio
+        pages.push(1);
+        pages.push(-1); // Elipsis
+        for (let i = this.currentPage - 1; i <= this.currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push(-1); // Elipsis
+        pages.push(this.totalPages);
+      }
+    }
+    
+    return pages;
   }
 
   /**

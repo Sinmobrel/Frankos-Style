@@ -1,0 +1,534 @@
+{
+  "timestamp": "2025-11-12T14:08:18.805Z",
+  "summary": {
+    "totalQuestions": 87,
+    "faqResponses": 0,
+    "aiResponses": 46,
+    "errors": 41,
+    "successRate": "52.9"
+  },
+  "results": [
+    {
+      "question": "tengo un bautizo y soy el padrino, ademas tengo un presupuesto de 200000",
+      "source": "AI",
+      "response": "¡Perfecto para un bautizo como padrino! Con tu presupuesto de $200.000 te recomiendo:\n\n* El \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es perfecto porque transmite elegancia y sobriedad, ideal para un evento como un bautizo.\n* El \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Aunque está un poco por encima de tu presupuesto, es un traje de alta calidad y sofisticado que te hará destacar en el evento.\n* El \"Traje de Caballero Azul Eléctrico Fashion\" por $230.000. Es un traje moderno y elegante que combina perfectamente con la ocasión de un bautizo.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "me caso en 2 meses y solo puedo gastar 150 mil pesos que me recomiendas",
+      "source": "AI",
+      "response": "¡Felicidades por tu compromiso! Con tu presupuesto de $150.000 y tu boda en 2 meses, te recomiendo dos opciones que están dentro de tu rango:\n\n1. \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un clásico que transmite elegancia y sobriedad, perfecto para una boda. Está disponible en tallas 48, 50, 52 y 54.\n2. \"Traje de Caballero Rojo Statement\" por $175.000. Si quieres hacer un statement con tu traje, este es una excelente opción. Está disponible en tallas 48, 50, 52 y 54.\n\nAmbos trajes son ideales para una boda y están dentro de tu presupuesto. ¿Te gustaría conocer más detalles sobre alguno de ellos?",
+      "success": true
+    },
+    {
+      "question": "necesito algo elegante para una boda pero económico, digamos unos $100.000",
+      "source": "AI",
+      "response": "¡Perfecto para una boda! Con tu presupuesto de $100.000, te recomiendo:\n\n* El \"Traje Verde\" por $89.990. Es un traje elegante y versátil que combina la sobriedad del corte clásico con un toque moderno. Es ideal para una boda y está dentro de tu presupuesto.\n* El \"Traje de Caballero Azul Marino Clásico\" por $124.000. Es un traje clásico y elegante que transmite sofisticación y distinción. Aunque está ligeramente por encima de tu presupuesto, es una excelente opción si estás dispuesto a ajustar un poco.\n* El \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un traje de alta calidad y elegancia que es perfecto para una boda. Sin embargo, está fuera de tu presupuesto.\n\n¿Te gustaría más información sobre alguno de estos trajes?",
+      "success": true
+    },
+    {
+      "question": "mi graduación es la próxima semana, tengo como 250000 para gastar",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "voy a una gala de la empresa y mi presupuesto es de $300.000 más o menos",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "soy testigo de matrimonio y tengo 180 mil, que opciones hay?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "comunión de mi sobrino, soy padrino, presupuesto 200.000 pesos chilenos",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "tengo una entrevista importante y solo 120000 disponible",
+      "source": "AI",
+      "response": "¡Buena suerte en tu entrevista! Con tu presupuesto de $120.000, te recomiendo dos opciones que podrían ser ideales para ti:\n\n1. \"Traje de Caballero Burdeos Ejecutivo\" por $340.000 (no es el precio ideal, pero es un traje de alta calidad que podría ser perfecto para una entrevista importante). Sin embargo, no se ajusta a tu presupuesto.\n2. No tenemos ese producto específico en tu rango de presupuesto. Te recomiendo visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp +56 9 5047 6935 para ver nuestra colección completa y encontrar algo que se adapte a tus necesidades y presupuesto.\n\n¿Te gustaría más información sobre alguna otra opción o visitar nuestra tienda?",
+      "success": true
+    },
+    {
+      "question": "necesito algo que sirva tanto para bodas como para el trabajo",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "busco un traje versátil para graduación y también para galas",
+      "source": "AI",
+      "response": "¡Excelente elección! Para graduación y galas, te recomiendo el \"Traje de Caballero Gris Claro Premium\" por $255.000. Es un traje versátil que combina elegancia y sofisticación. Está disponible en tallas 48, 50, 52 y 54. Su longitud es de 72 cm, con hombros de 46 cm y cintura de 92 cm. El traje incluye saco y pantalón, y está hecho con una mezcla premium de algodón y poliéster. Es perfecto para graduación y galas debido a su elegancia moderna y detalles únicos. ¿Te gustaría conocer más detalles sobre este traje?",
+      "success": true
+    },
+    {
+      "question": "quiero algo que use en la oficina pero también en cenas elegantes",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "necesito ropa para varias ocasiones: trabajo, bodas y eventos formales",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "tengo 200 mil que me puedes mostrar",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "mi presupuesto es limitado, solo $150.000",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "cuento con $300000 para comprar",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "tengo como 100 mil pesos nada mas",
+      "source": "AI",
+      "response": "Con un presupuesto de $100.000, te recomiendo el \"Traje Verde\" por $89.990. Es un traje elegante y sobrio que combina perfectamente con cualquier ocasión semiformal o cócteles. Está disponible en tallas S, M, L, XL y XXL. ¿Te gustaría saber más sobre este traje o tal vez visitar nuestra tienda para probarlo? Puedes contactarme por WhatsApp en +56 9 5047 6935 para más información.",
+      "success": true
+    },
+    {
+      "question": "voy a un bautizo como padrino que me recomiendas",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "me invitaron a una boda elegante",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "tengo una cena romántica importante",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "asisto a una graduación universitaria",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "mi cumpleaños número 30 quiero algo especial",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "que tienen bonito?",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "muestrame lo mejor",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "quiero algo que se vea bien",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en la base de datos que se ajusten a tu solicitud. Sin embargo, te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa y encontrar algo que se adapte a tus gustos y necesidades.\n\nSi prefieres, también puedes consultarnos por WhatsApp al +56 9 5047 6935. Estamos aquí para ayudarte a encontrar lo que buscas. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "necesito ropa elegante",
+      "source": "AI",
+      "response": "¡Claro que sí! En Franko's Style, tenemos una amplia variedad de opciones para hombres que buscan elegancia y sofisticación. ¿Podrías decirme un poco más sobre lo que estás buscando? ¿Es para un evento específico, como un casamiento o una reunión de negocios, o simplemente para tu estilo diario?\n\nRecuerda que puedes visitarnos en nuestra tienda en Alameda 3410, Local V-21, o contactarnos por WhatsApp al +56 9 5047 6935 para obtener más información. Estamos abiertos de lunes a sábado de 12:00 a 18:30.\n\n¿Qué te parece si te recomiendo algunas de nuestras opciones más populares?",
+      "success": true
+    },
+    {
+      "question": "algo formal pero no tanto",
+      "source": "AI",
+      "response": "¡Claro! En Franko's Style, podemos ayudarte a encontrar un look elegante pero no demasiado formal. ¿Qué tipo de evento o ocasión tienes en mente? ¿Un cumpleaños, una reunión de trabajo o algo más?",
+      "success": true
+    },
+    {
+      "question": "busco algo discreto pero impactante",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "quiero un traje azul para boda con presupuesto de 200000",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "algo gris para trabajo que no cueste mas de 150 mil",
+      "source": "AI",
+      "response": "¡Claro! Para un traje gris para trabajo que no cueste más de $150.000, te recomiendo el \"Traje de Caballero Azul Marino Clásico\" por $124.000. Aunque su nombre no sea gris, es un color que combina bien con la ropa gris y es muy versátil. También está disponible en gris. \n\nTiene una excelente calidad y un diseño clásico que es perfecto para un ambiente laboral. ¿Te gustaría saber más sobre este traje o tal vez verlo en persona?",
+      "success": true
+    },
+    {
+      "question": "traje negro elegante para gala, tengo 250000",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "busco algo en color marino para bautizo, máximo $180.000",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "necesito talla 42 para boda, presupuesto 200 mil",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "talla L o XL algo para oficina económico",
+      "source": "AI",
+      "response": "¡Hola! Para una oficina económica, te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es un traje de alta calidad que transmite profesionalismo y elegancia. Está disponible en tallas 48, 50, 52 y 54. Si buscas algo más económico, podrías considerar el \"Traje de Caballero Negro Ejecutivo\" (no disponible en la base de datos), pero te sugiero visitar nuestra tienda para ver nuestras opciones. ¿Te gustaría más información sobre el \"Traje de Caballero Burdeos Ejecutivo\"?",
+      "success": true
+    },
+    {
+      "question": "uso 46 que tienen para graduación bajo 300000",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "quiero algo muy elegante pero barato",
+      "source": "AI",
+      "response": "Lo siento, pero no tenemos productos específicos disponibles que se ajusten a tu descripción. Sin embargo, te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa y encontrar algo que se adapte a tus necesidades y presupuesto.\n\nSi prefieres, también puedes consultarnos por WhatsApp al +56 9 5047 6935. Estamos disponibles para ayudarte a encontrar lo que buscas. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "necesito un traje económico de lujo",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "algo exclusivo que no sea caro",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "busco calidad premium con presupuesto ajustado",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "no se si azul o gris para una boda",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "cual es mejor para entrevista, negro o marino?",
+      "source": "AI",
+      "response": "Excelente elección! Para una entrevista, te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es un clásico que transmite profesionalismo y elegancia. El color burdeos es ideal para una entrevista porque es conservador y respetuoso, pero también muestra que eres alguien que se toma en serio la ocasión.\n\nTambién está disponible en negro, que es otro color seguro y profesional. Sin embargo, el burdeos es un poco más llamativo y puede hacer que te recuerden más fácilmente.\n\n¿Te gustaría saber más sobre el tamaño y la medida del traje?",
+      "success": true
+    },
+    {
+      "question": "entre slim y regular cual me conviene?",
+      "source": "AI",
+      "response": "Excelente pregunta! La elección entre un corte slim y regular depende de tu figura y estilo personal. Si tienes un cuerpo esbelto y atlético, el corte slim puede ser una excelente opción, ya que acentúa tus líneas y te da un aspecto más elegante y moderno.\n\nPor otro lado, si tienes un cuerpo más robusto o quieres un look más clásico, el corte regular puede ser más adecuado. Este estilo se adapta mejor a figuras más redondas y te da un aspecto más tradicional y sofisticado.\n\nEn Franko's Style, podemos ayudarte a encontrar el corte perfecto para ti. ¿Te gustaría visitar nuestra tienda en Alameda 3410, Local V-21, para que podamos medirte y recomendarte el mejor estilo para tu figura? O puedes consultarnos por WhatsApp al +56 9 5047 6935 para obtener más información. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "es mejor un traje de 200 mil o dos de 100 mil?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "tengo un evento y...",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "estaba pensando en comprar algo",
+      "source": "AI",
+      "response": "¡Excelente decisión! En Franko's Style, estamos aquí para ayudarte a encontrar el look perfecto para ti. ¿Qué tipo de ocasión tienes en mente? ¿Un evento formal, un trabajo importante o simplemente quieres actualizar tu guardarropa? Cuéntame un poco más sobre lo que buscas y te puedo recomendar algunas opciones.",
+      "success": true
+    },
+    {
+      "question": "me gustan los trajes pero",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "quizás necesite",
+      "source": "AI",
+      "response": "¡Claro que sí! ¿En qué puedo ayudarte hoy? ¿Necesitas un traje para un evento especial o simplemente quieres actualizar tu guardarropa? ¿Cuál es tu presupuesto aproximado y qué tipo de ocasión tienes en mente?",
+      "success": true
+    },
+    {
+      "question": "necesito un terno bacán para mi matrimonio",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "quiero verme piola para la pega",
+      "source": "AI",
+      "response": "Lo siento, pero no tengo información específica sobre un producto llamado \"verme pio\" en nuestra base de datos. No tenemos productos específicos disponibles con ese nombre.\n\nTe invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa y encontrar lo que necesitas. Estamos abiertos de lunes a sábado de 12:00 a 18:30. O puedes consultarnos por WhatsApp al +56 9 5047 6935 para obtener más información.",
+      "success": true
+    },
+    {
+      "question": "algo pulento para una talla importante",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "cachái algo filete para una junta?",
+      "source": "AI",
+      "response": "¡Claro que sí! Para una junta, te recomiendo el \"Traje de Caballero Burdeos Ejecutivo\" por $340.000. Es un traje de alta calidad que transmite profesionalismo y elegancia. Está disponible en tallas 48, 50, 52 y 54. ¿Te gustaría saber más sobre este traje o tal vez verlo en persona?",
+      "success": true
+    },
+    {
+      "question": "me siento perdido, no se que comprar",
+      "source": "AI",
+      "response": "No te preocupes, estoy aquí para ayudarte. ¿Cuál es el motivo de tu visita? ¿Tienes algún evento especial en mente o simplemente buscas actualizar tu guardarropa? ¿Podrías decirme un poco más sobre lo que estás buscando?",
+      "success": true
+    },
+    {
+      "question": "estoy nervioso por mi boda y necesito ayuda",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "es muy importante verme bien ese día",
+      "source": "AI",
+      "response": "¡Claro que sí! Entiendo que quieres verte bien para ese día especial. En Franko's Style, tenemos una amplia variedad de opciones para elegir. ¿Podrías decirme un poco más sobre el tipo de evento o ocasión para la que necesitas un traje? ¿Es un cumpleaños, una boda, una reunión de negocios o algo más? Esto me ayudará a recomendarte los mejores productos para ti.\n\nAdemás, ¿tienes algún presupuesto en mente para el traje? Esto me permitirá sugerirte opciones dentro de tu rango de precios.\n\nRecuerda que puedes contactarme por WhatsApp al +56 9 5047 6935 si necesitas más información o quieres programar una cita en nuestra tienda. Estamos ubicados en Alameda 3410, Local V-21, y nuestros horarios son de lunes a sábado de 12:00 a 18:30.",
+      "success": true
+    },
+    {
+      "question": "quiero impresionar en mi entrevista",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "busco traje azul marino, talla 44, para boda, máximo 200 mil, que sea moderno",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "necesito camisa blanca, corbata elegante y traje gris, todo por 250000",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "quiero un conjunto completo para graduación, soy talla L, presupuesto 300 mil",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "que diferencia hay entre sus trajes?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "como se cual es mi talla exacta?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "que significa corte slim?",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "cual es la diferencia de precio entre sus productos?",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "mi evento es mañana que tienen disponible?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "necesito algo urgente para pasado mañana",
+      "source": "AI",
+      "response": "Lo siento, pero no tengo productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, o a consultarnos por WhatsApp al +56 9 5047 6935 para ver nuestra colección completa. Estamos abiertos de lunes a sábado de 12:00 a 18:30.",
+      "success": true
+    },
+    {
+      "question": "mi boda es en 3 meses, cuando debería comprar?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "cuanto demoran en tener stock?",
+      "source": "AI",
+      "response": "En Franko's Style, nos esforzamos por mantener un stock actualizado y disponible para nuestros clientes. Sin embargo, debido a la naturaleza de nuestra tienda de alta gama, algunos productos pueden tener un tiempo de entrega más largo.\n\nTe recomiendo visitar nuestra tienda en Alameda 3410, Local V-21, para ver nuestra colección completa y obtener información más precisa sobre los plazos de entrega. También puedes contactarnos por WhatsApp al +56 9 5047 6935 para obtener más detalles.\n\nLunes a Sábado 12:00-18:30. Estoy aquí para ayudarte.",
+      "success": true
+    },
+    {
+      "question": "tienen stock?",
+      "source": "AI",
+      "response": "¡Claro que sí! Tenemos una amplia variedad de productos para elegir. ¿Qué tipo de producto estás buscando? ¿Un traje, una camisa, una corbata o algún accesorio? ¿Tienes algún evento o ocasión específica en mente?",
+      "success": true
+    },
+    {
+      "question": "hay disponibilidad?",
+      "source": "AI",
+      "response": "¡Claro que sí! Tenemos una amplia variedad de productos para elegir. ¿Qué tipo de producto estás buscando? ¿Un traje, camisa, corbata o algún accesorio? ¿Tienes algún evento o ocasión específica en mente?",
+      "success": true
+    },
+    {
+      "question": "esta todo agotado?",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, o puedes consultarnos por WhatsApp al +56 9 5047 6935. Lunes a Sábado 12:00-18:30.",
+      "success": true
+    },
+    {
+      "question": "cuando llega mercadería nueva?",
+      "source": "AI",
+      "response": "Nuestra tienda recibe mercadería nueva regularmente. Sin embargo, no tengo información específica sobre la próxima llegada de productos nuevos en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa y conocer nuestros últimos productos. Lunes a Sábado 12:00-18:30. O puedes consultarnos por WhatsApp al +56 9 5047 6935 para obtener más información.",
+      "success": true
+    },
+    {
+      "question": "ayuda",
+      "source": "AI",
+      "response": "¡Claro! Soy CarVian, tu asesor de moda masculina en Franko's Style. ¿En qué puedo ayudarte hoy? ¿Estás buscando un traje para un evento especial o necesitas consejos para elegir la ropa adecuada para tu estilo? ¿Cuál es tu presupuesto y ocasión?",
+      "success": true
+    },
+    {
+      "question": "no se que quiero",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa. También puedes consultarnos por WhatsApp al +56 9 5047 6935. Lunes a Sábado estamos abiertos de 12:00 a 18:30. Estoy aquí para ayudarte a encontrar lo que necesitas. ¿En qué puedo ayudarte hoy?",
+      "success": true
+    },
+    {
+      "question": "asdasd",
+      "source": "AI",
+      "response": "Lo siento, pero no tengo información específica sobre ese producto en este momento. ¿Te gustaría visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central? Estamos abiertos de lunes a sábado de 12:00 a 18:30. También puedes consultarnos por WhatsApp al +56 9 5047 6935 para obtener más información.",
+      "success": true
+    },
+    {
+      "question": "???",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "hola como estas que me recomiendas tengo un evento",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "emmm... pues... necesito algo...",
+      "source": "AI",
+      "response": "No tenemos productos específicos disponibles en este momento. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central, donde podrás ver nuestra colección completa. También puedes consultarnos por WhatsApp al +56 9 5047 6935. Estamos disponibles de lunes a sábado de 12:00 a 18:30. ¿En qué puedo ayudarte?",
+      "success": true
+    },
+    {
+      "question": "traje? camisa? no se...",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "tnego un vautiso y soy el padrno",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "nesesito algo elejante para voda",
+      "source": "AI",
+      "response": "En este momento no tengo información específica de ese producto. Te invito a visitar nuestra tienda en Alameda 3410, Local V-21 (Lunes a Sábado 12:00-18:30) o contactarnos por WhatsApp al +56 9 5047 6935 para consultar nuestra colección completa y precios actualizados. 😊",
+      "success": true
+    },
+    {
+      "question": "presupusto de 200mil pesos",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "talla cuarenta y dos mas o meno",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "como los contacto?",
+      "source": "AI",
+      "response": "¡Claro! Puedes contactarme a través de WhatsApp al +56 9 5047 6935. También puedes visitar nuestra tienda en Alameda 3410, Local V-21, Persa Estación Central. Estamos abiertos de lunes a sábado de 12:00 a 18:30. Estoy aquí para ayudarte a encontrar la ropa perfecta para ti. ¿En qué puedo ayudarte hoy?",
+      "success": true
+    },
+    {
+      "question": "donde quedan?",
+      "source": "AI",
+      "response": "📍 **Nos encuentras en:** Alameda 3410, Persa Estación Central, Local V-21, Santiago. **Horarios:** Lunes a Sábado 12:00-18:30. ¡Ven a conocer nuestra colección en persona!",
+      "success": true
+    },
+    {
+      "question": "estan cerca del metro?",
+      "source": "AI",
+      "response": "Sí, estamos muy cerca del metro. Nuestra tienda se encuentra en Alameda 3410, Local V-21, Persa Estación Central, lo que significa que estamos a pocos minutos a pie de la estación de metro. Puedes llegar fácilmente a nuestra tienda después de bajar del metro. ¿Necesitas ayuda con la ubicación o tienes alguna otra pregunta? Puedes contactarnos por WhatsApp al +56 9 5047 6935 para más información.",
+      "success": true
+    },
+    {
+      "question": "puedo ir hoy?",
+      "error": "timeout of 10000ms exceeded",
+      "status": "No status",
+      "success": false
+    },
+    {
+      "question": "son mejores que otras tiendas?",
+      "source": "AI",
+      "response": "¡Absolutamente! En Franko's Style, nos enfocamos en ofrecer la mejor calidad y elegancia en cada uno de nuestros productos. Nuestros trajes, camisas, corbatas y accesorios están diseñados para hacer que cada cliente se sienta confiado y sofisticado. Nuestra experiencia y pasión por la moda nos permiten ofrecer soluciones personalizadas para cada ocasión y estilo. ¿Te gustaría saber más sobre cómo podemos ayudarte a encontrar el look perfecto para ti?",
+      "success": true
+    },
+    {
+      "question": "por que debería comprar con ustedes?",
+      "source": "AI",
+      "response": "Excelente pregunta! En Franko's Style, nos enorgullecemos de ofrecer la mejor calidad y elegancia en nuestros productos. Nuestros trajes y accesorios están diseñados para hacer que cada hombre se sienta confiado y sofisticado. Nuestra experiencia y conocimiento en la moda masculina nos permiten ofrecer asesoramiento personalizado para cada ocasión.\n\nAl elegir Franko's Style, usted puede estar seguro de obtener:\n\n- Calidad de alta gama en nuestros productos\n- Diseños elegantes y sofisticados\n- Asesoramiento personalizado para cada ocasión\n- Un servicio de atención al cliente excepcional\n\n¿Quieres saber más sobre cómo podemos ayudarte a encontrar el look perfecto para ti? Puedes visitarnos en nuestra tienda en Alameda 3410 o contactarnos por WhatsApp al +56 9 5047 6935. Estoy aquí para ayudarte.",
+      "success": true
+    },
+    {
+      "question": "que los hace diferentes?",
+      "source": "AI",
+      "response": "Excelente pregunta! En Franko's Style, nos enfocamos en la alta costura y la elegancia masculina. Nuestros trajes, camisas, corbatas y accesorios están diseñados para hacer que cada hombre se sienta confiado y sofisticado.\n\nNuestros trajes, por ejemplo, están hechos con materiales de alta calidad y cortados con precisión para un ajuste perfecto. Nuestras camisas están diseñadas para ser cómodas y elegantes, y nuestras corbatas están hechas con seda y otros materiales de alta calidad.\n\nEn resumen, lo que nos hace diferentes es nuestra pasión por la elegancia y la calidad. Queremos que cada hombre que se viste con nosotros se sienta como un verdadero caballero.\n\n¿Te gustaría ver algunas de nuestras opciones? Puedes visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp al +56 9 5047 6935 para ver nuestra colección completa.",
+      "success": true
+    }
+  ]
+}
