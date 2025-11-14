@@ -8,6 +8,57 @@
   }
 }
 
+.filter-results-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.error-message {
+  padding: 20px;
+  background: #fee;
+  color: #c33;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #666;
+
+  svg {
+    margin-bottom: 20px;
+    opacity: 0.3;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .btn-reset-filters {
+    margin-top: 10px;
+  }
+}
+
 .catalog-filters {
   display: flex;
   flex-wrap: wrap;

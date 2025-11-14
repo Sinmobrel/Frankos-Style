@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService, ProductsResponse } from '../../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { ProductModalService } from '../../services/product-modal.service';
 import { Product } from '../../models/product.model';
 import { finalize } from 'rxjs/operators';
@@ -16,7 +16,9 @@ import { finalize } from 'rxjs/operators';
 export class CatalogComponent implements OnInit {
   private apiService = inject(ApiService);
   productModal = inject(ProductModalService);
-  products: Product[] = [];
+  products: Product[] = []; // Productos filtrados
+  allProducts: Product[] = []; // Todos los productos
+  filteredProducts: Product[] = []; // Productos de la página actual
   loading = true;
   error: string | null = null;
   
@@ -27,34 +29,13 @@ export class CatalogComponent implements OnInit {
   currentPage = 1;
   pageSize = 12;
   totalProducts = 0;
-  hasMore = true;
+  hasMore = false;
   
   // Propiedades para filtros
   filterName: string = '';
   filterCategory: string = '';
   filterMinPrice: number | null = null;
   filterMaxPrice: number | null = null;
-
-  // Getter para productos filtrados
-  get filteredProducts(): Product[] {
-    if (!this.products || !Array.isArray(this.products)) return [];
-    return this.products.filter(product => {
-      // Filtro por nombre
-      const matchesName = this.filterName.trim() === '' || (product.name && product.name.toLowerCase().includes(this.filterName.toLowerCase()));
-
-      // Filtro por categoría
-      const matchesCategory = this.filterCategory.trim() === '' || this.matchesProductCategory(product.category, this.filterCategory);
-
-      // Filtro por precio mínimo
-      const productPrice = Number(product.price);
-      const matchesMinPrice = this.filterMinPrice === null || isNaN(productPrice) || productPrice >= this.filterMinPrice;
-
-      // Filtro por precio máximo
-      const matchesMaxPrice = this.filterMaxPrice === null || isNaN(productPrice) || productPrice <= this.filterMaxPrice;
-
-      return matchesName && matchesCategory && matchesMinPrice && matchesMaxPrice;
-    });
-  }
   
   /**
    * Resetea todos los filtros a sus valores por defecto
@@ -64,6 +45,8 @@ export class CatalogComponent implements OnInit {
     this.filterCategory = '';
     this.filterMinPrice = null;
     this.filterMaxPrice = null;
+    this.currentPage = 1;
+    this.applyFilters();
   }
 
   /**
@@ -116,44 +99,98 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProducts();
+    this.loadAllProducts();
   }
 
   /**
-   * Carga productos con paginación
+   * Carga TODOS los productos de una vez para filtrado local
    */
-  loadProducts(): void {
+  loadAllProducts(): void {
     this.loading = true;
-    this.apiService.getProductsPaginated(this.currentPage, this.pageSize)
+    this.error = null;
+    
+    // Solicitar todos los productos con stock (false = solo productos con stock > 0)
+    this.apiService.getProducts(false)
       .pipe(finalize(() => this.loading = false))
       .subscribe({
-        next: (response: ProductsResponse) => {
-          // Reemplazar productos (no agregar)
-          this.products = response.products;
-          this.totalProducts = response.pagination.totalProducts;
-          this.hasMore = response.pagination.hasMore;
-          
-          console.log(`📦 Página ${this.currentPage}: ${response.products.length} productos (${this.totalProducts} totales)`);
-          
-          // Scroll al inicio de la página
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+        next: (products) => {
+          console.log('📦 Productos cargados:', products.length);
+          this.allProducts = products;
+          this.applyFilters(); // Aplicar filtros después de cargar
         },
         error: (err) => {
           console.error('Error loading products:', err);
-          this.error = 'Error al cargar productos';
+          this.error = 'No se pudieron cargar los productos';
+          this.allProducts = [];
+          this.filteredProducts = [];
         }
       });
   }
 
   /**
-   * Ir a una página específica
+   * Aplica filtros localmente a todos los productos
+   */
+  applyFilters(): void {
+    let filtered = [...this.allProducts];
+
+    // Filtro por nombre (busca en nombre y descripción)
+    if (this.filterName.trim()) {
+      const searchTerm = this.filterName.toLowerCase();
+      filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(searchTerm) ||
+        (p.description && p.description.toLowerCase().includes(searchTerm))
+      );
+    }
+
+    // Filtro por categoría
+    if (this.filterCategory) {
+      filtered = filtered.filter(p =>
+        this.matchesProductCategory(p.category, this.filterCategory)
+      );
+    }
+
+    // Filtro por precio mínimo
+    if (this.filterMinPrice !== null && this.filterMinPrice > 0) {
+      filtered = filtered.filter(p => p.price >= this.filterMinPrice!);
+    }
+
+    // Filtro por precio máximo
+    if (this.filterMaxPrice !== null && this.filterMaxPrice > 0) {
+      filtered = filtered.filter(p => p.price <= this.filterMaxPrice!);
+    }
+
+    // Actualizar productos filtrados
+    this.products = filtered;
+    this.totalProducts = filtered.length;
+    
+    // Resetear a página 1 cuando se aplican filtros
+    this.currentPage = 1;
+    
+    // Aplicar paginación local
+    this.updatePaginatedProducts();
+  }
+
+  /**
+   * Actualiza los productos de la página actual
+   */
+  updatePaginatedProducts(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.filteredProducts = this.products.slice(startIndex, endIndex);
+    
+    console.log(`📄 Página ${this.currentPage}: Mostrando ${this.filteredProducts.length} de ${this.totalProducts} productos`);
+    
+    // Scroll al inicio
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /**
+   * Navegación de paginación - Ir a una página específica
    */
   goToPage(page: number): void {
-    if (page < 1 || page > this.totalPages || page === this.currentPage || this.loading) {
-      return;
-    }
+    if (page === -1 || page === this.currentPage) return;
     this.currentPage = page;
-    this.loadProducts();
+    this.updatePaginatedProducts();
   }
 
   /**
@@ -161,7 +198,8 @@ export class CatalogComponent implements OnInit {
    */
   previousPage(): void {
     if (this.currentPage > 1) {
-      this.goToPage(this.currentPage - 1);
+      this.currentPage--;
+      this.updatePaginatedProducts();
     }
   }
 
@@ -170,7 +208,8 @@ export class CatalogComponent implements OnInit {
    */
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
-      this.goToPage(this.currentPage + 1);
+      this.currentPage++;
+      this.updatePaginatedProducts();
     }
   }
 

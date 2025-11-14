@@ -173,7 +173,22 @@ const SPELLING_CORRECTIONS = {
   'acsesorio': 'accesorio',
   'accezorio': 'accesorio',
   'accesorio': 'accesorio',
-  'acsesorio': 'accesorio'
+  'acsesorio': 'accesorio',
+  
+  // Accesorios específicos
+  'gemelo': 'gemelos',
+  'gemelos': 'gemelos',
+  'jemelos': 'gemelos',
+  'yemelos': 'gemelos',
+  'mancuerna': 'gemelos',
+  'mancuernas': 'gemelos',
+  'panuelo': 'pañuelo',
+  'pañuelo': 'pañuelo',
+  'panhuelo': 'pañuelo',
+  'alfiler': 'alfiler',
+  'alfilet': 'alfiler',
+  'pin': 'alfiler',
+  'broche': 'alfiler'
 };
 
 // Mapa de teclas adyacentes en teclado QWERTY español
@@ -271,9 +286,10 @@ function normalizeText(text) {
       return SPELLING_CORRECTIONS[word];
     }
     
-    // Lista de palabras objetivo (productos, colores, ocasiones) - SIN TILDES
+    // Lista de palabras objetivo (productos, colores, ocasiones, accesorios) - SIN TILDES
     const targetWords = [
       'traje', 'trajes', 'camisa', 'camisas', 'corbata', 'corbatas', 'accesorio', 'accesorios',
+      'gemelos', 'gemelo', 'pañuelo', 'panuelo', 'alfiler', 'mancuernas',
       'azul', 'gris', 'negro', 'blanco', 'burdeos', 'marino', 'rojo', 'verde', 'amarillo', 
       'morado', 'violeta', 'rosa', 'beige', 'cafe', 'marron', 'dorado', 'plateado', 'turquesa',
       'naranja', 'celeste', 'electrico',
@@ -373,24 +389,64 @@ function findClosestMatch(word, candidatesList, threshold = 3) {
   return closestMatch;
 }
 
-// Función mejorada para búsqueda inteligente con corrección ortográfica
-async function smartProductSearch(query) {
+// Función para detectar la categoría solicitada por el usuario
+function detectRequestedCategory(query) {
+  const normalizedQuery = normalizeText(query).toLowerCase();
+  
+  // Patrones por categoría con prioridad
+  const categoryPatterns = {
+    'trajes': ['traje', 'trajes', 'terno', 'ternos', 'trage', 'trages'],
+    'camisas': ['camisa', 'camisas', 'kamisa', 'camiseta'],
+    'corbatas': ['corbata', 'corbatas', 'korvata', 'corbatta'],
+    'accesorios': ['accesorio', 'accesorios', 'aksesorio', 'complemento']
+  };
+  
+  for (const [category, patterns] of Object.entries(categoryPatterns)) {
+    if (patterns.some(pattern => normalizedQuery.includes(pattern))) {
+      console.log(`📁 Categoría detectada: ${category}`);
+      return category;
+    }
+  }
+  
+  return null;
+}
+
+// Función mejorada para búsqueda inteligente con corrección ortográfica y TODOS los campos
+async function smartProductSearch(query, requestedCategory = null) {
   try {
     // 1. Normalizar la consulta
     const normalizedQuery = normalizeText(query);
     console.log('🔍 Query normalizada:', normalizedQuery);
+    if (requestedCategory) {
+      console.log('🎯 Categoría solicitada:', requestedCategory);
+    }
     
-    // 2. Buscar con la query normalizada
+    // 2. Buscar con la query normalizada en TODOS los campos relevantes
+    let searchConditions = [
+      { name: new RegExp(normalizedQuery, 'i') },
+      { description: new RegExp(normalizedQuery, 'i') },
+      { category: new RegExp(normalizedQuery, 'i') },
+      { mainColor: new RegExp(normalizedQuery, 'i') },
+      { colors: new RegExp(normalizedQuery, 'i') },
+      { productType: new RegExp(normalizedQuery, 'i') },
+      { tags: new RegExp(normalizedQuery, 'i') },
+      { subcategory: new RegExp(normalizedQuery, 'i') },
+      { occasion: new RegExp(normalizedQuery, 'i') },
+      { eventTypes: new RegExp(normalizedQuery, 'i') },
+      { cut: new RegExp(normalizedQuery, 'i') },
+      { material: new RegExp(normalizedQuery, 'i') },
+      { searchKeywords: new RegExp(normalizedQuery, 'i') }
+    ];
+    
+    // 3. Si hay categoría solicitada, filtrar por ella
+    let baseQuery = { stock: { $gt: 0 } };
+    if (requestedCategory) {
+      baseQuery.category = new RegExp(requestedCategory, 'i');
+    }
+    
     let products = await Product.find({
-      $or: [
-        { name: new RegExp(normalizedQuery, 'i') },
-        { description: new RegExp(normalizedQuery, 'i') },
-        { category: new RegExp(normalizedQuery, 'i') },
-        { mainColor: new RegExp(normalizedQuery, 'i') },
-        { productType: new RegExp(normalizedQuery, 'i') },
-        { tags: new RegExp(normalizedQuery, 'i') }
-      ],
-      stock: { $gt: 0 }
+      ...baseQuery,
+      $or: searchConditions
     }).limit(3);
     
     // 3. Si no hay resultados, intentar fuzzy matching con categorías conocidas
@@ -410,10 +466,15 @@ async function smartProductSearch(query) {
         const matchedCategory = findClosestMatch(word, categories);
         if (matchedCategory) {
           console.log(`✅ Categoría corregida: "${word}" → "${matchedCategory}"`);
-          products = await Product.find({
+          let categoryQuery = {
             category: new RegExp(matchedCategory, 'i'),
             stock: { $gt: 0 }
-          }).limit(3);
+          };
+          // Si hay categoría solicitada, mantener el filtro
+          if (requestedCategory) {
+            categoryQuery.category = new RegExp(requestedCategory, 'i');
+          }
+          products = await Product.find(categoryQuery).limit(3);
           if (products.length > 0) break;
         }
         
@@ -421,8 +482,8 @@ async function smartProductSearch(query) {
         const matchedColor = findClosestMatch(word, colors);
         if (matchedColor && products.length === 0) {
           console.log(`✅ Color corregido: "${word}" → "${matchedColor}"`);
-          // Usar la función mejorada que busca sinónimos
-          products = await getProductsByColor(matchedColor);
+          // Usar la función mejorada que busca sinónimos con categoría
+          products = await getProductsByColor(matchedColor, requestedCategory);
           if (products.length > 0) break;
         }
       }
@@ -465,6 +526,11 @@ const productKeywords = [
   // Categorías de productos
   'traje', 'trajes', 'camisa', 'camisas', 'corbata', 'corbatas',
   'accesorio', 'accesorios',
+  // Accesorios específicos
+  'gemelos', 'gemelo', 'mancuernas', 'mancuerna',
+  'pañuelo', 'panuelo', 'pocket square',
+  'alfiler', 'pin', 'broche', 'tie pin',
+  'faja', 'cummerbund', 'tirantes', 'suspenders',
   // Consultas sobre productos
   'precio', 'precios', 'cuesta', 'vale', '$', 'peso',
   'color', 'colores', 'talla', 'tallas', 'medida', 'medidas',
@@ -575,8 +641,10 @@ async function getProductsByCategory(category) {
 }
 
 async function searchProducts(query) {
+  // Detectar categoría solicitada
+  const requestedCategory = detectRequestedCategory(query);
   // Usar la nueva función de búsqueda inteligente
-  return await smartProductSearch(query);
+  return await smartProductSearch(query, requestedCategory);
 }
 
 async function getProductsByPriceRange(minPrice, maxPrice) {
@@ -639,7 +707,7 @@ async function getProductsBySize(size) {
   }
 }
 
-async function getProductsByColor(color) {
+async function getProductsByColor(color, requestedCategory = null) {
   try {
     // Mapa de sinónimos de colores para búsqueda más amplia (INCLUYE VERSIONES CON Y SIN TILDES)
     const colorSynonyms = {
@@ -681,14 +749,21 @@ async function getProductsByColor(color) {
     const escapedTerms = searchTerms.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     const colorPattern = escapedTerms.join('|');
     
+    // Construir query base con categoría si fue solicitada
+    let baseQuery = { stock: { $gt: 0 } };
+    if (requestedCategory) {
+      baseQuery.category = new RegExp(requestedCategory, 'i');
+      console.log(`🎯 Filtrando por categoría: ${requestedCategory}`);
+    }
+    
     const products = await Product.find({
+      ...baseQuery,
       $or: [
         { mainColor: new RegExp(colorPattern, 'i') },
         { colors: { $regex: new RegExp(colorPattern, 'i') } },
         { name: new RegExp(colorPattern, 'i') },
         { description: new RegExp(colorPattern, 'i') }
-      ],
-      stock: { $gt: 0 }
+      ]
     }).limit(3);
     
     console.log(`✅ Encontrados ${products.length} productos para color "${color}"`);
@@ -723,7 +798,7 @@ async function getInventorySummary() {
   }
 }
 
-// Función SIMPLIFICADA para formatear productos para la IA (OPTIMIZADA PARA VERCEL)
+// Función MEJORADA para formatear productos para la IA con TODOS los campos relevantes
 function formatProductsForAI(products, title) {
   if (!products || products.length === 0) {
     return `${title}: NO PRODUCTS AVAILABLE.`;
@@ -733,11 +808,61 @@ function formatProductsForAI(products, title) {
   
   products.forEach((product, index) => {
     formatted += `${index + 1}. "${product.name}"\n`;
-    formatted += `   💰 $${product.price.toLocaleString('es-CL')}`;
+    formatted += `   💰 Precio: $${product.price.toLocaleString('es-CL')}`;
     
-    if (product.stock) formatted += ` | 📦 ${product.stock} units`;
-    if (product.mainColor) formatted += ` | 🎨 ${product.mainColor}`;
-    if (product.sizes && product.sizes.length > 0) formatted += ` | 👔 ${product.sizes.join(', ')}`;
+    // CATEGORÍA Y TIPO (CRUCIAL para diferenciar trajes de camisas)
+    if (product.category) formatted += ` | 📂 Categoría: ${product.category}`;
+    if (product.productType) formatted += ` | 🏷️ Tipo: ${product.productType}`;
+    
+    // STOCK
+    if (product.stock) formatted += ` | 📦 Stock: ${product.stock}`;
+    
+    // COLORES (principal y adicionales)
+    if (product.mainColor) {
+      formatted += `\n   🎨 Color principal: ${product.mainColor}`;
+      if (product.colors && product.colors.length > 0 && product.colors.length > 1) {
+        formatted += ` (también en: ${product.colors.filter(c => c !== product.mainColor).join(', ')})`;
+      }
+    }
+    
+    // TALLAS
+    if (product.sizes && product.sizes.length > 0) {
+      formatted += `\n   👔 Tallas: ${product.sizes.join(', ')}`;
+    } else if (product.sizesText) {
+      formatted += `\n   👔 Tallas: ${product.sizesText}`;
+    }
+    
+    // CORTE Y MATERIAL
+    if (product.cut) formatted += `\n   ✂️ Corte: ${product.cut}`;
+    if (product.material) formatted += `\n   🧵 Material: ${product.material}`;
+    
+    // EVENTOS Y OCASIONES
+    if (product.eventTypes && product.eventTypes.length > 0) {
+      formatted += `\n   🎭 Ideal para: ${product.eventTypes.join(', ')}`;
+    } else if (product.occasion) {
+      formatted += `\n   🎭 Ocasión: ${product.occasion}`;
+    }
+    
+    // QUÉ INCLUYE (para trajes completos)
+    if (product.includes && product.includes.length > 0) {
+      formatted += `\n   📦 Incluye: ${product.includes.join(', ')}`;
+    }
+    
+    // DESCRIPCIÓN CORTA
+    if (product.description) {
+      const shortDesc = product.description.substring(0, 120);
+      formatted += `\n   📝 ${shortDesc}${product.description.length > 120 ? '...' : ''}`;
+    }
+    
+    // BADGES (destacado, nuevo, popular)
+    const badges = [];
+    if (product.featured) badges.push('⭐ Destacado');
+    if (product.newProduct) badges.push('🆕 Nuevo');
+    if (product.isPopular) badges.push('🔥 Popular');
+    if (product.isExclusive) badges.push('💎 Exclusivo');
+    if (badges.length > 0) {
+      formatted += `\n   ${badges.join(' | ')}`;
+    }
     
     formatted += `\n\n`;
   });
@@ -745,7 +870,7 @@ function formatProductsForAI(products, title) {
   const prices = products.map(p => p.price);
   formatted += `💡 PRICE RANGE: $${Math.min(...prices).toLocaleString('es-CL')} - $${Math.max(...prices).toLocaleString('es-CL')}\n\n`;
   
-  formatted += `🤖 INSTRUCTIONS:\n⚠️ ONLY recommend products from list above\n⚠️ Use EXACT names in quotes and EXACT prices\n- Keep under 100 words\n- Respond in SPANISH\n- If not in list, say "no tenemos" and suggest from list\n`;
+  formatted += `🤖 INSTRUCTIONS:\n⚠️ ONLY recommend products from list above\n⚠️ Use EXACT names in quotes and EXACT prices\n⚠️ Respect product CATEGORY - if user asks for "traje" only show trajes, NOT camisas\n- Keep under 120 words\n- Respond in SPANISH\n- If user asks for specific category not in list, say "no tenemos [category]" and suggest from list\n- Highlight key features: color, cut, material, what occasions it's perfect for\n`;
   
   return formatted;
 }
@@ -775,7 +900,7 @@ function getSystemPrompt(inventoryInfo = '', hasProducts = false) {
 
 ESSENTIAL FRANKO'S STYLE INFORMATION:
 - Specialty: High-end tailoring and elegant men's fashion
-- Products: Suits, shirts, ties, and accessories (NO footwear)
+- Products: Suits, shirts, ties, and accessories (cufflinks, pocket squares, tie pins, etc.) - NO footwear
 - Location: Alameda 3410, Local V-21, Persa Estación Central
 - Contact: WhatsApp +56 9 5047 6935
 - Hours: Monday-Saturday 12:00-18:30, Sundays closed
@@ -803,11 +928,19 @@ CRUCIAL RESPONSE RULES:
 3. When recommending products, use EXACT NAME in quotes AND mention EXACT PRICE from database
 4. When customer mentions BUDGET and OCCASION, recommend 2-3 best options within budget
 5. Focus on helping customer choose what they need
-6. Mention key features: name, price, main color, why it's good for their occasion
+6. Mention key features: name, price, main color, cut, material, why it's good for their occasion
 7. Don't overwhelm with unnecessary information
 8. Be helpful, enthusiastic and direct
 9. When asked about contact, ALWAYS include the WhatsApp link: https://wa.me/56950476935
 10. If NO products found: "Actualmente no tengo productos específicos que mostrar. Te invito a visitar nuestra tienda en Alameda 3410 o contactarnos por WhatsApp +56 9 5047 6935 para ver nuestra colección completa."
+
+⚠️ CRITICAL: RESPECT PRODUCT CATEGORIES
+- If user asks for "TRAJE" (suit) → ONLY recommend products with Categoría: trajes
+- If user asks for "CAMISA" (shirt) → ONLY recommend products with Categoría: camisas
+- If user asks for "CORBATA" (tie) → ONLY recommend products with Categoría: corbatas
+- If user asks for "ACCESORIO" (accessory) → ONLY recommend products with Categoría: accesorios
+- NEVER recommend a camisa when user asks for traje, or vice versa
+- If database has wrong category items, apologize and say "no tengo [category] con esas características"
 
 ${hasProducts ? `CONCISE PRODUCT RECOMMENDATIONS (ONLY from database above):
 - MENTION: Product name in quotes, exact price, main color, why it fits their need
@@ -1034,6 +1167,10 @@ router.post('/chat', async (req, res) => {
     
     } else if (lowerMessage.includes('color') || lowerMessage.includes('gris') || lowerMessage.includes('azul') || lowerMessage.includes('negro') || lowerMessage.includes('burdeos') || lowerMessage.includes('rojo') || lowerMessage.includes('blanco') || lowerMessage.includes('marino') || lowerMessage.includes('verde') || lowerMessage.includes('amarillo') || lowerMessage.includes('morado') || lowerMessage.includes('rosa') || lowerMessage.includes('beige') || lowerMessage.includes('cafe') || lowerMessage.includes('marron')) {
       console.log('🎨 Buscando por color específico...');
+      
+      // Detectar categoría solicitada
+      const requestedCategory = detectRequestedCategory(normalizedMessage);
+      
       const colors = [
         'gris', 'azul', 'negro', 'blanco', 'burdeos', 'marino',
         'rojo', 'verde', 'amarillo', 'naranja', 'morado', 'violeta', 'rosa',
@@ -1063,9 +1200,10 @@ router.post('/chat', async (req, res) => {
       
       if (colorFound) {
         console.log(`🔍 Buscando productos con color: "${colorFound}"`);
-        productsFound = await getProductsByColor(colorFound);
+        productsFound = await getProductsByColor(colorFound, requestedCategory);
         console.log(`📦 Productos encontrados: ${productsFound.length}`);
-        inventoryData = formatProductsForAI(productsFound, `Productos en color ${colorFound}`);
+        const categoryText = requestedCategory ? ` ${requestedCategory}` : '';
+        inventoryData = formatProductsForAI(productsFound, `Productos${categoryText} en color ${colorFound}`);
       }
     
     } else if (lowerMessage.includes('talla') || lowerMessage.includes('tallas') || lowerMessage.includes('medida') || lowerMessage.includes('medidas') || /\b(38|40|42|44|46|48|50|52|54|56)\b/.test(lowerMessage) || lowerMessage.includes('xs') || lowerMessage.includes('xl') || lowerMessage.includes('small') || lowerMessage.includes('medium') || lowerMessage.includes('large')) {
@@ -1089,18 +1227,26 @@ router.post('/chat', async (req, res) => {
     
     } else if (lowerMessage.includes('traje') || lowerMessage.includes('trajes')) {
       console.log('🤵 Buscando trajes en la base de datos...');
-      productsFound = await getProductsByCategory('traje');
+      const requestedCategory = detectRequestedCategory(normalizedMessage);
+      productsFound = await smartProductSearch(normalizedMessage, requestedCategory);
+      if (productsFound.length === 0) {
+        productsFound = await getProductsByCategory('traje');
+      }
       inventoryData = formatProductsForAI(productsFound, 'Trajes disponibles');
     
     } else if (lowerMessage.includes('camisa') || lowerMessage.includes('camisas')) {
       console.log('👔 Buscando camisas en la base de datos...');
-      productsFound = await getProductsByCategory('camisa');
+      const requestedCategory = detectRequestedCategory(normalizedMessage);
+      productsFound = await smartProductSearch(normalizedMessage, requestedCategory);
+      if (productsFound.length === 0) {
+        productsFound = await getProductsByCategory('camisa');
+      }
       inventoryData = formatProductsForAI(productsFound, 'Camisas disponibles');
     
     } else if (lowerMessage.includes('zapato') || lowerMessage.includes('zapatos') || lowerMessage.includes('calzado') || lowerMessage.includes('pantalon') || lowerMessage.includes('pantalones') || lowerMessage.includes('chaleco') || lowerMessage.includes('chalecos')) {
       console.log('❌ Consulta sobre productos no disponibles');
       // Respuesta directa para consultas de productos que no vendemos
-      const directReply = 'Actualmente no tenemos calzado, pantalones ni chalecos disponibles en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados. ¿Te puedo ayudar con alguna de estas categorías?';
+      const directReply = 'Actualmente no tenemos calzado, pantalones ni chalecos disponibles en nuestra tienda. Nos especializamos en trajes elegantes, camisas de alta calidad, corbatas exclusivas y accesorios sofisticados (gemelos, pañuelos, alfileres, etc.). ¿Te puedo ayudar con alguna de estas categorías?';
       return res.json({ 
         reply: directReply, 
         products: undefined,
@@ -1110,10 +1256,15 @@ router.post('/chat', async (req, res) => {
     
     } else if (lowerMessage.includes('corbata') || lowerMessage.includes('corbatas') || lowerMessage.includes('accesorio') || lowerMessage.includes('accesorios')) {
       console.log('👔 Buscando corbatas y accesorios en la base de datos...');
-      productsFound = await getProductsByCategory('corbata');
+      const requestedCategory = detectRequestedCategory(normalizedMessage);
+      productsFound = await smartProductSearch(normalizedMessage, requestedCategory);
       if (productsFound.length === 0) {
-        // Intentar buscar por "accesorio" si no hay corbatas
-        productsFound = await getProductsByCategory('accesorio');
+        // Intentar buscar por categoría específica
+        if (lowerMessage.includes('corbata')) {
+          productsFound = await getProductsByCategory('corbata');
+        } else {
+          productsFound = await getProductsByCategory('accesorio');
+        }
       }
       inventoryData = formatProductsForAI(productsFound, 'Corbatas y Accesorios disponibles');
     
@@ -1130,11 +1281,14 @@ router.post('/chat', async (req, res) => {
     
     } else if (lowerMessage.includes('buscar') || lowerMessage.includes('quiero') || lowerMessage.includes('necesito')) {
       console.log('🔍 Buscando productos por término general...');
+      // Detectar categoría solicitada
+      const requestedCategory = detectRequestedCategory(normalizedMessage);
       // Extraer términos de búsqueda del mensaje normalizado
       const searchTerms = normalizedMessage.replace(/buscar|quiero|necesito|un|una|el|la|de|para|en/gi, '').trim();
       if (searchTerms && searchTerms.length > 2) {
-        productsFound = await smartProductSearch(searchTerms);
-        inventoryData = formatProductsForAI(productsFound, `Resultados para "${searchTerms}"`);
+        productsFound = await smartProductSearch(searchTerms, requestedCategory);
+        const categoryText = requestedCategory ? ` (${requestedCategory})` : '';
+        inventoryData = formatProductsForAI(productsFound, `Resultados para "${searchTerms}"${categoryText}`);
       }
     }
 
@@ -1148,10 +1302,13 @@ router.post('/chat', async (req, res) => {
       
       if (hasProductIntent) {
         console.log('🔍 Búsqueda general por palabras clave de producto...');
-        productsFound = await smartProductSearch(normalizedMessage);
+        // Detectar categoría solicitada
+        const requestedCategory = detectRequestedCategory(normalizedMessage);
+        productsFound = await smartProductSearch(normalizedMessage, requestedCategory);
         
         if (productsFound.length > 0) {
-          inventoryData = formatProductsForAI(productsFound, 'Productos relacionados');
+          const categoryText = requestedCategory ? ` (${requestedCategory})` : '';
+          inventoryData = formatProductsForAI(productsFound, `Productos relacionados${categoryText}`);
         } else {
           // Si no encuentra productos específicos, NO obtener resumen
           console.log('⚠️ No se encontraron productos específicos para la consulta');
